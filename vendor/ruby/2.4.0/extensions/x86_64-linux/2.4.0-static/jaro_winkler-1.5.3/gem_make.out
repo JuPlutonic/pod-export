@@ -1,0 +1,40 @@
+current directory: /media/salessionato/Ruby/ruby/RecipeFinder_For_Fork2ForkCom2/vendor/ruby/2.4.0/gems/jaro_winkler-1.5.3/ext/jaro_winkler
+/media/salessionato/Ruby/ruby/.rbenv/versions/2.4.6/bin/ruby -I /media/salessionato/Ruby/ruby/.rbenv/versions/2.4.6/lib/ruby/site_ruby/2.4.0 -r ./siteconf20190814-29957-1s1nxnu.rb extconf.rb
+creating Makefile
+
+current directory: /media/salessionato/Ruby/ruby/RecipeFinder_For_Fork2ForkCom2/vendor/ruby/2.4.0/gems/jaro_winkler-1.5.3/ext/jaro_winkler
+make "DESTDIR=" clean
+
+current directory: /media/salessionato/Ruby/ruby/RecipeFinder_For_Fork2ForkCom2/vendor/ruby/2.4.0/gems/jaro_winkler-1.5.3/ext/jaro_winkler
+make "DESTDIR="
+compiling adj_matrix.c
+In file included from /media/salessionato/Ruby/ruby/.rbenv/versions/2.4.6/include/ruby-2.4.0/ruby/ruby.h:2012:0,
+                 from /media/salessionato/Ruby/ruby/.rbenv/versions/2.4.6/include/ruby-2.4.0/ruby.h:33,
+                 from codepoints.h:2,
+                 from adj_matrix.c:2:
+/media/salessionato/Ruby/ruby/.rbenv/versions/2.4.6/include/ruby-2.4.0/ruby/intern.h:910:29: warning: 'struct timespec' declared inside parameter list
+ void rb_timespec_now(struct timespec *);
+                             ^
+/media/salessionato/Ruby/ruby/.rbenv/versions/2.4.6/include/ruby-2.4.0/ruby/intern.h:910:29: warning: its scope is only this definition or declaration, which is probably not what you want
+/media/salessionato/Ruby/ruby/.rbenv/versions/2.4.6/include/ruby-2.4.0/ruby/intern.h:913:41: warning: 'struct timespec' declared inside parameter list
+ VALUE rb_time_timespec_new(const struct timespec *, int);
+                                         ^
+compiling codepoints.c
+compiling jaro.c
+In file included from /media/salessionato/Ruby/ruby/.rbenv/versions/2.4.6/include/ruby-2.4.0/ruby/ruby.h:2012:0,
+                 from /media/salessionato/Ruby/ruby/.rbenv/versions/2.4.6/include/ruby-2.4.0/ruby.h:33,
+                 from codepoints.h:2,
+                 from jaro.c:3:
+/media/salessionato/Ruby/ruby/.rbenv/versions/2.4.6/include/ruby-2.4.0/ruby/intern.h:910:29: warning: 'struct timespec' declared inside parameter list
+ void rb_timespec_now(struct timespec *);
+                             ^
+/media/salessionato/Ruby/ruby/.rbenv/versions/2.4.6/include/ruby-2.4.0/ruby/intern.h:910:29: warning: its scope is only this definition or declaration, which is probably not what you want
+/media/salessionato/Ruby/ruby/.rbenv/versions/2.4.6/include/ruby-2.4.0/ruby/intern.h:913:41: warning: 'struct timespec' declared inside parameter list
+ VALUE rb_time_timespec_new(const struct timespec *, int);
+                                         ^
+compiling jaro_winkler.c
+linking shared-object jaro_winkler/jaro_winkler_ext.so
+
+current directory: /media/salessionato/Ruby/ruby/RecipeFinder_For_Fork2ForkCom2/vendor/ruby/2.4.0/gems/jaro_winkler-1.5.3/ext/jaro_winkler
+make "DESTDIR=" install
+/home/linuxbrew/.linuxbrew/bin/ginstall -c -m 0755 jaro_winkler_ext.so ./.gem.20190814-29957-mpg1qz/jaro_winkler

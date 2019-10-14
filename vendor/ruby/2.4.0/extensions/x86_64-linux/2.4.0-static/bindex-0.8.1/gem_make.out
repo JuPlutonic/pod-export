@@ -1,0 +1,15 @@
+current directory: /media/salessionato/Ruby/ruby/RecipeFinder_For_Fork2ForkCom2/vendor/ruby/2.4.0/gems/bindex-0.8.1/ext/skiptrace
+/media/salessionato/Ruby/ruby/.rbenv/versions/2.4.6/bin/ruby -I /media/salessionato/Ruby/ruby/.rbenv/versions/2.4.6/lib/ruby/site_ruby/2.4.0 -r ./siteconf20190814-29957-1xky7v6.rb extconf.rb
+creating Makefile
+
+current directory: /media/salessionato/Ruby/ruby/RecipeFinder_For_Fork2ForkCom2/vendor/ruby/2.4.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR=" clean
+
+current directory: /media/salessionato/Ruby/ruby/RecipeFinder_For_Fork2ForkCom2/vendor/ruby/2.4.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR="
+compiling cruby.c
+linking shared-object skiptrace/internal/cruby.so
+
+current directory: /media/salessionato/Ruby/ruby/RecipeFinder_For_Fork2ForkCom2/vendor/ruby/2.4.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR=" install
+/home/linuxbrew/.linuxbrew/bin/ginstall -c -m 0755 cruby.so ./.gem.20190814-29957-1lesp0f/skiptrace/internal

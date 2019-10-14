@@ -1,0 +1,15 @@
+current directory: /media/salessionato/Ruby/ruby/RecipeFinder_For_Fork2ForkCom2/vendor/ruby/2.4.0/gems/websocket-driver-0.6.5/ext/websocket-driver
+/media/salessionato/Ruby/ruby/.rbenv/versions/2.4.6/bin/ruby -I /media/salessionato/Ruby/ruby/.rbenv/versions/2.4.6/lib/ruby/site_ruby/2.4.0 -r ./siteconf20190814-29957-udsnqu.rb extconf.rb
+creating Makefile
+
+current directory: /media/salessionato/Ruby/ruby/RecipeFinder_For_Fork2ForkCom2/vendor/ruby/2.4.0/gems/websocket-driver-0.6.5/ext/websocket-driver
+make "DESTDIR=" clean
+
+current directory: /media/salessionato/Ruby/ruby/RecipeFinder_For_Fork2ForkCom2/vendor/ruby/2.4.0/gems/websocket-driver-0.6.5/ext/websocket-driver
+make "DESTDIR="
+compiling websocket_mask.c
+linking shared-object websocket_mask.so
+
+current directory: /media/salessionato/Ruby/ruby/RecipeFinder_For_Fork2ForkCom2/vendor/ruby/2.4.0/gems/websocket-driver-0.6.5/ext/websocket-driver
+make "DESTDIR=" install
+/home/linuxbrew/.linuxbrew/bin/ginstall -c -m 0755 websocket_mask.so ./.gem.20190814-29957-17cx2mc

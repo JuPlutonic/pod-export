@@ -1,0 +1,13 @@
+current directory: /media/salessionato/Ruby/ruby/RecipeFinder_For_Fork2ForkCom2/vendor/ruby/2.4.0/gems/json-2.0.2/ext/json
+/media/salessionato/Ruby/ruby/.rbenv/versions/2.4.6/bin/ruby -I /media/salessionato/Ruby/ruby/.rbenv/versions/2.4.6/lib/ruby/site_ruby/2.4.0 -r ./siteconf20190814-29957-1qxiogd.rb extconf.rb
+creating Makefile
+
+current directory: /media/salessionato/Ruby/ruby/RecipeFinder_For_Fork2ForkCom2/vendor/ruby/2.4.0/gems/json-2.0.2/ext/json
+make "DESTDIR=" clean
+
+current directory: /media/salessionato/Ruby/ruby/RecipeFinder_For_Fork2ForkCom2/vendor/ruby/2.4.0/gems/json-2.0.2/ext/json
+make "DESTDIR="
+make: Nessuna operazione da eseguire per "all".
+
+current directory: /media/salessionato/Ruby/ruby/RecipeFinder_For_Fork2ForkCom2/vendor/ruby/2.4.0/gems/json-2.0.2/ext/json
+make "DESTDIR=" install

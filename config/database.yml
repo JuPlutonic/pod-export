@@ -1,0 +1,16 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: pod_export_development
+
+test:
+  <<: *default
+  database: pod_export_test
+
+production:
+  <<: *default
+  database: pod_export_production

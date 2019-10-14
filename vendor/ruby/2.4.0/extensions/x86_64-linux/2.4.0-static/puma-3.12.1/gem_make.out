@@ -1,0 +1,21 @@
+current directory: /media/salessionato/Ruby/ruby/RecipeFinder_For_Fork2ForkCom2/vendor/ruby/2.4.0/gems/puma-3.12.1/ext/puma_http11
+/media/salessionato/Ruby/ruby/.rbenv/versions/2.4.6/bin/ruby -I /media/salessionato/Ruby/ruby/.rbenv/versions/2.4.6/lib/ruby/site_ruby/2.4.0 -r ./siteconf20190814-29957-1cpqpsp.rb extconf.rb
+checking for BIO_read() in -lcrypto... yes
+checking for SSL_CTX_new() in -lssl... yes
+checking for openssl/bio.h... yes
+creating Makefile
+
+current directory: /media/salessionato/Ruby/ruby/RecipeFinder_For_Fork2ForkCom2/vendor/ruby/2.4.0/gems/puma-3.12.1/ext/puma_http11
+make "DESTDIR=" clean
+
+current directory: /media/salessionato/Ruby/ruby/RecipeFinder_For_Fork2ForkCom2/vendor/ruby/2.4.0/gems/puma-3.12.1/ext/puma_http11
+make "DESTDIR="
+compiling http11_parser.c
+compiling io_buffer.c
+compiling mini_ssl.c
+compiling puma_http11.c
+linking shared-object puma/puma_http11.so
+
+current directory: /media/salessionato/Ruby/ruby/RecipeFinder_For_Fork2ForkCom2/vendor/ruby/2.4.0/gems/puma-3.12.1/ext/puma_http11
+make "DESTDIR=" install
+/home/linuxbrew/.linuxbrew/bin/ginstall -c -m 0755 puma_http11.so ./.gem.20190814-29957-i2sv7y/puma
