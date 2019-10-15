@@ -1,23 +1,27 @@
 - provide(:home, 'active')
 - provide(:title, 'Home')
-h2
+br/
+br/
+/! TODO: Show/Get logic:
+/h2
   | Searching for - #{@search_term}
-- if @pods.nil? or @pods == []
+/- if @pods.nil? or @pods == []
   p
   h2
     | No pods found with #{@search_term}
-- else
+/- else
   table border=".5"
     tr
-      th Image
+      th Id
       th Title
-      th Social rank
-    - @pods.each do |pod|
+      /th 'Get/View'
+    /- @pods.each do |pod|
       tr class="<haml_loud"
         | cycle('even', 'odd') &gt;
-        td= link_to(image_tag(pod['image_url'], size: '100x100'), pod['source_url']) unless pod['image_url'].blank?
-        td= link_to(sanitize(pod['title']), pod['source_url'])
+        td= link_to(pod['id'] unless pod['id'].blank?
+        td= link_to(sanitize(pod['title'])
         td
-          span.pull-right.badge.badge-important style=("margin-right: 16px") = formatted_rank(pod['social_rank'])
-javascript:
+          /! TODO: it doesn't equals 1, needs helper for show/get
+          span.pull-right.badge.badge-important style=("margin-right: 16px") = 1
+/javascript:
   | $('#input_sm_field').val("Enter pod's name");

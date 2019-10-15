@@ -6,7 +6,6 @@ html
     meta content="width=device-width, initial-scale=1" name="viewport" /
     /! The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
     title== yield(:title)
-    /! RecipeFinderForFork2forkcom
     /! Bootstrap
     link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" /
     /! HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
@@ -19,13 +18,18 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
     = render 'shared/navbar'
-    .container style=("margin-top: 60px")
+
+    /! Filter's block
+    /!TODO: needs BDD testing
+
+    /.container style=("margin-top: 60px")
       .row
         .col-md-3.well
           = form_tag('/', class: 'form-inline', method: 'get') do
             .row
               .form-group.col-md-8.col-md-offset-2
                 = text_field_tag :looking_for, @search_term, placeholder: "Enter pod's name", id: 'input_sm_field', class: 'input input-sm', style: 'width: 100%'
+            br/
             .row
               .form-group.col-md-8.col-md-offset-2
                 = button_tag 'Search', type: 'submit', id: 'btn_sm_button', class: 'btn btn-danger btn-sm', data: {disable_with: "<i class='fa fa-circle-o-notch fa-spin'></i> Searching…"}
@@ -35,8 +39,7 @@ html
     script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"
     /! Include all compiled plugins (below), or include individual files as needed
     script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
-    javascript:
-      |  $(document).ready(function(){ <ruby code=" session[:button_clicks] ||= 3"></ruby> function count() { <ruby code=" (session[:button_clicks] % 3).zero? ? session[:button_clicks] = 1 : session[:button_clicks] += 1"></ruby> $("#span_n<ruby code="=session[:button_clicks].to_s"></ruby>").html("<a class='badge badge-default' href='<ruby code="= request.original_url"></ruby>'><ruby code="= @search_term"></ruby></a>"); } $('#btn_sm_button').click( function() { count(); }); });
+
   hr/
   footer
     p.text-center
