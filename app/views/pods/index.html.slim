@@ -2,7 +2,7 @@
 - provide(:title, 'Home')
 br/
 br/
-/! TODO: Show/Get logic:
+/! TODO: Show/New logic:
 /h2
   | Searching for - #{@search_term}
 /- if @pods.nil? or @pods == []
@@ -10,18 +10,20 @@ br/
   h2
     | No pods found with #{@search_term}
 /- else
-  table border=".5"
-    tr
-      th Id
-      th Title
-      /th 'Get/View'
-    /- @pods.each do |pod|
-      tr class="<haml_loud"
-        | cycle('even', 'odd') &gt;
-        td= link_to(pod['id'] unless pod['id'].blank?
-        td= link_to(sanitize(pod['title'])
-        td
-          /! TODO: it doesn't equals 1, needs helper for show/get
-          span.pull-right.badge.badge-important style=("margin-right: 16px") = 1
+br/
+table border=".5"
+  tr
+    th №
+    th ИНН
+    th Наименование организации
+    th _
+  - @elements.each_with_index do |entry, num|
+      tr
+        td= num+1
+        td= @pod_ids[num]
+        td= @pod_names[num]
+        td= button_to entry, entry == 'показать данные' ? pod_path : new_pod_path, remote: true, class:'btn-sm primary'
+/! TODO: it doesn't equals 1, needs helper for show/new
+  span.pull-right.badge.badge-important style=("margin-right: 16px") = 1
 /javascript:
-  | $('#input_sm_field').val("Enter pod's name");
+  | $('#input_sm_field').val("Поиск по названию организации");

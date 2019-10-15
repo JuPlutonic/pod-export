@@ -52,7 +52,6 @@ group :development do
   # Automatic Ruby code style checking tool. (http://github.com/bbatsov/rubocop)
   gem 'rubocop', require: false
 
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   # Rails application preloader (https://github.com/rails/spring)
   gem 'spring'
   # Makes spring watch files using the listen gem. (https://github.com/jonleighton/spring-watcher-listen)
@@ -69,14 +68,12 @@ group :test do
   # Capybara aims to simplify the process of integration testing Rack applications, such as Rails, Sinatra or Merb (https://github.com/teamcapybara/capybara)
   gem 'capybara', '~> 2.4.4'
   # Headless Chrome driver for Capybara (https://github.com/machinio/cuprite)
-  gem 'cuprite'
-  # Auto-install phantomjs on demand for current platform. Comes with poltergeist integration. (https://github.com/colszowka/phantomjs-gem)
-  gem 'phantomjs', '~> 2', require: 'phantomjs/poltergeist'
-  # PhantomJS driver for Capybara (https://github.com/teampoltergeist/poltergeist)
-  gem 'poltergeist', '~> 1.6.0'
+  # gem 'cuprite'
+  # # Auto-install phantomjs on demand for current platform. Comes with poltergeist integration. (https://github.com/colszowka/phantomjs-gem)
+  # gem 'phantomjs', '~> 2', require: 'phantomjs/poltergeist'
+  # # PhantomJS driver for Capybara (https://github.com/teampoltergeist/poltergeist)
+  # gem 'poltergeist', '~> 1.6.0'
 end
 
 # Pg is the Ruby interface to the {PostgreSQL RDBMS}[http://www.postgresql.org/] (https://bitbucket.org/ged/ruby-pg)
 gem 'pg'
-# Makes http fun! Also, makes consuming restful web services dead easy. (http://jnunemaker.github.com/httparty)
-gem 'httparty', '>=0.13.5'
