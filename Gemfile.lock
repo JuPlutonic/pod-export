@@ -133,6 +133,8 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
+    record_tag_helper (1.0.0)
+      actionview (~> 5.x)
     rspec-core (3.9.0)
       rspec-support (~> 3.9.0)
     rspec-expectations (3.9.0)
@@ -226,6 +228,7 @@ DEPENDENCIES
   pg
   puma (~> 3)
   rails (>= 5.0.2)
+  record_tag_helper
   rspec-rails (~> 3.5)
   rubocop
   sass-rails (~> 5.0)

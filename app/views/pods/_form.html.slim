@@ -1,0 +1,9 @@
+div.well.col-md-4
+  = form_for @pod, multipart: true do |f|
+    fieldset
+      = f.label :organization
+      = f.text_field :organization, value: @pod_organization, disabled: :true
+    fieldset
+      = f.label :id
+      = f.text_field :id, value: @pod_id, disabled: :true
+    = f.submit unless locals[:disable_toggler]

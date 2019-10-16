@@ -1,2 +1,9 @@
-- provide(:about, "active")
-- provide(:title, "About")
+- provide(:home, "active")
+- provide(:title, "ПОД")
+
+= render "form", locals: {disable_toggler: false}
+
+  /p Files:
+  /ul
+    - pod.json_dataset.files.each do |a|
+      li= link_to a.file_name, a.file.url

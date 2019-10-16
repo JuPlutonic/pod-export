@@ -1,8 +1,6 @@
 - provide(:home, 'active')
-- provide(:title, 'Home')
-br/
-br/
-/! TODO: Show/New logic:
+- provide(:title, 'Организации')
+/! TODO: Filter logic:
 /h2
   | Searching for - #{@search_term}
 /- if @pods.nil? or @pods == []
@@ -10,7 +8,6 @@ br/
   h2
     | No pods found with #{@search_term}
 /- else
-br/
 table border=".5"
   tr
     th №
@@ -21,9 +18,17 @@ table border=".5"
       tr
         td= num+1
         td= @pod_ids[num]
-        td= @pod_names[num]
-        td= button_to entry, entry == 'показать данные' ? pod_path : new_pod_path, remote: true, class:'btn-sm primary'
-/! TODO: it doesn't equals 1, needs helper for show/new
-  span.pull-right.badge.badge-important style=("margin-right: 16px") = 1
+        td= @pod_organizations[num]
+        - get_params = {}
+        - this_path = {}
+        - if entry == 'показать данные'
+          - this_path = pod_path
+          - get_params = { pod_id: @pod_ids[num] }
+        - else
+          - this_path = new_pod_path
+          - get_params = { pod_id: @pod_ids[num], pod_organization: @pod_organizations[num] }
+        td
+          = button_to entry, this_path, method: :get, params: get_params, remote: false
+          /class:'btn-sm btn' , remote: true, format: :js
 /javascript:
   | $('#input_sm_field').val("Поиск по названию организации");
