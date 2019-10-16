@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: pods
+#
+#  id           :integer          not null, primary key
+#  organization :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+
 require 'rails_helper'
 
 RSpec.describe Pod, type: :model do
