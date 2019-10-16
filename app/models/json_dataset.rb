@@ -12,7 +12,6 @@
 #  datum_id   :integer
 #
 
-
 class JsonDataset < ApplicationRecord
   belongs_to :datum
 end

@@ -18,9 +18,9 @@ Rails.application.routes.draw do
   get 'pods/index'
   root 'pods#index'
   resources :pods # do
-    # member do
-    #   patch :update_span
-    # end
+  # member do
+  #   patch :update_span
+  # end
   # end
   get 'contact' => 'pods#contact', as: :contact
   get 'about' => 'pods#about', as: :about

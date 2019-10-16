@@ -10,7 +10,6 @@
 #  updated_at   :datetime         not null
 #
 
-
 class Pod < ApplicationRecord
   has_many :datum
   validates :id, length: { is: 10 || 12 }, presence: true

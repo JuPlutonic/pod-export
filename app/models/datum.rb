@@ -15,7 +15,6 @@
 #  pod_id     :integer
 #
 
-
 class Datum < ApplicationRecord
   belongs_to :pod
   has_one :json_dataset
