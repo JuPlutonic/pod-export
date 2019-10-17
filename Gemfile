@@ -49,8 +49,13 @@ group :development do
   # Listen to file modifications (https://github.com/guard/listen)
   gem 'listen', '~> 3.0.5'
   # gem 'oink'
+  # Struggling to get 100% code coverage:
+  # gem 'simplecov', require: false
+  # gem 'simplecov-json', require: false
   # Automatic Ruby code style checking tool. (http://github.com/bbatsov/rubocop)
   gem 'rubocop', require: false
+  # Code style checking for RSpec files (https://github.com/rubocop-hq/rubocop-rspec)
+  gem 'rubocop-rspec', '~> 1.25.0', require: false
 
   # Rails application preloader (https://github.com/rails/spring)
   gem 'spring'

@@ -133,8 +133,6 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
-    record_tag_helper (1.0.0)
-      actionview (~> 5.x)
     rspec-core (3.9.0)
       rspec-support (~> 3.9.0)
     rspec-expectations (3.9.0)
@@ -159,6 +157,8 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 1.7)
+    rubocop-rspec (1.25.1)
+      rubocop (>= 0.53.0)
     ruby-progressbar (1.10.1)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
@@ -228,9 +228,9 @@ DEPENDENCIES
   pg
   puma (~> 3)
   rails (>= 5.0.2)
-  record_tag_helper
   rspec-rails (~> 3.5)
   rubocop
+  rubocop-rspec (~> 1.25.0)
   sass-rails (~> 5.0)
   slim-rails
   spring
