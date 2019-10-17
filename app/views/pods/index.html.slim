@@ -15,7 +15,7 @@ table border=".5"
     th Наименование организации
     th _
   - @elements.each_with_index do |entry, num|
-      tr
+      tr class="#{cycle('odd', 'even')}"
         td= num+1
         td= @pod_ids[num]
         td= @pod_organizations[num]
@@ -23,12 +23,24 @@ table border=".5"
         - this_path = {}
         - if entry == 'показать данные'
           - this_path = pod_path
-          - get_params = { pod_id: @pod_ids[num] }
+          - get_params = { current_id: @pod_ids[num] }
+        /TODO: протестировать ELSE
         - else
           - this_path = new_pod_path
-          - get_params = { pod_id: @pod_ids[num], pod_organization: @pod_organizations[num] }
+          - get_params = { current_id: @pod_ids[num], current_organization: @pod_organizations[num] }
         td
           = button_to entry, this_path, method: :get, params: get_params, remote: false
           /class:'btn-sm btn' , remote: true, format: :js
 /javascript:
   | $('#input_sm_field').val("Поиск по названию организации");
+div
+  .row.col-md-5
+  p Навигация
+    #{@cur_page + 1}
+    из
+    #{@last_page + 1}
+  .row.col-md-5
+  p
+    fieldset.input
+      = number_field_tag 'page_nav', @cur_page ? "#{@cur_page} + 1" : "1", within: 1..@last_page, class: "special_input"
+      = submit_tag 'Страница', class: 'btn btn-xs'
