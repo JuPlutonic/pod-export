@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PodsController < ApplicationController
-  before_action :set_pod, only: [:show, :edit, :update]
+  before_action :set_pod, only: %i[show edit update]
 
   def index
     @pods = Pod.all # TODO: Filter '' also need to be passed by default
@@ -63,6 +63,7 @@ class PodsController < ApplicationController
     params.require(:pod).permit(:organization, :id)
   end
 
+  # #rubocop:disable Metrics/AbcSize
   def scrape(cur_page = 0)
     require 'open-uri'
 
@@ -72,13 +73,13 @@ class PodsController < ApplicationController
     @pod_ids = []
 
     # If we start browsing base_url, li[12] will be the last paginated table
-    @cur_page = cur_page || get_cur_page
+    @cur_page = cur_page || @cur_page || 0
     if @cur_page.zero? && @last_page.nil?
-      @last_page = doc.
-                   xpath('//div[3]/ul/li[12]/a').
-                   to_s.
-                   gsub(/^.*=/, ''). # remove unuseful parts of url query
-                   gsub(/\D/, '').to_i # remove non digit parts of html tags
+      @last_page = doc
+                   .xpath('//div[3]/ul/li[12]/a')
+                   .to_s
+                   .gsub(/^.*=/, '') # remove unuseful parts of url query
+                   .gsub(/\D/, '').to_i # remove non digit parts of html tags
     end
 
     doc = doc.xpath('//tbody')
@@ -88,6 +89,6 @@ class PodsController < ApplicationController
       # gsub do deletion of /organization/ - it remains only taxpayer's id
       @pod_ids << anchor.xpath('@href').to_s.gsub(%r{(/\w+/)(\d+)}, '\2')
     end
-
   end
+  # #rubocop:enable Metrics/AbcSize
 end
