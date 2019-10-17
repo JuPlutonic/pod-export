@@ -28,18 +28,19 @@ ActiveRecord::Schema.define(version: 20191014115049) do
   end
 
   create_table "json_datasets", force: :cascade do |t|
-    t.binary   "files",      default: "[]", null: false
-    t.jsonb    "jsonb",      default: {},   null: false
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.binary   "file"
+    t.jsonb    "jsonb",      default: {}, null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.integer  "datum_id"
     t.index ["datum_id"], name: "index_json_datasets_on_datum_id", using: :btree
   end
 
   create_table "pods", force: :cascade do |t|
     t.string   "organization"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "tax_payers_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   add_foreign_key "data", "pods"

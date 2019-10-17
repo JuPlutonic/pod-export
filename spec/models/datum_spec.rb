@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: data
@@ -9,7 +11,7 @@
 #  author     :string
 #  source     :string
 #  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  updated_at :datetime         not null (by default PG sorts table DESC by this column)
 #  pod_id     :integer
 #
 

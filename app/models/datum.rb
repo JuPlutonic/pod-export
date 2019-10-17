@@ -16,6 +16,10 @@
 #
 
 class Datum < ApplicationRecord
-  belongs_to :pod
-  has_one :json_dataset
+  with_options dependent: :destroy do
+    belongs_to :pod, foreign_key: :tax_payers_id, inverse_of: :data
+    has_one :json_dataset
+  end
+
+  validates :tax_payers_id, presence: true
 end

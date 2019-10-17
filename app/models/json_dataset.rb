@@ -5,7 +5,7 @@
 # Table name: json_datasets
 #
 #  id         :integer          not null, primary key
-#  files      :binary           default("[]"), not null
+#  file       :binary
 #  jsonb      :jsonb            not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -13,5 +13,5 @@
 #
 
 class JsonDataset < ApplicationRecord
-  belongs_to :datum
+  belongs_to :datum, touch: true
 end

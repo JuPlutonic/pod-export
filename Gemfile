@@ -24,14 +24,14 @@ gem 'json', '2.0.2'
 # Sass adapter for the Rails asset pipeline. (https://github.com/rails/sass-rails)
 gem 'sass-rails', '~> 5.0'
 # gem 'sdoc', '>= 0.4.0', group: :doc
+# # Slim templates generator for Rails 3+ (https://github.com/slim-template/slim-rails)
+gem 'slim-rails'
+# Generic interface to multiple Ruby template engines (http://github.com/rtomayko/tilt/)
+gem 'tilt', '=2.0.9'
 # Turbolinks makes navigating your web application faster (https://github.com/turbolinks/turbolinks)
 gem 'turbolinks', '~> 5'
 # Ruby wrapper for UglifyJS JavaScript compressor (http://github.com/lautis/uglifier)
 gem 'uglifier', '>= 1.3.0'
-# Generic interface to multiple Ruby template engines (http://github.com/rtomayko/tilt/)
-gem 'tilt', '=2.0.9'
-# Slim templates generator for Rails 3+ (https://github.com/slim-template/slim-rails)
-gem 'slim-rails'
 
 group :development, :test do
   # RSpec for Rails (https://github.com/rspec/rspec-rails)
@@ -54,9 +54,12 @@ group :development do
   # gem 'simplecov-json', require: false
   # Automatic Ruby code style checking tool. (http://github.com/bbatsov/rubocop)
   gem 'rubocop', require: false
+  # Automatic performance checking tool for Ruby code. (https://github.com/rubocop-hq/rubocop-performance)
+  gem 'rubocop-performance', require: false
+  # Automatic Rails code style checking tool. (https://github.com/rubocop-hq/rubocop-rails)
+  gem 'rubocop-rails', require: false
   # Code style checking for RSpec files (https://github.com/rubocop-hq/rubocop-rspec)
   gem 'rubocop-rspec', '~> 1.25.0', require: false
-
   # Rails application preloader (https://github.com/rails/spring)
   gem 'spring'
   # Makes spring watch files using the listen gem. (https://github.com/jonleighton/spring-watcher-listen)
