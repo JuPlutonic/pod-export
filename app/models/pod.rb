@@ -6,15 +6,17 @@
 #
 #  id            :integer          not null, primary key
 #  organization  :string
-#  tax_payers_id :integer
+#  tax_payer_id :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
 
 class Pod < ApplicationRecord
-  has_many :data, dependent: :restrict_with_exception, primary_key: :tax_payers_id
-  has_many :json_datasets, through: :datum, primary_key: :tax_payers_id
-  validates :tax_payers_id, length: { is: 10 || 12 }, presence: true, uniqueness: true
+  self.primary_key = 'tax_payer_id'
+  has_many :data, dependent: :restrict_with_exception, primary_key: :tax_payer_id
+  has_many :json_datasets, through: :datum
+  # validates :tax_payer_id, presence: true, uniqueness: true
+  accepts_nested_attributes_for :data, reject_if: proc { |attributes| attributes[:converted].blank? }, allow_destroy: true
 
   # Filter
   # Sends post-query to URI. Here scrape updates variarles.

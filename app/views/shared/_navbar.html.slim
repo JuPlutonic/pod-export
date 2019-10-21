@@ -8,12 +8,13 @@ nav.navbar.navbar-inverse.navbar-fixed-top role="navigation"
         span.icon-bar
         span.icon-bar
       a.navbar-brand href="#"
-        b Pods
+        b ПОД
     /! Collect the nav links, forms, and other content for toggling
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       ul.nav.navbar-nav.navbar-right
-        li class="#{yield(:home)}" = link_to "Home", root_path
-        li class="#{yield(:about)}" = link_to "About", about_path
-        li class="#{yield(:contact)}" = link_to "Contact", contact_path
+        li class="#{yield(:home)}"= link_to "🏡", root_path
+        /doesnt work = link_to_unless_current "🏡", {action: "index" }
+        li class="#{yield(:about)}"= link_to "О программе", about_path
+        li class="#{yield(:contact)}"= link_to "Контакты", contact_path
     /! /.navbar-collapse
   /! /.container-fluid

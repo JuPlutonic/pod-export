@@ -5,6 +5,8 @@ ruby '2.4.9'
 gem 'puma', '~> 3'
 # Full-stack web application framework. (https://rubyonrails.org)
 gem 'rails', '>= 5.0.2'
+# Suppressing RangeError during type casting (https://github.com/kamipo/activerecord-suppress_range_error)
+# gem 'activerecord-suppress_range_error'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

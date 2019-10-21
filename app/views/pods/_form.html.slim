@@ -2,11 +2,13 @@ div.well.col-md-4
   = form_for @pod, multipart: true do |f|
     fieldset
       = f.label :organization
-      = f.text_field :organization, value: @current_organization, disabled: :true
+      = f.text_field :organization,
+        value: @pod.organization || params[:organization],
+        disabled: :true
     fieldset
-      = f.label :id
-      = f.text_field :id, value: @current_id, disabled: :true
+      = f.label :tax_payer_id
+      = f.text_field :tax_payer_id, value: params[:tax_payer_id], disabled: :true
     fieldset
-      = f.hidden_field :current_id, value: params[:current_id]
-      = f.hidden_field :current_organization, value: params[:current_organization]
+      = f.hidden_field :tax_payer_id, value: params[:tax_payer_id]
+      = f.hidden_field :organization, value: params[:organization]
     = f.submit class: "btn btn-xs" unless locals[:disable_toggler]

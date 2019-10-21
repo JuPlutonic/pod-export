@@ -1,5 +1,6 @@
 - provide(:home, 'active')
 - provide(:title, 'Организации')
+
 /! TODO: Filter logic:
 /h2
   | Searching for - #{@search_term}
@@ -8,31 +9,10 @@
   h2
     | No pods found with #{@search_term}
 /- else
-table border=".5"
-  tr
-    th №
-    th ИНН
-    th Наименование организации
-    th _
-  - @elements.each_with_index do |entry, num|
-      tr class="#{cycle('odd', 'even')}"
-        td= num+1
-        td= @pod_ids[num]
-        td= @pod_organizations[num]
-        - get_params = {}
-        - this_path = {}
-        - if entry == 'показать данные'
-          - this_path = pod_path
-          - get_params = { current_id: @pod_ids[num] }
-        /TODO: протестировать ELSE
-        - else
-          - this_path = new_pod_path
-          - get_params = { current_id: @pod_ids[num], current_organization: @pod_organizations[num] }
-        td
-          = button_to entry, this_path, method: :get, params: get_params, remote: false
-          /class:'btn-sm btn' , remote: true, format: :js
+
 /javascript:
   | $('#input_sm_field').val("Поиск по названию организации");
+div.tbl== render partial: 'index_page'
 div
   .row.col-md-5
   p Навигация
@@ -42,5 +22,11 @@ div
   .row.col-md-5
   p
     fieldset.input
-      = number_field_tag 'page_nav', @cur_page ? "#{@cur_page} + 1" : "1", within: 1..@last_page, class: "special_input"
-      = submit_tag 'Страница', class: 'btn btn-xs'
+      - value = @cur_page ? "#{@cur_page + 1}" : "1"
+      = number_field_tag \
+        :page_nav,
+        value,
+        within: 1..@last_page,
+        class: "page_nav"
+      = submit_tag :page_nav, class: 'btn btn-xs', remote: false
+

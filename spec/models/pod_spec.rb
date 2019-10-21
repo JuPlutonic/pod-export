@@ -6,7 +6,7 @@
 #
 #  id            :integer          not null, primary key
 #  organization  :string
-#  tax_payers_id :integer
+#  tax_payer_id  :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
