@@ -1,6 +1,5 @@
 nav.navbar.navbar-inverse.navbar-fixed-top role="navigation"
   .container-fluid
-    /! Brand and toggle get grouped for better mobile display
     .navbar-header
       button.navbar-toggle.collapsed aria-expanded="false" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"
         span.sr-only Toggle navigation
@@ -9,12 +8,10 @@ nav.navbar.navbar-inverse.navbar-fixed-top role="navigation"
         span.icon-bar
       a.navbar-brand href="#"
         b ПОД
-    /! Collect the nav links, forms, and other content for toggling
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       ul.nav.navbar-nav.navbar-right
         li class="#{yield(:home)}"= link_to "🏡", root_path
-        /doesnt work = link_to_unless_current "🏡", {action: "index" }
+        /! OPTIMIZE: link_to_unless_current doesn't work because link's class is active
+         = link_to_unless_current "🏡", {action: "index" }
         li class="#{yield(:about)}"= link_to "О программе", about_path
         li class="#{yield(:contact)}"= link_to "Контакты", contact_path
-    /! /.navbar-collapse
-  /! /.container-fluid
