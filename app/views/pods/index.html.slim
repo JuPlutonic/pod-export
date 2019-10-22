@@ -22,7 +22,7 @@ div
   .row.col-md-5
   p
     fieldset
-      = fields_for url: {controller: 'page_nav', action: 'new'}, method: post do |page_nav|
+      = simple_form_strong_parameters_for url: {controller: 'page_nav', action: 'create'}, method: post do |page_nav|
         = page_nav.number_field \
           value: @index_cur_page ? "#{@index_cur_page + 1}" : "1",
           within: 1..@index_last_page,

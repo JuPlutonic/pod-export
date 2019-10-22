@@ -22,11 +22,9 @@ Rails.application.routes.draw do
   get 'pods/index'
   root 'pods#index'
   resources :pods, param: :tax_payer_id # do
+  # resources :page_navs do; post 'create', on: :member;end
   resources :page_navs, only: :create # do
-  # member do
-  #   patch :update_page_nav
-  # end
-  # end
+  # member do; patch :update_page_nav; end;  # end
 
   get 'contact' => 'pods#contact', as: :contact
   get 'about' => 'pods#about', as: :about

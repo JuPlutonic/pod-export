@@ -26,6 +26,10 @@ gem 'json', '2.0.2'
 # Sass adapter for the Rails asset pipeline. (https://github.com/rails/sass-rails)
 gem 'sass-rails', '~> 5.0'
 # gem 'sdoc', '>= 0.4.0', group: :doc
+# Forms made easy! (https://github.com/plataformatec/simple_form)
+gem 'simple_form'
+# Automatic handeling of strong parameters with simple form. (https://www.github.com/kaspernj/simple_form_strong_parameters)
+gem 'simple_form_strong_parameters'
 # # Slim templates generator for Rails 3+ (https://github.com/slim-template/slim-rails)
 gem 'slim-rails'
 # Generic interface to multiple Ruby template engines (http://github.com/rtomayko/tilt/)
