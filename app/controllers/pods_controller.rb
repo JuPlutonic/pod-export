@@ -15,22 +15,20 @@ class PodsController < ApplicationController
   # ---------------set_pod, scrape, elem_retrieval------------------------------
   def index
     @index_cur_page ||= 0
-    # TODO: add memoization of @page_nav and reimplemet to call from here
-    #   as method and this method must have Thread.new inside.
+    # TODO: @page_nav must have Thread.new inside.
     @page_nav = PageNav.new(@index_cur_page)
-    @index_cur_page = @page_nav.current_page
+    @index_cur_page = @page_nav.page
     @index_last_page = @page_nav.last_page
 
-    @page_nav.scrape(@index_cur_page)
     @elements = elem_retrieval(@page_nav.pod_ids, Pod.all)
   end
 
   # ---------------scrape_data, pod_params--------------------------------------
   def create
-    # TODO: NOKOGIRI SIDEKIQ REDIS
     @pod = Pod.new(pod_params)
     @pod.save
     # @pod.data.build
+    # TODO: NOKOGIRI SIDEKIQ REDIS
     @page_nav.scrape_data(@pod) # @tax_payer_id
 
     if @pod.save
@@ -58,8 +56,8 @@ class PodsController < ApplicationController
     # , data_attributes: [:id, :date:, source, :author, :converted])
   end
 
-  # Attributes: @pod_ids => tax_payer_id_numbers_on_page,
-  #              array of scrapped tax_payer's id numbers
+  # Attributes: @page_nav.pod_ids => tax_payer_id_numbers_on_page,
+  #               array of scrapped tax_payer's id numbers
   #             Pod.all => pods
   def elem_retrieval(tax_payer_id_numbers_on_page, pods)
     elements = []

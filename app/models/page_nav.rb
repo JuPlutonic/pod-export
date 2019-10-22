@@ -2,26 +2,32 @@
 
 class PageNav
   include ActiveModel::Model
+  extend Memoizable
+
   attr_reader :page
-  attr_accessor :limit, :pod_organizations, :pod_ids, :current_page, :last_page
+  attr_accessor :limit, :pod_organizations, :pod_ids, :last_page
 
   def initialize(first_page)
-    pod_organizations ||= []
-    pod_ids ||= []
+    @pod_organizations ||= []
+    @pod_ids ||= []
+    @page ||= 0
     page = first_page.to_i
-    last_page = page
-    limit = 20
+    @last_page ||= page
+
+    scrape(first_page)
+    @limit = 20
   end
 
   # Strange implementation of pod_organizations and pod_ids caching
   #   for views if we don't changing page but pushing 'Visit page' button.
   #            (controllers/pods/index.html.slim)
   def page=(new_page)
-    break if new_page == page
+    return if new_page == page
 
-    pod_organizations = []
-    pod_ids = []
+    @pod_organizations = []
+    @pod_ids = []
     @page = new_page
+    scrape(new_page)
   end
 
   def to_model
@@ -29,7 +35,7 @@ class PageNav
   end
 
   def to_key
-    page
+    current_page
   end
 
   def persisted?
@@ -38,23 +44,24 @@ class PageNav
 
   def scrape_data(pod); end
 
+  private
+
   # rubocop:disable Metrics/AbcSize
   # TODO: Filter '' needs to be passed by default.
   # TODO: base_url with the page number query need to be implemented.
-  def scrape(cur_page)
+  memoized def scrape(cur_page)
     require 'open-uri'
 
-    base_url = 'https://data.gov.ru/organizations'
+    base_url = "https://data.gov.ru/organizations?page=#{cur_page}"
     doc = Nokogiri::HTML(URI.parse(base_url).open, nil, 'UTF-8')
-
     # TODO: TEST crawling when base_url have only one page (expect @last_page.to be 0)
     # If we start browsing base_url, li[12] will be the last paginated table
-    if page.zero? && cur_page.zero?
-      last_page = doc
-                  .xpath('//div[3]/ul/li[12]/a')
-                  .to_s
-                  .gsub(/^.*=/, '') # removes unuseful parts of url query
-                  .gsub(/\D/, '').to_i # removes non digit parts of html tags
+    if cur_page.zero?
+      @last_page = doc
+                   .xpath('//div[3]/ul/li[12]/a')
+                   .to_s
+                   .gsub(/^.*=/, '') # removes unuseful parts of url query
+                   .gsub(/\D/, '').to_i # removes non digit parts of html tags
     end
 
     doc = doc.xpath('//tbody')

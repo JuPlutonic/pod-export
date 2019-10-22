@@ -1,6 +1,7 @@
 # == Route Map
 #
 #     Prefix Verb   URI Pattern                        Controller#Action
+#   data_new GET    /data/new(.:format)                data#new
 # pods_index GET    /pods/index(.:format)              pods#index
 #       root GET    /                                  pods#index
 #       pods GET    /pods(.:format)                    pods#index
@@ -11,6 +12,7 @@
 #            PATCH  /pods/:tax_payer_id(.:format)      pods#update
 #            PUT    /pods/:tax_payer_id(.:format)      pods#update
 #            DELETE /pods/:tax_payer_id(.:format)      pods#destroy
+#  page_navs POST   /page_navs(.:format)               page_navs#create
 #    contact GET    /contact(.:format)                 pods#contact
 #      about GET    /about(.:format)                   pods#about
 
@@ -20,6 +22,7 @@ Rails.application.routes.draw do
   get 'pods/index'
   root 'pods#index'
   resources :pods, param: :tax_payer_id # do
+  resources :page_navs, only: :create # do
   # member do
   #   patch :update_page_nav
   # end

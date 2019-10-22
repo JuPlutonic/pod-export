@@ -22,10 +22,10 @@ div
   .row.col-md-5
   p
     fieldset
-      = f.fields_for f.to_key do |page_nav|
-        = f.number_field \
-        value: @index_cur_page ? "#{@index_cur_page + 1}" : "1",
-        within: 1..@index_last_page,
-        class: "special_input"
-      = f.submit
+      = fields_for url: {controller: 'page_nav', action: 'new'}, method: post do |page_nav|
+        = page_nav.number_field \
+          value: @index_cur_page ? "#{@index_cur_page + 1}" : "1",
+          within: 1..@index_last_page,
+          class: "special_input"
+        = page_nav.submit
       / "Перейти"
