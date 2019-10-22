@@ -16,17 +16,16 @@ div.tbl== render partial: 'index_page'
 div
   .row.col-md-5
   p Навигация
-    #{@cur_page + 1}
+    #{@index_cur_page + 1}
     из
-    #{@last_page + 1}
+    #{@index_last_page + 1}
   .row.col-md-5
   p
-    fieldset.input
-      - value = @cur_page ? "#{@cur_page + 1}" : "1"
-      = number_field_tag \
-        :page_nav,
-        value,
-        within: 1..@last_page,
-        class: "page_nav"
-      = submit_tag :page_nav, class: 'btn btn-xs', remote: false
-
+    fieldset
+      = f.fields_for f.to_key do |page_nav|
+        = f.number_field \
+        value: @index_cur_page ? "#{@index_cur_page + 1}" : "1",
+        within: 1..@index_last_page,
+        class: "special_input"
+      = f.submit
+      / "Перейти"

@@ -6,17 +6,17 @@ table border=".5"
     th _
   - @elements.each_with_index do |entry, num|
       tr class="#{cycle('odd', 'even')}"
-        td= @cur_page * 20 + num + 1
-        td= @pod_ids[num]
-        td= @pod_organizations[num]
+        td= @page_nav.limit + num + 1
+        td= @page_nav.pod_ids[num]
+        td= @page_nav.pod_organizations[num]
         - get_params = {}
         - this_path = {}
         - if entry == 'показать данные'
-          - this_path = pod_path(@pod_ids[num])
-          - get_params = { tax_payer_id: @pod_ids[num], organization: @pod_organizations[num] }
+          - this_path = pod_path(@page_nav.pod_ids[num])
+          - get_params = { tax_payer_id: @page_nav.pod_ids[num], organization: @page_nav.pod_organizations[num] }
         /TODO: протестировать ELSE
         - else
           - this_path = new_pod_path
-          - get_params = { tax_payer_id: @pod_ids[num], organization: @pod_organizations[num] }
+          - get_params = { tax_payer_id: @page_nav.pod_ids[num], organization: @page_nav.pod_organizations[num] }
         td
           = button_to entry, this_path, method: :get, params: get_params, remote: false
