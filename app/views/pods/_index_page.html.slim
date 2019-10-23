@@ -6,7 +6,7 @@ table border=".5"
     th _
   - @elements.each_with_index do |entry, num|
       tr class="#{cycle('odd', 'even')}"
-        td= @page_nav.limit + num + 1
+        td= @page_nav.limit * @index_cur_page + num + 1
         td= @page_nav.pod_ids[num]
         td= @page_nav.pod_organizations[num]
         - get_params = {}

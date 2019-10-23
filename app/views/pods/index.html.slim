@@ -22,10 +22,9 @@ div
   .row.col-md-5
   p
     fieldset
-      = simple_form_strong_parameters_for url: {controller: 'page_nav', action: 'create'}, method: post do |page_nav|
-        = page_nav.number_field \
+      = simple_form_for [@page_nav], remote: true do |page_nav|
+        = page_nav.number_field :page,
           value: @index_cur_page ? "#{@index_cur_page + 1}" : "1",
           within: 1..@index_last_page,
           class: "special_input"
         = page_nav.submit
-      / "Перейти"

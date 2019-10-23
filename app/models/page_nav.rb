@@ -11,10 +11,10 @@ class PageNav
     @pod_organizations ||= []
     @pod_ids ||= []
     @page ||= 0
-    page = first_page.to_i
-    @last_page ||= page
+    page = first_page.respond_to?(:to_i) ? first_page.to_i : first_page[:page].to_i
+    @last_page ||= 0
 
-    scrape(first_page)
+    scrape(page)
     @limit = 20
   end
 
@@ -22,12 +22,13 @@ class PageNav
   #   for views if we don't changing page but pushing 'Visit page' button.
   #            (controllers/pods/index.html.slim)
   def page=(new_page)
+    new_page = new_page.respond_to?(:to_i) ? new_page.to_i : new_page[:page].to_i
     return if new_page == page
 
     @pod_organizations = []
     @pod_ids = []
     @page = new_page
-    scrape(new_page)
+    scrape(@page)
   end
 
   def to_model
@@ -35,7 +36,7 @@ class PageNav
   end
 
   def to_key
-    current_page
+    [page..last_page]
   end
 
   def persisted?

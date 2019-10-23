@@ -29,6 +29,8 @@ ru:
 
       # Those will however take effect for all the other models below
       # for which we define a specific label.
+      page_nav:
+        create: "Перейти"
       pod:
         create: "Создать организацию"
         update: "Обновить организацию"
