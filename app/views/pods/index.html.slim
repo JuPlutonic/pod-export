@@ -1,30 +1,16 @@
 - provide(:home, 'active')
 - provide(:title, 'Организации')
 
-/! TODO: Filter logic:
-/h2
-  | Searching for - #{@search_term}
-/- if @pods.nil? or @pods == []
-  p
-  h2
-    | No pods found with #{@search_term}
-/- else
+div.tbl== render 'shared/pods_table', pod_ids: @page_nav.pod_ids
 
-/javascript:
-  | $('#input_sm_field').val("Поиск по названию организации");
-div.tbl== render partial: 'index_page'
 div
-  .row.col-md-5
-  p Навигация
-    #{@index_cur_page + 1}
-    из
-    #{@index_last_page + 1}
   .row.col-md-5
   p
     fieldset
-      = simple_form_for [@page_nav], remote: true do |page_nav|
+      = simple_form_for @page_nav, remote: true do |page_nav|
         = page_nav.number_field :page,
           value: @index_cur_page ? "#{@index_cur_page + 1}" : "1",
           within: 1..@index_last_page,
           class: "special_input"
+        /! TODO: Filter logic (additional model parameter).
         = page_nav.submit

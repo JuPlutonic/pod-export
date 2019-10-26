@@ -2,76 +2,108 @@
 
 class PageNav
   include ActiveModel::Model
-  extend Memoizable
+  RECORDS_PER_PAGE_ON_TARGETED_SITE = 20
 
   attr_reader :page
-  attr_accessor :limit, :pod_organizations, :pod_ids, :last_page
+  attr_accessor :last_page, :limit, :pod_organizations, :pod_ids
 
   def initialize(first_page)
+    @limit = RECORDS_PER_PAGE_ON_TARGETED_SITE
+
     @pod_organizations ||= []
     @pod_ids ||= []
-    @page ||= 0
-    page = first_page.respond_to?(:to_i) ? first_page.to_i : first_page[:page].to_i
-    @last_page ||= 0
+    page = first_page.respond_to?(:to_i) ? first_page.to_i : first_page[:page].to_i - 1
 
-    scrape(page)
-    @limit = 20
+    # Run the scrapping with Nokogiri.
+    doc = call_nokogiri_default_page
+    @last_page = scrape_last_page(doc)
+    doc = call_nokogiri_default_page(page, true) unless page.zero?
+    scrape(doc)
   end
 
-  # Strange implementation of pod_organizations and pod_ids caching
-  #   for views if we don't changing page but pushing 'Visit page' button.
-  #            (controllers/pods/index.html.slim)
+  # @pod_organizations and @pod_ids are hold by method 'scape' memoization.
+  #                                                            gem Memoist'
+  # So if we don't changing page, but pushing 'Visit page' button
+  #   we'll see no load. The button is on controllers/pods/index.html.slim page.
   def page=(new_page)
-    new_page = new_page.respond_to?(:to_i) ? new_page.to_i : new_page[:page].to_i
+    new_page = new_page.respond_to?(:to_i) ? new_page.to_i : new_page[:page].to_i - 1
     return if new_page == page
 
+    # First time scrapped data must be cleared.
     @pod_organizations = []
     @pod_ids = []
+    # Setter
     @page = new_page
-    scrape(@page)
+    # Redo the scrapping, Rememoize with true.
+    doc = call_nokogiri_default_page(new_page, true)
+    scrape(doc, true)
   end
 
+  # ---------------Simple form methods.-----------------------------------------
   def to_model
     self
   end
 
   def to_key
-    [page..last_page]
+    [0..@last_page]
   end
 
   def persisted?
     false
   end
+  # ----------------------------------------------------------------------------
 
-  def scrape_data(pod); end
+  # ---------------Filter implementation template.------------------------------
+  #   It sends post-query to URI. Here scrape updates variables.
+  # def filter(keyword)
+  #   get('/search', query: { q: keyword })['pods']
+  #   doc = call_nokogiri_default_page_with_filter
+  #   @last_page = scrape_last_page(doc)
+  #   scrape(doc)
+  # end
+  # ----------------------------------------------------------------------------
 
   private
 
-  # rubocop:disable Metrics/AbcSize
-  # TODO: Filter '' needs to be passed by default.
-  # TODO: base_url with the page number query need to be implemented.
-  memoized def scrape(cur_page)
-    require 'open-uri'
+  extend Memoist
+  require 'open-uri'
 
+  #  ---------------Implementation template which is collecting json datasets.--
+  def scrape_data(pod)
+    # call_nokogiri_selected_pod_page
+  end
+
+  # def call_nokogiri_selected_pod_page; end
+  # ----------------------------------------------------------------------------
+
+  # TODO: User may filter page results. Filter '' needs to be passed by default.
+  def call_nokogiri_default_page(cur_page = 0)
     base_url = "https://data.gov.ru/organizations?page=#{cur_page}"
-    doc = Nokogiri::HTML(URI.parse(base_url).open, nil, 'UTF-8')
-    # TODO: TEST crawling when base_url have only one page (expect @last_page.to be 0)
-    # If we start browsing base_url, li[12] will be the last paginated table
-    if cur_page.zero?
-      @last_page = doc
-                   .xpath('//div[3]/ul/li[12]/a')
-                   .to_s
-                   .gsub(/^.*=/, '') # removes unuseful parts of url query
-                   .gsub(/\D/, '').to_i # removes non digit parts of html tags
-    end
+    Nokogiri::HTML(URI.parse(base_url).open, nil, 'UTF-8')
+  end
+  memoize :call_nokogiri_default_page
 
+  # TODO: TEST crawling when base_url have only one page (where is no pagination on the target site).
+  def scrape_last_page(doc)
+    # When we start browsing from the first page, li[12] will be the last paginated table.
+    doc
+      .xpath('//div[3]/ul/li[12]/a')
+      .to_s
+      .gsub(/^.*=/, '') # - removes useful parts of url query.
+      .gsub(/\D/, '').to_i # - removes non digit parts of html tags.
+  end
+  memoize :scrape_last_page
+
+  def scrape(doc)
     doc = doc.xpath('//tbody')
     doc.xpath('//td[2]/a').each do |anchor|
       pod_organizations << anchor.text.strip
 
-      # gsub does deletion of /organization/ - it remains only taxpayer's id:
+      # gsub is doing deletion of /organization/ - it remains only taxpayer's id:
       pod_ids << anchor.xpath('@href').to_s.gsub(%r{(/\w+/)(\d+)}, '\2').to_s
+      # FIXME: Glitches: P8 /administraciya-kostromskoy-oblasti, P3 /administraciya-vladimirskoy-oblasti
+      # FIXME: __Appearing only if the type of the organizations is "regional"
     end
   end
-  # rubocop:enable Metrics/AbcSize
+  memoize :scrape
 end

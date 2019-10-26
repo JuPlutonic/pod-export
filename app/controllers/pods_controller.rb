@@ -12,24 +12,23 @@ class PodsController < ApplicationController
   def update; end
   # ----------------------------------------------------------------------------
 
-  # ---------------set_pod, scrape, elem_retrieval------------------------------
+  # ---------------elem_retrieval, scrapping...---------------------------------
   def index
+    # Definition of instance variables, what will be accessed in the
+    #   views/pods/index.html.slim file.
     @index_cur_page ||= 0
-    # TODO: @page_nav must have Thread.new inside.
-    @page_nav = PageNav.new(@index_cur_page)
-    @index_cur_page = @page_nav.page
-    @index_last_page = @page_nav.last_page
 
-    @elements = elem_retrieval(@page_nav.pod_ids, Pod.all)
+    @page_nav = PageNav.new(@index_cur_page) unless Object.const_defined?(:PagNav) && @index_cur_page == @page_nav.page
+    @index_last_page ||= @page_nav.last_page
   end
+  # ----------------------------------------------------------------------------
 
   # ---------------scrape_data, pod_params--------------------------------------
+  # TODO: NOKOGIRI SIDEKIQ REDIS implementation, method @page_nav.scrape_data(@pod OR @tax_payer_id).
   def create
     @pod = Pod.new(pod_params)
     @pod.save
     # @pod.data.build
-    # TODO: NOKOGIRI SIDEKIQ REDIS
-    @page_nav.scrape_data(@pod) # @tax_payer_id
 
     if @pod.save
       respond_to do |format|
@@ -54,20 +53,5 @@ class PodsController < ApplicationController
   def pod_params
     params.require(:pod).permit(:organization, :tax_payer_id)
     # , data_attributes: [:id, :date:, source, :author, :converted])
-  end
-
-  # Attributes: @page_nav.pod_ids => tax_payer_id_numbers_on_page,
-  #               array of scrapped tax_payer's id numbers
-  #             Pod.all => pods
-  def elem_retrieval(tax_payer_id_numbers_on_page, pods)
-    elements = []
-    tax_payer_id_numbers_on_page.each do |pod|
-      elements << if pods.where(tax_payer_id: pod).blank?
-                    'получить данные'
-                  else
-                    'показать данные'
-                  end
-    end
-    elements
   end
 end

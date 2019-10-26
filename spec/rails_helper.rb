@@ -5,11 +5,11 @@ ENV['RAILS_ENV'] ||= 'test'
 require 'spec_helper'
 require File.expand_path('../config/environment', __dir__)
 require 'rspec/rails'
-# require 'capybara/poltergeist'
+# require 'capybara/poltergeist' OR 'capybara/cuprite'
 
 RSpec.configure do |config|
   config.use_transactional_fixtures = false
   config.infer_spec_type_from_file_location!
-  # Capybara.javascript_driver = :poltergeist
-  Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+  # Capybara.javascript_driver = :poltergeist OR :headless_chrome
+  Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 end

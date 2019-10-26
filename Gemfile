@@ -1,10 +1,12 @@
 source 'https://rubygems.org'
 
 ruby '2.4.9'
+# memoize methods invocation (https://github.com/matthewrudy/memoist
+gem 'memoist'
 # Puma is a simple, fast, threaded, and highly concurrent HTTP 1.1 server for Ruby/Rack applications (http://puma.io)
 gem 'puma', '~> 3'
 # Full-stack web application framework. (https://rubyonrails.org)
-gem 'rails', '>= 5.0.2'
+gem 'rails', '>= 5.2.3'
 # Suppressing RangeError during type casting (https://github.com/kamipo/activerecord-suppress_range_error)
 # gem 'activerecord-suppress_range_error'
 
@@ -47,12 +49,17 @@ group :development do
   # Annotates Rails Models, routes, fixtures, and others based on the database schema. (http://github.com/ctran/annotate_models)
   gem 'annotate', require: false
 
+  # Better error page for Rails and other Rack apps (https://github.com/BetterErrors/better_errors)
+  gem 'better_errors'
+  # Retrieve the binding of a method's caller. Can also retrieve bindings even further up the stack. (http://github.com/banister/binding_of_caller)
+  gem 'binding_of_caller'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   # Ruby fast debugger - base + CLI (http://github.com/deivid-rodriguez/byebug)
   gem 'byebug', platform: :mri
   # Listen to file modifications (https://github.com/guard/listen)
   gem 'listen', '~> 3.0.5'
-  # gem 'oink'
+  # Rails plugin and log parser to help narrow down the source(s) of increased memory usage in rails application (https://github.com/noahd1/oink)
+  gem 'oink'
   # Struggling to get 100% code coverage:
   # gem 'simplecov', require: false
   # gem 'simplecov-json', require: false

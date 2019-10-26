@@ -1,7 +1,6 @@
 require_relative 'boot'
 
 require 'rails/all'
-require_relative 'memoizable'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -14,5 +13,6 @@ module PodExport
     # -- all .rb files in that directory are automatically loaded.
     config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
     config.i18n.default_locale = :ru
+    Rails.application.middleware.use( Oink::Middleware, logger: Rails.logger )
   end
 end

@@ -6,8 +6,8 @@ class PageNavsController < ApplicationController
   end
 
   def create
-    @page_nav = PageNav.new(page_nav_params) # create!(simple_form_strong_parameters(:page_nav))
-    # redirect_to page_nav_path(@page_nav)
+    @page_nav = PageNav.new(page_nav_params)
+
     respond_to do |format|
       format.js
     end
@@ -16,7 +16,8 @@ class PageNavsController < ApplicationController
   private
 
   def page_nav_params
+    # OPTIMIZE: Something wrong with with 'ActionController::Parameters', what is 'permitted: false'
+    # OPTIMIZE: __and can be accessed only by 'params[:page_nav][:page]' hash key.
     params.require(:page_nav).permit(:page)
   end
-
 end
