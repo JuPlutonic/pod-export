@@ -102,7 +102,7 @@ class PageNav
       # gsub is doing deletion of /organization/ - it remains only taxpayer's id:
       pod_ids << anchor.xpath('@href').to_s.gsub(%r{(/\w+/)(\d+)}, '\2').to_s
       # FIXME: Glitches: P8 /administraciya-kostromskoy-oblasti, P3 /administraciya-vladimirskoy-oblasti
-      # FIXME: __Appearing only if the type of the organizations is "regional"
+      # FIXME: __Appearing only if the type of the organizations is "regional".
     end
   end
   memoize :scrape

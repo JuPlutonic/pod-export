@@ -14,7 +14,7 @@ div#pods_table
           td= @page_nav.pod_organizations[num]
           - get_params = {}
           - this_path = {}
-          /TODO: ТEST на-первую 'true' часть IF условия
+          /TODO: ТEST на-первую 'true' часть IF условия.
           - if entry == 'показать данные'
             - this_path = pod_path(@page_nav.pod_ids[num])
             - get_params = { tax_payer_id: @page_nav.pod_ids[num], organization: @page_nav.pod_organizations[num] }

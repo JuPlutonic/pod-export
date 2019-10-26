@@ -24,7 +24,8 @@ class PodsController < ApplicationController
   # ----------------------------------------------------------------------------
 
   # ---------------scrape_data, pod_params--------------------------------------
-  # TODO: NOKOGIRI SIDEKIQ REDIS implementation, method @page_nav.scrape_data(@pod OR @tax_payer_id).
+  # TODO: User, when visits Pod's sees organization description and it's open datasets.
+  # TODO: __NOKOGIRI, SIDEKIQ, REDIS, TAB tags and method @page_nav.scrape_data(@pod OR @tax_payer_id) implementation.
   def create
     @pod = Pod.new(pod_params)
     @pod.save
