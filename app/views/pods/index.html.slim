@@ -12,5 +12,5 @@ div
           value: @index_cur_page ? "#{@index_cur_page + 1}" : "1",
           within: 1..@index_last_page,
           class: "special_input"
-        /! TODO: Filter logic (additional model parameter).
+        /! TODO: Пользователь не только выбирает страницу, но и фильтрует по названию организации. Дополнительное поле в simple form.
         = page_nav.submit
