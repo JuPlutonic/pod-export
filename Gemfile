@@ -92,6 +92,8 @@ group :test do
   gem 'capybara', '~> 2.4.4'
   # Headless Chrome driver for Capybara (https://github.com/machinio/cuprite)
   # gem 'cuprite'
+ # Strategies for cleaning databases.  Can be used to ensure a clean state for testing. (http://github.com/DatabaseCleaner/database_cleaner)
+  gem 'database_cleaner'
   # # Auto-install phantomjs on demand for current platform. Comes with poltergeist integration. (https://github.com/colszowka/phantomjs-gem)
   # gem 'phantomjs', '~> 2', require: 'phantomjs/poltergeist'
   # # PhantomJS driver for Capybara (https://github.com/teampoltergeist/poltergeist)
