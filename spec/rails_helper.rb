@@ -3,7 +3,7 @@
 ENV['RAILS_ENV'] ||= 'test'
 
 require 'spec_helper'
-require 'oink/middleware'
+# require 'oink/middleware'
 require File.expand_path('../config/environment', __dir__)
 require 'rspec/rails'
 # require 'capybara/poltergeist' OR 'capybara/cuprite'
