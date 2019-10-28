@@ -40,6 +40,8 @@ gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
+  #factory_bot_rails provides integration between factory_bot and rails 4.2 or newer (https://github.com/thoughtbot/factory_bot_rails)
+  gem 'factory_bot_rails'
   # Extracting `assigns` and `assert_template` from ActionDispatch. (https://github.com/rails/rails-controller-testing)
   gem 'rails-controller-testing'
   # RSpec for Rails (https://github.com/rspec/rspec-rails)
