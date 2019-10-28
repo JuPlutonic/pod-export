@@ -40,6 +40,8 @@ gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
+  # Extracting `assigns` and `assert_template` from ActionDispatch. (https://github.com/rails/rails-controller-testing)
+  gem 'rails-controller-testing'
   # RSpec for Rails (https://github.com/rspec/rspec-rails)
   gem 'rspec-rails', '~> 3.5'
   # gem 'selenium-webdriver'
