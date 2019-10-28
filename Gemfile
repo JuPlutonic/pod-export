@@ -3,13 +3,12 @@ source 'https://rubygems.org'
 ruby '2.4.9'
 # memoize methods invocation (https://github.com/matthewrudy/memoist
 gem 'memoist'
+# Pg is the Ruby interface to the {PostgreSQL RDBMS}[http://www.postgresql.org/] (https://bitbucket.org/ged/ruby-pg)
+gem 'pg'
 # Puma is a simple, fast, threaded, and highly concurrent HTTP 1.1 server for Ruby/Rack applications (http://puma.io)
 gem 'puma', '~> 3'
 # Full-stack web application framework. (https://rubyonrails.org)
 gem 'rails', '>= 5.2.3'
-# Suppressing RangeError during type casting (https://github.com/kamipo/activerecord-suppress_range_error)
-# gem 'activerecord-suppress_range_error'
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -27,6 +26,7 @@ gem 'jquery-rails'
 gem 'json', '2.0.2'
 # Sass adapter for the Rails asset pipeline. (https://github.com/rails/sass-rails)
 gem 'sass-rails', '~> 5.0'
+# bundle exec rake doc:rails generates the API under doc/api.
 # gem 'sdoc', '>= 0.4.0', group: :doc
 # Forms made easy! (https://github.com/plataformatec/simple_form)
 gem 'simple_form'
@@ -40,7 +40,7 @@ gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
-  #factory_bot_rails provides integration between factory_bot and rails 4.2 or newer (https://github.com/thoughtbot/factory_bot_rails)
+  # factory_bot_rails provides integration between factory_bot and rails 4.2 or newer (https://github.com/thoughtbot/factory_bot_rails)
   gem 'factory_bot_rails'
   # Extracting `assigns` and `assert_template` from ActionDispatch. (https://github.com/rails/rails-controller-testing)
   gem 'rails-controller-testing'
@@ -92,7 +92,7 @@ group :test do
   gem 'capybara', '~> 2.4.4'
   # Headless Chrome driver for Capybara (https://github.com/machinio/cuprite)
   # gem 'cuprite'
- # Strategies for cleaning databases.  Can be used to ensure a clean state for testing. (http://github.com/DatabaseCleaner/database_cleaner)
+  # Strategies for cleaning databases.  Can be used to ensure a clean state for testing. (http://github.com/DatabaseCleaner/database_cleaner)
   gem 'database_cleaner'
   # # Auto-install phantomjs on demand for current platform. Comes with poltergeist integration. (https://github.com/colszowka/phantomjs-gem)
   # gem 'phantomjs', '~> 2', require: 'phantomjs/poltergeist'
@@ -101,6 +101,3 @@ group :test do
   # Simple one-liner tests for common Rails functionality (https://matchers.shoulda.io/)
   gem 'shoulda-matchers'
 end
-
-# Pg is the Ruby interface to the {PostgreSQL RDBMS}[http://www.postgresql.org/] (https://bitbucket.org/ged/ruby-pg)
-gem 'pg'

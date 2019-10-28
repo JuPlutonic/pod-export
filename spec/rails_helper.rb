@@ -7,6 +7,10 @@ require File.expand_path('../config/environment', __dir__)
 require 'rspec/rails'
 # require 'capybara/poltergeist' OR 'capybara/cuprite'
 
+# Checks for pending migration and applies them before tests are run.
+# If you are not using ActiveRecord, you can remove this line.
+ActiveRecord::Migration.maintain_test_schema!
+
 RSpec.configure do |config|
   config.use_transactional_fixtures = false
   config.infer_spec_type_from_file_location!
@@ -35,8 +39,8 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
-  Shoulda::Matchers.configure do |config|
-    config.integrate do |with|
+  Shoulda::Matchers.configure do |soulda_config|
+    soulda_config.integrate do |with|
       with.test_framework :rspec
       with.library :rails
     end

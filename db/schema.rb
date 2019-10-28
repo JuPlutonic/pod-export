@@ -10,37 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191017192104) do
+ActiveRecord::Schema.define(version: 2019_10_17_192104) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "data", force: :cascade do |t|
-    t.string   "mime"
-    t.date     "date"
-    t.boolean  "converted"
-    t.string   "author"
-    t.string   "source"
+    t.string "mime"
+    t.date "date"
+    t.boolean "converted"
+    t.string "author"
+    t.string "source"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "pod_id"
-    t.index ["pod_id"], name: "index_data_on_pod_id", using: :btree
+    t.integer "pod_id"
+    t.index ["pod_id"], name: "index_data_on_pod_id"
   end
 
   create_table "json_datasets", force: :cascade do |t|
-    t.binary   "file"
-    t.jsonb    "jsonb",      default: {}, null: false
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.integer  "datum_id"
-    t.index ["datum_id"], name: "index_json_datasets_on_datum_id", using: :btree
+    t.binary "file"
+    t.jsonb "jsonb", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "datum_id"
+    t.index ["datum_id"], name: "index_json_datasets_on_datum_id"
   end
 
   create_table "pods", force: :cascade do |t|
-    t.string   "organization"
-    t.string   "tax_payer_id", null: false
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.string "organization"
+    t.string "tax_payer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "data", "pods"

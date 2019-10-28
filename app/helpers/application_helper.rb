@@ -5,6 +5,8 @@ module ApplicationHelper
   #               array of scrapped tax_payer's id numbers
   def elem_retrieval(tax_payer_id_numbers_on_page)
     elements = []
+    return elements if Pod.all.blank?
+
     tax_payer_id_numbers_on_page.each do |pod|
       elements << if Pod.all.where(tax_payer_id: pod).blank?
                     'получить данные'
