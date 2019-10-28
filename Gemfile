@@ -96,6 +96,8 @@ group :test do
   # gem 'phantomjs', '~> 2', require: 'phantomjs/poltergeist'
   # # PhantomJS driver for Capybara (https://github.com/teampoltergeist/poltergeist)
   # gem 'poltergeist', '~> 1.6.0'
+  # Simple one-liner tests for common Rails functionality (https://matchers.shoulda.io/)
+  gem 'shoulda-matchers'
 end
 
 # Pg is the Ruby interface to the {PostgreSQL RDBMS}[http://www.postgresql.org/] (https://bitbucket.org/ged/ruby-pg)
