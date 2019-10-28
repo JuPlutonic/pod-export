@@ -4892,7 +4892,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
     min-height: 20px;
     padding: 19px;
     margin-bottom: 20px;
-    background-color: #D6E1C3;
+    background-color: #f1f1f1;
     border: 1px solid #A11006;
     border-radius: 4px;
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
