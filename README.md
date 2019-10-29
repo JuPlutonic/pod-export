@@ -28,11 +28,11 @@ bundle exec oink --format verbose -t 60 ./log/*
 
 ---
 
-* Без скаффолдинга, т.к. данные получаются (скрапятся) по ходу работы. Генерил модели, а также контроллеры без маршрута. 
+* Без скаффолдинга, т.к. данные получаются (скрапятся) по ходу работы. Генерил модели, а также контроллеры без маршрута.
 
 * Поэтому в методе индекс и в application_helper происходит сравнения персистанса из БД с соскраппленными таблицами и поэтому submit из специальной формы gem ('simple_form').
 
-* Pod - ПОД (поставщик открытых данных) и ИНН в приложении синонимы, также tax_payer_id в приложении стал primary_key типа string, во избежание ошибок как на стороне postgres так и того чтобы ошибочный скраппинг не влиял на работу приложения. 
+* Pod - ПОД (поставщик открытых данных) и ИНН в приложении синонимы, также tax_payer_id в приложении стал primary_key типа string, во избежание ошибок как на стороне postgres так и того чтобы ошибочный скраппинг не влиял на работу приложения.
 
 ### AGILE:
 
@@ -56,6 +56,7 @@ app/controllers/page_navs_controller.rb:
 
 app/controllers/pods_controller.rb:
 
+**BRANCH:** pods_new_organization-description
 * [27-] [TODO] User, when visits Pod's sees organization description and it's open datasets.
 * [-28] [TODO] __NOKOGIRI, SIDEKIQ, REDIS, TAB tags and method @page_nav.scrape_data(@pod OR @tax_payer_id) implementation.
 
