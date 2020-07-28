@@ -23,7 +23,7 @@ gem 'jbuilder', '~> 2.5'
 # Use jQuery with Rails 4+ (https://github.com/rails/jquery-rails)
 gem 'jquery-rails'
 # JSON implementation for JRuby (http://json-jruby.rubyforge.org/)
-gem 'json', '2.0.2'
+gem 'json', '2.3.0'
 # Sass adapter for the Rails asset pipeline. (https://github.com/rails/sass-rails)
 gem 'sass-rails', '~> 5.0'
 # bundle exec rake doc:rails generates the API under doc/api.
