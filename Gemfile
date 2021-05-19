@@ -8,7 +8,7 @@ gem 'pg'
 # Puma is a simple, fast, threaded, and highly concurrent HTTP 1.1 server for Ruby/Rack applications (http://puma.io)
 gem 'puma', '~> 4'
 # Full-stack web application framework. (https://rubyonrails.org)
-gem 'rails', '>= 5.2.3'
+gem 'rails', '= 5.2.4.6'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -24,8 +24,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 # JSON implementation for JRuby (http://json-jruby.rubyforge.org/)
 gem 'json', '2.3.0'
-gem "nokogiri", ">= 1.11.4"
-# Sass adapter for the Rails asset pipeline. (https://github.com/rails/sass-rails)
+# Use libsass with Ruby! (https://github.com/sass/sassc-ruby)
 gem 'sassc'
 # bundle exec rake doc:rails generates the API under doc/api.
 # gem 'sdoc', '>= 0.4.0', group: :doc
