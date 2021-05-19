@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.4.9'
+ruby '2.6.7'
 # memoize methods invocation (https://github.com/matthewrudy/memoist
 gem 'memoist'
 # Pg is the Ruby interface to the {PostgreSQL RDBMS}[http://www.postgresql.org/] (https://bitbucket.org/ged/ruby-pg)
@@ -24,8 +24,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 # JSON implementation for JRuby (http://json-jruby.rubyforge.org/)
 gem 'json', '2.3.0'
+gem "nokogiri", ">= 1.11.4"
 # Sass adapter for the Rails asset pipeline. (https://github.com/rails/sass-rails)
-gem 'sass-rails', '~> 5.0'
+gem 'sassc'
 # bundle exec rake doc:rails generates the API under doc/api.
 # gem 'sdoc', '>= 0.4.0', group: :doc
 # Forms made easy! (https://github.com/plataformatec/simple_form)
@@ -52,7 +53,6 @@ end
 group :development do
   # Annotates Rails Models, routes, fixtures, and others based on the database schema. (http://github.com/ctran/annotate_models)
   gem 'annotate', require: false
-
   # Better error page for Rails and other Rack apps (https://github.com/BetterErrors/better_errors)
   gem 'better_errors'
   # Retrieve the binding of a method's caller. Can also retrieve bindings even further up the stack. (http://github.com/banister/binding_of_caller)
@@ -60,13 +60,12 @@ group :development do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   # Ruby fast debugger - base + CLI (http://github.com/deivid-rodriguez/byebug)
   gem 'byebug', platform: :mri
+  # Guard gem for RSpec (https://github.com/guard/guard-rspec)
+  gem 'guard-rspec', require: false
   # Listen to file modifications (https://github.com/guard/listen)
   gem 'listen', '~> 3.0.5'
   # Rails plugin and log parser to help narrow down the source(s) of increased memory usage in rails application (https://github.com/noahd1/oink)
   gem 'oink'
-  # Struggling to get 100% code coverage:
-  # gem 'simplecov', require: false
-  # gem 'simplecov-json', require: false
   # Automatic Ruby code style checking tool. (http://github.com/bbatsov/rubocop)
   gem 'rubocop', require: false
   # Automatic performance checking tool for Ruby code. (https://github.com/rubocop-hq/rubocop-performance)
@@ -77,6 +76,8 @@ group :development do
   gem 'rubocop-rspec', '~> 1.25.0', require: false
   # Rails application preloader (https://github.com/rails/spring)
   gem 'spring'
+  # rspec command for spring (https://github.com/jonleighton/spring-commands-rspec)
+  gem 'spring-commands-rspec'
   # Makes spring watch files using the listen gem. (https://github.com/jonleighton/spring-watcher-listen)
   gem 'spring-watcher-listen', '~> 2.0.0'
   # `thin start --ssl`, in any ENV run `rails s thin`
@@ -100,4 +101,7 @@ group :test do
   # gem 'poltergeist', '~> 1.6.0'
   # Simple one-liner tests for common Rails functionality (https://matchers.shoulda.io/)
   gem 'shoulda-matchers'
+  # Struggling to get 100% code coverage:
+  # gem 'simplecov', require: false
+  # gem 'simplecov-json', require: false
 end
