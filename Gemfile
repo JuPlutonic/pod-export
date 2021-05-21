@@ -65,16 +65,6 @@ group :development do
   gem 'listen', '~> 3.0.5'
   # Rails plugin and log parser to help narrow down the source(s) of increased memory usage in rails application (https://github.com/noahd1/oink)
   gem 'oink'
-  # Automatic Ruby code style checking tool. (http://github.com/bbatsov/rubocop)
-  gem 'rubocop', require: false
-  # Automatic performance checking tool for Ruby code. (https://github.com/rubocop-hq/rubocop-performance)
-  gem 'rubocop-performance', require: false
-  # Automatic Rails code style checking tool. (https://github.com/rubocop-hq/rubocop-rails)
-  gem 'rubocop-rails', require: false
-  # Code style checking for RSpec files (https://github.com/rubocop-hq/rubocop-rspec)
-  gem 'rubocop-rspec', '~> 1.25.0', require: false
-  # Rails application preloader (https://github.com/rails/spring)
-  gem 'spring'
   # rspec command for spring (https://github.com/jonleighton/spring-commands-rspec)
   gem 'spring-commands-rspec'
   # Makes spring watch files using the listen gem. (https://github.com/jonleighton/spring-watcher-listen)
