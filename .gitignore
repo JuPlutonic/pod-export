@@ -21,8 +21,12 @@
 !/tmp/.keep
 
 .irb_saved_history
+.overcommit.yml
+.overcommit_gems.rb
+.overcommit_gems.rb.lock
 .rubocop.yml
 .rubocop_todo.yml
+.reek.yml
 .idea
 .byebug_history
 
@@ -43,4 +47,5 @@
 
 .ruby-gemset
 .ruby-version
+.node-version
 Gemfile.lock.example

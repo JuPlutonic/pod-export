@@ -16,5 +16,7 @@ class Pod < ApplicationRecord
   has_many :data, dependent: :restrict_with_exception, primary_key: :tax_payer_id
   has_many :json_datasets, through: :datum
   # validates :tax_payer_id, presence: true, uniqueness: true
-  accepts_nested_attributes_for :data, reject_if: proc { |attributes| attributes[:converted].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :data, reject_if: proc { |attributes|
+                                                    attributes[:converted].blank?
+                                                  }, allow_destroy: true
 end

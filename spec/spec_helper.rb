@@ -27,19 +27,17 @@ require 'capybara/dsl'
 RSpec.configure do |config|
   config.include Capybara::DSL
   config.before :all do
-    ENV['PRECOMPILE_ASSETS'] ||= begin
-      case self.class.metadata[:type]
-      when :feature, :view
-        STDOUT.write 'Precompiling assets...'
+    ENV['PRECOMPILE_ASSETS'] ||= case self.class.metadata[:type]
+                                 when :feature, :view
+                                   $stdout.write 'Precompiling assets...'
 
-        require 'rake'
-        Rails.application.load_tasks
-        Rake::Task['assets:precompile'].invoke
+                                   require 'rake'
+                                   Rails.application.load_tasks
+                                   Rake::Task['assets:precompile'].invoke
 
-        STDOUT.puts ' done.'
-        Time.zone.now.to_s
-      end
-    end
+                                   $stdout.puts ' done.'
+                                   Time.zone.now.to_s
+                                 end
   end
   config.before(:each, js: true) do
     page.driver.browser.url_whitelist = ['127.0.0.1']

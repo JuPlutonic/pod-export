@@ -15,7 +15,9 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
   config.infer_spec_type_from_file_location!
   # Capybara.javascript_driver = :poltergeist OR :headless_chrome
+  # rubocop:disable Lint/NonDeterministicRequireOrder
   Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
+  # rubocop:enable Lint/NonDeterministicRequireOrder
 
   config.include FactoryBot::Syntax::Methods
 

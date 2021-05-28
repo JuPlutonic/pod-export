@@ -1,6 +1,7 @@
-Rails.application.configure do
+# frozen_string_literal: true
 
-  Rails.application.middleware.use( Oink::Middleware, logger: Rails.logger )
+Rails.application.configure do
+  Rails.application.middleware.use(Oink::Middleware, logger: Rails.logger)
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on

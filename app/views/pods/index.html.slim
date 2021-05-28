@@ -10,7 +10,6 @@ div
       = simple_form_for @page_nav, remote: true do |page_nav|
         = page_nav.number_field :page,
           value: @index_cur_page ? "#{@index_cur_page + 1}" : "1",
-          within: 1..@index_last_page,
+          within: 1..(@index_last_page || @page_nav.to_key.first.last),
           class: "special_input"
-        /! TODO: Пользователь не только выбирает страницу, но и фильтрует по названию организации. Дополнительное поле в simple form.
         = page_nav.submit
