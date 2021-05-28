@@ -17,7 +17,7 @@
   - Рекомендую ноду ``` `which -a node | head -n 1` -v # => v12.16.2```
   - Ярн первой версии ` npm install -g yarn@1.22.5`
   - Установим его в рельсы `rails yarn:install`
-  - Скомплилм ассеты `rails assets:precompile
+  - Скомплилм ассеты `rails assets:precompile`
 
 * heroku config:set BLAH_BLAH_KEY="..........."
 
