@@ -2,10 +2,10 @@
 
 ## Перечень организаций — поставщиков датасетов
 
-Получаем данные о ПОД из data.gov.ru
+Получаем данные о ПОД из https://data.gov.ru
 
-[Heroku, бейдж](https://heroku-badge.herokuapp.com/?app=pod-export7657651)
-[![Обитает здесь](https://s3.amazonaws.com/assets.heroku.com/addons.heroku.com/uploaded_logos/13555/icon.png)](https://pod-export7657651.herokuapp.com/)
+![Heroku](https://pyheroku-badge.herokuapp.com/?app=pod-export7657651&style=plastic)
+[::обитает![обитает здесь](https://s3.amazonaws.com/assets.heroku.com/addons.heroku.com/uploaded_logos/13555/icon.png)здесь::](https://pod-export7657651.herokuapp.com/)
 
 ## Config
 
