@@ -1,31 +1,30 @@
 # README
 
-## перечень организаций, поставщиков датасетов
+## Перечень организаций — поставщиков датасетов
 
-Получаем данные о ПОД из data.gov.ru
+Получаем данные о ПОД из https://data.gov.ru
 
-[Heroku, бейдж](https://heroku-badge.herokuapp.com/?app=pod_export7657651)
-[![Обитает здесь](https://s3.amazonaws.com/assets.heroku.com/addons.heroku.com/uploaded_logos/13555/icon.png)](https://pod_export7657651.herokuapp.com/)
+![Heroku](https://pyheroku-badge.herokuapp.com/?app=pod-export7657651&style=plastic)
+[::обитает![обитает здесь](https://s3.amazonaws.com/assets.heroku.com/addons.heroku.com/uploaded_logos/13555/icon.png)здесь::](https://pod-export7657651.herokuapp.com/)
 
 ## Config
-
----
 
 * Ruby version (put this line in Gemfile): ruby '2.6.7'
 
 * Rails 5.2.4.6
 
+* Front-end часть — простая, ассеты компилятся так:
+  - Рекомендую ноду ``` `which -a node | head -n 1` -v # => v12.16.2```
+  - Ярн первой версии ` npm install -g yarn@1.22.5`
+  - Установим его в рельсы `rails yarn:install`
+  - Скомплилм ассеты `rails assets:precompile`
+
 * heroku config:set BLAH_BLAH_KEY="..........."
 
----
+* Анализ логов Oink:
+  - `bundle exec oink --format verbose -t 60 ./log/*`
 
-### анализ логов oink
-
-bundle exec oink --format verbose -t 60 ./log/*
-
-### особенности
-
----
+## Особенности
 
 * Без скаффолдинга, т.к. данные получаются (скрапятся) по ходу работы. Генерил
     модели, а также контроллеры без маршрута.
@@ -39,7 +38,7 @@ bundle exec oink --format verbose -t 60 ./log/*
     как на стороне postgres так и того чтобы ошибочный скраппинг не влиял на
     работу приложения.
 
-### AGILE
+## AGILE
 
 app/views/pods/index.html.slim (убрал из кода):
 
@@ -73,7 +72,7 @@ app/controllers/pods_controller.rb:
 **BRANCH:** pods_new_organization-description
 
 * [27] [TODO] User sees Pod's open datasets, pod_params have data_attributes:
-    [:id, :date:, source, :author, :converted]
+    [:id, :date, :source, :author, :converted]
 
 app/models/datum.rb:
 
@@ -97,3 +96,4 @@ app/models/page_nav.rb:
     regional".
 
 ---
+
