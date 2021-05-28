@@ -53,7 +53,7 @@ group :development do
   # Annotates Rails Models, routes, fixtures, and others based on the database schema. (http://github.com/ctran/annotate_models)
   gem 'annotate', require: false
   # Better error page for Rails and other Rack apps (https://github.com/BetterErrors/better_errors)
-  gem 'better_errors'
+  gem 'better_errors', '~> 2.9.1'
   # Retrieve the binding of a method's caller. Can also retrieve bindings even further up the stack. (http://github.com/banister/binding_of_caller)
   gem 'binding_of_caller'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

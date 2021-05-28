@@ -9,12 +9,11 @@ div#pods_table
     - elements.each_with_index do |entry, num|
         tr class="#{cycle('odd', 'even')}"
           - page_num = params[:page_nav] ? params[:page_nav][:page].to_i - 1 : 0
-          td= @page_nav.limit * page_num + num + 1
+          td= PageNav::RECORDS_PER_PAGE_ON_TARGETED_SITE * page_num + num + 1
           td= @page_nav.pod_ids[num]
           td= @page_nav.pod_organizations[num]
           - get_params = {}
           - this_path = {}
-          /TODO: ТEST на-первую 'true' часть IF условия.
           - if entry == 'показать данные'
             - this_path = pod_path(@page_nav.pod_ids[num])
             - get_params = { tax_payer_id: @page_nav.pod_ids[num], organization: @page_nav.pod_organizations[num] }

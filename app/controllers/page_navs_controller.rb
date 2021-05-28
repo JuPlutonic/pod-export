@@ -8,9 +8,7 @@ class PageNavsController < ApplicationController
   def create
     @page_nav = PageNav.new(page_nav_params)
 
-    respond_to do |format|
-      format.js
-    end
+    respond_to(&:js) # - format
   end
 
   private

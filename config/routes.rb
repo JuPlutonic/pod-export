@@ -21,10 +21,12 @@ Rails.application.routes.draw do
 
   get 'pods/index'
   root 'pods#index'
+  # rubocop:disable Style/BlockDelimiters
   resources :pods, param: :tax_payer_id # do
-    # member do; patch :update_page_nav; end;
+  #   member do; patch :update_page_nav; end;
   # end
   resources :page_navs, only: :create do; post 'create', on: :member; end
+  # rubocop:enable Style/BlockDelimiters
   get 'contact' => 'pods#contact', as: :contact
   get 'about' => 'pods#about', as: :about
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

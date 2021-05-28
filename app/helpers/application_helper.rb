@@ -1,21 +1,22 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
-  # Attributes: @page_nav.pod_ids => tax_payer_id_numbers_on_page,
-  #               array of scrapped tax_payer's id numbers
-  def elem_retrieval(tax_payer_id_numbers_on_page)
-    elements = []
+  FULLCELL = 'показать данные'
+  EMPTYCCELL = 'получить данные'
+  # Attributes: @page_nav.pod_ids => tpi_numbers_on_page
+  #               (array of scrapped tax_payer's id numbers).
+  def elem_retrieval(tpi_numbers_on_page)
     pods = Pod.all
+    return Array.new(PageNav::RECORDS_PER_PAGE_ON_TARGETED_SITE) { EMPTYCCELL } if pods.blank?
 
-    tax_payer_id_numbers_on_page.each do |pod|
-      return Array.new(20) { 'получить данные' } if pods.blank?
+    pods_check(pods, tpi_numbers_on_page)
+  end
 
-      elements << if pods.where(tax_payer_id: pod).blank?
-                    'получить данные'
-                  else
-                    'показать данные'
-                  end
+  private
+
+  def pods_check(pods, tpi_numbers_on_page)
+    tpi_numbers_on_page.reduce([]) do |el, pod|
+      el << (pods.where(tax_payer_id: pod).blank? ? EMPTYCCELL : FULLCELL)
     end
-    elements
   end
 end
