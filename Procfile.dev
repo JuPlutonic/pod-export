@@ -1,0 +1,3 @@
+app: bundle exec rails server -p 3000 -b 0.0.0.0
+postgresql: postgres -D ~/.linuxbrew/opt/postgresql@13/data
+tmuxinator: /home/linuxbrew/.linuxbrew/bin/tmuxinator

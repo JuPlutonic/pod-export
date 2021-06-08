@@ -9,7 +9,7 @@
 
 ## Config
 
-* Ruby version (put this line in Gemfile): ruby '2.6.7'
+* Ruby версия (вставьте данную строку в Gemfile): `ruby '2.6.7'`
 
 * Rails 5.2.4.6
 
@@ -19,10 +19,19 @@
   - Установим его в рельсы `rails yarn:install`
   - Скомпилим ассеты `rails assets:precompile`
 
-* heroku config:set BLAH_BLAH_KEY="..........."
+* heroku — в .gitignore добавлен файл `/initializers/oink.rb`
 
 * Анализ логов Oink:
   - `bundle exec oink --format verbose -t 60 ./log/*`
+
+* Запуск в tmux:
+
+  > Запустим Overmind, затем запустим Tmuxinator
+  > (оба приложения ставятся отдельно):
+  > `overmind s 2>&1 >/dev/null &`
+  > `mux start pod-export`
+  > Tmuxinator (mux — это «алиас»), подключивщись по сокету, откроет окно
+  > Overmind-а с «рельсой».
 
 ## Особенности
 
@@ -34,9 +43,9 @@
     специальной формы gem ('simple_form').
 
 * Pod - ПОД (поставщик открытых данных) и ИНН в приложении синонимы, также
-    tax_payer_id в приложении стал primary_key типа string, во избежание ошибок
-    как на стороне postgres так и того чтобы ошибочный скраппинг не влиял на
-    работу приложения.
+    tax_payer_id в приложении стал primary_key типа «string», во избежание
+    ошибок как на стороне postgres, так и для того, чтобы ошибочный скраппинг не
+    влиял на работу приложения.
 
 ## AGILE
 

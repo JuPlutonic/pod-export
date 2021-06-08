@@ -71,7 +71,6 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   # `thin start --ssl`, in any ENV run `rails s thin`
   # gem 'thin'
-
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   # A debugging tool for your Ruby on Rails applications. (https://github.com/rails/web-console)
   gem 'web-console'
