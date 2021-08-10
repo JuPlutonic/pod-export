@@ -1,0 +1,19 @@
+---
+name: pod-export
+root: ~/optimiz/pod-export7657651
+pre_window: >
+  promote ~/optimiz/pod-export7657651/.env.development &&
+  rbenv global 2.6.8
+windows:
+  - pod_wrk:
+      layout: main-vertical
+      panes:
+        - log_pod: tail -f log/development.log
+        - dbg_pod: rails c
+  - pod_app:
+      - overmind connect -s ~/optimiz/pod-export7657651/tmp/sockets/dev.sock pod_app
+  - wrk:
+      layout: main-vertical
+      panes:
+        - edt_pod: nvim +NERDTreeToggle
+        - tdd_pod: rbenv exec bundle exec guard
