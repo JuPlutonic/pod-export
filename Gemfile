@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
-ruby '2.6.7'
+ruby '~> 2.6.0'
 # memoize methods invocation (https://github.com/matthewrudy/memoist
 gem 'memoist'
 # Pg is the Ruby interface to the {PostgreSQL RDBMS}[http://www.postgresql.org/] (https://bitbucket.org/ged/ruby-pg)
@@ -8,7 +10,7 @@ gem 'pg'
 # Puma is a simple, fast, threaded, and highly concurrent HTTP 1.1 server for Ruby/Rack applications (http://puma.io)
 gem 'puma', '~> 4'
 # Full-stack web application framework. (https://rubyonrails.org)
-gem 'rails', '= 5.2.4.6'
+gem 'rails', '~> 5.2.6'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -23,7 +25,7 @@ gem 'jbuilder', '~> 2.5'
 # Use jQuery with Rails 4+ (https://github.com/rails/jquery-rails)
 gem 'jquery-rails'
 # JSON implementation for JRuby (http://json-jruby.rubyforge.org/)
-gem 'json', '2.3.0'
+gem 'json', '~> 2.3.0'
 # Use libsass with Ruby! (https://github.com/sass/sassc-ruby)
 gem 'sassc'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -33,11 +35,11 @@ gem 'simple_form'
 # # Slim templates generator for Rails 3+ (https://github.com/slim-template/slim-rails)
 gem 'slim-rails'
 # Generic interface to multiple Ruby template engines (http://github.com/rtomayko/tilt/)
-gem 'tilt', '=2.0.9'
+gem 'tilt', '~> 2.0.9'
 # Turbolinks makes navigating your web application faster (https://github.com/turbolinks/turbolinks)
 gem 'turbolinks', '~> 5'
 # Ruby wrapper for UglifyJS JavaScript compressor (http://github.com/lautis/uglifier)
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier', '~> 1.3.0'
 
 group :development, :test do
   # factory_bot_rails provides integration between factory_bot and rails 4.2 or newer (https://github.com/thoughtbot/factory_bot_rails)

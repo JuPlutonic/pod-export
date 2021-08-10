@@ -91,18 +91,6 @@ config/master.key
 # Only include if you have production secrets in this file, which is no longer a Rails default
 # config/secrets.yml
 
-# dotenv, dotenv-rails
-# TODO Comment out these rules if environment variables can be committed
-.env
-.env.*
-
-## Environment normalization:
-/.bundle
-/vendor/bundle
-
-# these should all be checked in to normalize the environment:
-# Gemfile.lock, .ruby-version, .ruby-gemset
-
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
 
@@ -146,10 +134,6 @@ yarn-debug.log*
 /spec/examples.txt
 /test/tmp/
 /test/version_tmp/
-/tmp/
-
-# Used by dotenv library to load environment variables.
-# .env
 
 # Ignore Byebug command history file.
 .byebug_history
@@ -211,7 +195,6 @@ cscope.out
 cscope.in.out
 cscope.po.out
 
-
 ### Vim
 # Swap
 [._]*.s[a-v][a-z]
@@ -228,13 +211,11 @@ Sessionx.vim
 # Temporary
 .netrwhist
 *~
-# Auto-generated tag files
-tags
 # Persistent undo
 [._]*.un~
 
 ### Added
-# When something crashes in zsh
+# When something crashed in zsh
 core
 
 # Maybe used as convention
@@ -247,14 +228,18 @@ core
 .env.local
 
 # Git hooks in use
-.overcommit.yml
-.overcommit_gems.rb
+# .overcommit.yml
+# .overcommit_gems.rb
 .overcommit_gems.rb.lock
 
 # Linting in use
-.reek.yml
-.rubocop.yml
+# .reek.yml
+# .rubocop.yml
 .rubocop_todo.yml
 
 # Misc. for current project: Oink crashes Heroku (during deployment)
-/initializers/oink.rb
+config/initializers/oink.rb
+
+## Environment normalization:
+Gemfile.lock
+gems.locked

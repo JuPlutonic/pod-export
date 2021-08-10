@@ -13,4 +13,4 @@ gem 'rubocop-performance'
 # Automatic Rails code style checking tool. (https://github.com/rubocop-hq/rubocop-rails)
 gem 'rubocop-rails'
 # Code style checking for RSpec files (https://github.com/rubocop-hq/rubocop-rspec)
-gem 'rubocop-rspec', '~> 1.25.0'
+gem 'rubocop-rspec', '~> 2.4.0'

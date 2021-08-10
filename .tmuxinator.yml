@@ -1,71 +1,19 @@
-# ./.tmuxinator.yml
-
+---
 name: pod-export
 root: ~/optimiz/pod-export7657651
-# root: <%#= @settings["workspace"] %>
-
-# Optional tmux socket
-# socket_name: foo
-
-# Note that the pre and post options have been deprecated and will be replaced by
-# project hooks.
-
-# Project hooks
-
-# Runs on project start, always
-# on_project_start: >
-  mkdir -p ~/optimiz/pod-export7657651/tmp/sockets
-
-# Run on project start, the first time
-# on_project_first_start: command
-
-# Run on project start, after the first time
-# on_project_restart: command
-
-# Run on project exit ( detaching from tmux session )
-# on_project_exit: command
-
-# Run on project stop
-# on_project_stop: command
-
-# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 pre_window: >
   promote ~/optimiz/pod-export7657651/.env.development &&
-  rbenv global 2.6.7
-
-# pre_window: >
-  # prepend_to PATH /home/alessio/.anyenv/envs/rbenv/shims &&
-  # prepend_to PATH /home/alessio/.anyenv/envs/rbenv/bin
-
-  # Pass command line options to tmux. Useful for specifying a different tmux.conf.
-# tmux_options: -f ~/.tmux.mac.conf
-
-# Change the command to call tmux. This can be used by derivatives/wrappers like byobu.
-# tmux_command: byobu
-
-# Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
-# startup_window: 1
-
-# Specifies (by index) which pane of the specified window will be selected on project startup. If not set, the first pane is used.
-# startup_pane: 1
-
-# Controls whether the tmux session should be attached to automatically. Defaults to true.
-# attach: false
-
+  rbenv global 2.6.8
 windows:
-  - vim:
+  - pod_wrk:
       layout: main-vertical
-      # Synchronize all panes of this window, can be enabled before or after the pane commands run.
-      # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
-      # synchronize: after
       panes:
-        - nvim +NERDTreeToggle
-        - rbenv exec bundle exec guard
-  - mux-rails:
-      layout: main-horizontal
-      # synchronize: after
+        - log_pod: tail -f log/development.log
+        - dbg_pod: rails c
+  - pod_app:
+      - overmind connect -s ~/optimiz/pod-export7657651/tmp/sockets/dev.sock pod_app
+  - wrk:
+      layout: main-vertical
       panes:
-        - overmind connect -s ~/optimiz/pod-export7657651/tmp/sockets/dev.sock app
-        # n/w: # - overmind connect -s "0.0.0.0:4321" -S "tcp" app
-        - tail -f log/development.log
-        - rails c
+        - edt_pod: nvim +NERDTreeToggle
+        - tdd_pod: rbenv exec bundle exec guard

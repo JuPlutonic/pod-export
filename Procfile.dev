@@ -1,3 +1,5 @@
-app: bundle exec rails server -p 3000 -b 0.0.0.0
-postgresql: postgres -D ~/.linuxbrew/opt/postgresql@13/data
-tmuxinator: /home/linuxbrew/.linuxbrew/bin/tmuxinator
+# Using brew formula postgresql from Linuxbrew (`pg_ctl
+#   -D | |-| | start` can't handle termination signal well).
+pgsql: postgres -D  /home/linuxbrew/.linuxbrew/opt/postgresql@13/data
+pod_app: bundle exec rails server -p 3000 -b 0.0.0.0
+tmuxinator: /home/linuxbrew/.linuxbrew/bin/tmuxinator start pod-export
