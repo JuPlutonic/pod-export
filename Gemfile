@@ -41,7 +41,7 @@ gem 'tilt', '~> 2.0.9'
 # Turbolinks makes navigating your web application faster (https://github.com/turbolinks/turbolinks)
 gem 'turbolinks', '~> 5'
 # Ruby wrapper for UglifyJS JavaScript compressor (http://github.com/lautis/uglifier)
-gem 'uglifier', '~> 1.3.0'
+gem 'uglifier', '~> 2.7'
 
 group :development, :test do
   # factory_bot_rails provides integration between factory_bot and rails 4.2 or newer (https://github.com/thoughtbot/factory_bot_rails)
