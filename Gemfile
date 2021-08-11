@@ -28,6 +28,8 @@ gem 'jquery-rails'
 gem 'json', '~> 2.3.0'
 # Use libsass with Ruby! (https://github.com/sass/sassc-ruby)
 gem 'sassc'
+# Integrate SassC-Ruby into Rails. (https://github.com/sass/sassc-rails)
+gem 'sassc-rails'
 # bundle exec rake doc:rails generates the API under doc/api.
 # gem 'sdoc', '>= 0.4.0', group: :doc
 # Forms made easy! (https://github.com/plataformatec/simple_form)
