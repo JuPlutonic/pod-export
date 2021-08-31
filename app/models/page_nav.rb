@@ -95,10 +95,10 @@ class PageNav
   # TODO: User may filter page results. Filter '' needs to be passed by default.
   def call_nokogiri_default_page(cur_page = 0)
     base_url = 'https://data.gov.ru/organizations?field_organization_inn_value=' \
-                                                  '&title=' \
-                                                  '&field_organization_short_name_value=' \
-                                                  '&term_node_tid_depth=All' \
-                                                  "&page=#{cur_page}"
+               '&title=' \
+               '&field_organization_short_name_value=' \
+               '&term_node_tid_depth=All' \
+               "&page=#{cur_page}"
     Nokogiri::HTML(URI.parse(base_url).open(:ssl_verify_mode => OpenSSL::SSL::VERIFY_NONE,
                                             :read_timeout => READ_TIMEOUT,
                                             :encoding => Encoding::UTF_8,
