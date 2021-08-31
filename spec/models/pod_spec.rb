@@ -14,5 +14,11 @@
 require 'rails_helper'
 
 RSpec.describe Pod, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'validations' do
+    subject { FactoryBot.create(:pod_description) }
+
+    it { is_expected.to validate_presence_of(:tax_payer_id) }
+    it { is_expected.to validate_uniqueness_of(:tax_payer_id) }
+    # it { is_expected.to validate_presence_of(:organization).on(:create) }
+  end
 end

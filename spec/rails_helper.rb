@@ -16,7 +16,7 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   # Capybara.javascript_driver = :poltergeist OR :headless_chrome
   # rubocop:disable Lint/NonDeterministicRequireOrder
-  Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
+  Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
   # rubocop:enable Lint/NonDeterministicRequireOrder
 
   config.include FactoryBot::Syntax::Methods
@@ -25,7 +25,7 @@ RSpec.configure do |config|
     DatabaseCleaner.clean_with(:truncation)
   end
 
-  config.before(:each) do
+  config.before do
     DatabaseCleaner.strategy = :transaction
   end
 
@@ -33,11 +33,11 @@ RSpec.configure do |config|
     DatabaseCleaner.strategy = :truncation
   end
 
-  config.before(:each) do
+  config.before do
     DatabaseCleaner.start
   end
 
-  config.after(:each) do
+  config.after do
     DatabaseCleaner.clean
   end
 
