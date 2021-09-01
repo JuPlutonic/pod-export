@@ -1,4 +1,3 @@
 # frozen_string_literal: true
 
-module PageNavsHelper
-end
+module PageNavsHelper; end
