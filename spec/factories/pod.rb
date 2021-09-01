@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :pod_description, class: 'Pod' do
     tax_payer_id { '11001001aA' }
-    # organization { 'Pod'}
+    organization { 'Pod' }
   end
 
   factory :pod_elem_retriever, class: 'Pod' do
@@ -11,7 +11,7 @@ FactoryBot.define do
   end
 
   factory :invalid_pod, class: 'Pod' do
-    tax_payer_id nil
-    # organization nil
+    tax_payer_id { nil }
+    organization { nil }
   end
 end

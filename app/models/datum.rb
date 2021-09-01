@@ -4,17 +4,16 @@
 #
 # Table name: data
 #
-#  id         :integer       not null, primary key
+#  id         :bigint           not null, primary key
 #  mime       :string
 #  date       :date
 #  converted  :boolean
 #  author     :string
 #  source     :string
-#  created_at :datetime      not null
-#  updated_at :datetime      not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #  pod_id     :integer
 #
-
 # TODO: User must see data, sorted (ASC) by date. Now, by default it's sorted (DESC) by updated_at.
 class Datum < ApplicationRecord
   with_options dependent: :destroy do
