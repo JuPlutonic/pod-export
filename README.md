@@ -59,7 +59,7 @@ app/views/shared/_navbar.html.slim (убрал из кода):
     Не скрывается ссылка на индекс в индексе.
 
 * `[-15-] [OPTIMIZE]` Речь о NAVBAR-е… Н/р link_to_unless_current почему-то, да
-    и у тега link класс - active.
+    и у тега link класс `.active`.
 
 * `[-16]` / = link_to_unless_current "🏡", {action: "index" }
 
@@ -100,7 +100,7 @@ app/models/page_nav.rb:
 * `[104-] [FIXME]` Glitches: P8 /administraciya-kostromskoy-oblasti, P3
     /administraciya-vladimirskoy-oblasti
 
-* `[-105] [FIXME]` Appearing only if the type of the organizations is "
+* `[-105] [FIXME]` Appearing only if the type of the organization is "
     regional".
 
 ---

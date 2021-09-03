@@ -5,10 +5,14 @@
 # Table name: pods
 #
 #  id             :bigint           not null, primary key
+#  dataset_url    :string
 #  government_led :boolean          default(FALSE)
 #  kind           :string
+#  oktmo          :string
 #  organization   :string
 #  pod_code       :uuid             not null
+#  short_name     :string
+#  site           :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  tax_payer_id   :string

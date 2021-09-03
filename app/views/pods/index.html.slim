@@ -14,4 +14,4 @@ div
           within: 1..@page_nav.to_key.first.last.succ,
           class: 'special_input'
         = page_nav.submit
-/@index ? "#{@index.succ}" : '1',
+/value: @index ? "#{@index.succ}" : '1',
