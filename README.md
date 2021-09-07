@@ -77,15 +77,19 @@ app/controllers/page_navs_controller.rb:
 
 app/controllers/pods_controller.rb:
 
-**BRANCH:** pods_new_organization-description
+**BRANCH:** pods_new_organization-description_cp
 
 * `[27] [TODO]` User sees Pod's open datasets, pod_params have data_attributes:
-    `[:id, :date, :source, :author, :converted]`
+    `[:date, :source, :author, :converted]`
 
 app/models/datum.rb:
 
-* `[18] [TODO]` User must see data, sorted (ASC) by date. Now, by default
-    it's sorted (DESC) by updated_at.
+**BRANCH:** pods_new_organization-description_cp
+
+* `[88-] [TODO]` Open 2 times the same pod's page - it not converted. It shows
+    cached tab. `Memoize :scrape_data`
+
+* `[-89] [TODO]` _ for only 1st dataset's tab.
 
 app/models/page_nav.rb:
 

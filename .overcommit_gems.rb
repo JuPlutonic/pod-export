@@ -1,3 +1,8 @@
+source 'https://rubygems.org'
+# Security vulnerability scanner for Ruby on Rails. (https://brakemanscanner.org)
+gem 'brakeman'
+# Patch-level verification for Bundler (https://github.com/rubysec/bundler-audit#readme)
+gem 'bundler-audit'
 # Run Ruby more than fast. Fasterer (https://github.com/DamirSvrtan/fasterer)
 gem 'fasterer', '~> 0.10.0'
 # Markdown lint tool (http://github.com/markdownlint/markdownlint)
@@ -6,6 +11,8 @@ gem 'mdl'
 gem 'overcommit'
 # Code smell detector for Ruby (https://github.com/troessner/reek)
 gem 'reek'
+# ctags generator for ruby code (https://github.com/tmm1/ripper-tags)
+gem 'ripper-tags'
 # Automatic Ruby code style checking tool. (http://github.com/bbatsov/rubocop)
 gem 'rubocop'
 # Automatic performance checking tool for Ruby code. (https://github.com/rubocop-hq/rubocop-performance)

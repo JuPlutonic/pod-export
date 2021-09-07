@@ -58,7 +58,6 @@ class Datum < ApplicationRecord
                    .text.strip
     @type_of_o1  = doc
                    .xpath('//article/div[4]/div[2]/div/a')
-                   .content
     @type_of_o2  = doc
                    .xpath('//article/div[4]/div[2]/div/a/text()').to_s
     @site1       = doc
@@ -82,7 +81,6 @@ class Datum < ApplicationRecord
               .text.strip
     @oktmo2 = doc
               .xpath('//article/div[7]/div[2]/div/a')
-              .content
   end
   # memoize :scrape_pod_description
   # ----------------------------------------------------------------------------
@@ -91,7 +89,5 @@ class Datum < ApplicationRecord
   def scrape_data(tax_payer_id)
     # call_nokogiri_for_pod(tax_payer_id)
   end
-  # TODO: Open 2 times the same pod's page - it not converted. It shows cached tab. `Memoize :scrape_data`
-  # TODO: _ for only 1st dataset's tab.
   # ----------------------------------------------------------------------------
 end
