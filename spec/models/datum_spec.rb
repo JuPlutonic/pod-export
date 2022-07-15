@@ -12,7 +12,7 @@
 #  source     :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  pod_id     :integer
+#  pod_id     :bigint
 #
 require 'rails_helper'
 

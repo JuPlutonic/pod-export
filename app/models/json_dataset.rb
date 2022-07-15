@@ -9,7 +9,7 @@
 #  jsonb      :jsonb            not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  datum_id   :integer
+#  datum_id   :bigint
 #
 class JsonDataset < ApplicationRecord
   belongs_to :datum, touch: true

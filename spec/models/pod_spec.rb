@@ -6,11 +6,12 @@
 #
 #  id             :bigint           not null
 #  organization   :string
-#  tax_payer_id   :string           not null, primary key
+#  tax_payer_id   :string           primary key
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  kind           :string
 #  government_led :boolean          default(FALSE)
+#  pod_code       :string           not null
 #
 require 'rails_helper'
 

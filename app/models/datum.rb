@@ -12,14 +12,13 @@
 #  source     :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  pod_id     :integer
+#  pod_id     :bigint
 #
-# TODO: User must see data, sorted (ASC) by date. Now, by default it's sorted (DESC) by updated_at.
 class Datum < ApplicationRecord
   with_options dependent: :destroy do
-    belongs_to :pod, foreign_key: :tax_payer_id, inverse_of: :data
+    belongs_to :pod, foreign_key: :gov_code, inverse_of: :data
     has_one :json_dataset
   end
 
-  validates :tax_payer_id, presence: true
+  validates :gov_code, presence: true
 end

@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210090115180104) do
+ActiveRecord::Schema.define(version: 2022_07_15_143624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "budget_participants", force: :cascade do |t|
+    t.string "name"
+    t.string "short_name"
+    t.string "tax_payer_id"
+    t.boolean "status"
+    t.string "budg_code"
+    t.string "gov_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["budg_code"], name: "index_budget_participants_on_budg_code", unique: true
+    t.index ["gov_code"], name: "index_budget_participants_on_gov_code"
+  end
 
   create_table "data", force: :cascade do |t|
     t.string "mime"
@@ -23,7 +36,7 @@ ActiveRecord::Schema.define(version: 20210090115180104) do
     t.string "source"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "pod_id"
+    t.bigint "pod_id"
     t.index ["pod_id"], name: "index_data_on_pod_id"
   end
 
@@ -32,19 +45,20 @@ ActiveRecord::Schema.define(version: 20210090115180104) do
     t.jsonb "jsonb", default: {}, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "datum_id"
+    t.bigint "datum_id"
     t.index ["datum_id"], name: "index_json_datasets_on_datum_id"
   end
 
   create_table "pods", force: :cascade do |t|
     t.string "organization"
-    t.string "tax_payer_id", null: false
+    t.string "tax_payer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "kind"
     t.boolean "government_led", default: false
+    t.string "pod_code", null: false
     t.index ["government_led"], name: "index_pods_on_government_led"
-    t.index ["tax_payer_id"], name: "index_pods_on_tax_payer_id", unique: true
+    t.index ["pod_code"], name: "index_pods_on_pod_code", unique: true
   end
 
   add_foreign_key "data", "pods"
