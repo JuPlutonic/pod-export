@@ -4,11 +4,13 @@
 #
 # Table name: pods
 #
-#  id           :bigint           not null
-#  organization :string
-#  tax_payer_id :string           not null, primary key
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+#  id             :bigint           not null
+#  organization   :string
+#  tax_payer_id   :string           not null, primary key
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  kind           :string
+#  government_led :boolean          default(FALSE)
 #
 require 'rails_helper'
 
