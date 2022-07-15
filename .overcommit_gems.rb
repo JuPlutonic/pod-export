@@ -1,5 +1,5 @@
 # Run Ruby more than fast. Fasterer (https://github.com/DamirSvrtan/fasterer)
-gem 'fasterer'
+gem 'fasterer', '~> 0.10.0'
 # Markdown lint tool (http://github.com/markdownlint/markdownlint)
 gem 'mdl'
 # Git hook manager (https://github.com/causes/overcommit)
@@ -14,3 +14,7 @@ gem 'rubocop-performance'
 gem 'rubocop-rails'
 # Code style checking for RSpec files (https://github.com/rubocop-hq/rubocop-rspec)
 gem 'rubocop-rspec', '~> 2.4.0'
+# fast, accurate ctags generator for ruby source code using Ripper (https://github.com/tmm1/ripper-tags)
+gem 'ripper-tags'
+# YARD is a documentation generation tool for the Ruby programming... (https://github.com/lsegal/yard)
+gem 'yard'

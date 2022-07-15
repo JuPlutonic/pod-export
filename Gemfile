@@ -10,12 +10,12 @@ gem 'pg'
 # Puma is a simple, fast, threaded, and highly concurrent HTTP 1.1 server for Ruby/Rack applications (http://puma.io)
 gem 'puma', '~> 4'
 # Full-stack web application framework. (https://rubyonrails.org)
-gem 'rails', '~> 5.2.6'
+gem 'rails', '= 5.2.7.1'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 # CoffeeScript adapter for the Rails asset pipeline. (https://github.com/rails/coffee-rails)
-gem 'coffee-rails', '~> 4.2'
+gem 'coffee-rails', '~> 5.0.0'
 # an asset gemification of the font-awesome icon font library (https://github.com/bokmann/font-awesome-rails)
 gem 'font-awesome-rails'
 # Create JSON structures via a Builder-style DSL (https://github.com/rails/jbuilder)
@@ -33,7 +33,7 @@ gem 'sassc-rails'
 # bundle exec rake doc:rails generates the API under doc/api.
 # gem 'sdoc', '>= 0.4.0', group: :doc
 # Forms made easy! (https://github.com/plataformatec/simple_form)
-gem 'simple_form'
+gem 'simple_form', '~> 5.1.0'
 # # Slim templates generator for Rails 3+ (https://github.com/slim-template/slim-rails)
 gem 'slim-rails'
 # Generic interface to multiple Ruby template engines (http://github.com/rtomayko/tilt/)
