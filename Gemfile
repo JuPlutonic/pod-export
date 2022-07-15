@@ -10,7 +10,7 @@ gem 'pg'
 # Puma is a simple, fast, threaded, and highly concurrent HTTP 1.1 server for Ruby/Rack applications (http://puma.io)
 gem 'puma', '~> 4'
 # Full-stack web application framework. (https://rubyonrails.org)
-gem 'rails', '= 5.2.7.1'
+gem 'rails', '= 5.2.8.1'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
