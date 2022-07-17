@@ -32,7 +32,7 @@ class Pod < ApplicationRecord
   scope :president_led, -> { where(government_led: false) }
 
   validates :pod_code, presence: true, uniqueness: true
-  validates :tax_payer_id, presence: true
+  validates :tax_payer_id, presence: true, tax_payer_id: true
 
   accepts_nested_attributes_for :data, reject_if: proc { |attributes|
                                                     attributes[:converted].blank?
