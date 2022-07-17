@@ -14,8 +14,6 @@
 #  pod_code       :string           not null
 #
 class Pod < ApplicationRecord
-  self.primary_key = 'tax_payer_id'
-
   has_many :json_datasets, through: :datum
   # rubocop:disable Rails/InverseOf
   with_options foreign_key: :gov_code, primary_key: :pod_code do
