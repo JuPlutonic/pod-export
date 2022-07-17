@@ -42,7 +42,7 @@ GEM
     parallel (1.20.1)
     parser (3.0.2.0)
       ast (~> 2.4.1)
-    rack (2.2.3)
+    rack (2.2.4)
     rainbow (3.0.0)
     reek (6.0.6)
       kwalify (~> 0.7.0)
