@@ -1,4 +1,4 @@
-en:
+ru:
   simple_form:
     "yes": 'Да'
     "no": 'Нет'
@@ -10,6 +10,19 @@ en:
       # html: '<abbr title="required">*</abbr>'
     error_notification:
       default_message: "Устраните вышеотмеченные проблемы:"
+
+    labels:
+      pod:
+        tax_payer_id: ИНН
+        kinds:
+          federal: Федеральный
+          municipal: Муниципальный
+          regional: Региональный
+      budget_participant:
+        name: "Название"
+        short_name: "Короткое название"
+        tax_payer_id: ИНН
+        budg_code: Реальный ИНН
     # Examples
     # labels:
     #   defaults:

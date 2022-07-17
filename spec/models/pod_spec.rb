@@ -20,6 +20,5 @@ RSpec.describe Pod, type: :model do
     subject { FactoryBot.create(:pod_description) }
 
     it { is_expected.to validate_presence_of(:tax_payer_id) }
-    it { is_expected.to validate_uniqueness_of(:tax_payer_id) }
   end
 end

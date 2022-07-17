@@ -2,8 +2,10 @@
 
 ENV['RAILS_ENV'] ||= 'test'
 
-require 'spec_helper'
 require File.expand_path('../config/environment', __dir__)
+# Prevent database truncation if the environment is production
+abort("The Rails environment is running in production mode!") if Rails.env.production?
+require 'spec_helper'
 require 'rspec/rails'
 # require 'capybara/poltergeist' OR 'capybara/cuprite'
 
@@ -11,14 +13,15 @@ require 'rspec/rails'
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
+# rubocop:disable Lint/NonDeterministicRequireOrder
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+# rubocop:enable Lint/NonDeterministicRequireOrder
 RSpec.configure do |config|
   config.use_transactional_fixtures = false
   config.infer_spec_type_from_file_location!
   # Capybara.javascript_driver = :poltergeist OR :headless_chrome
-  # rubocop:disable Lint/NonDeterministicRequireOrder
-  Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
-  # rubocop:enable Lint/NonDeterministicRequireOrder
 
+  config.include Capybara::DSL
   config.include FactoryBot::Syntax::Methods
 
   config.before(:suite) do
@@ -41,8 +44,8 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
-  Shoulda::Matchers.configure do |soulda_config|
-    soulda_config.integrate do |with|
+  Shoulda::Matchers.configure do |config|
+    config.integrate do |with|
       with.test_framework :rspec
       with.library :rails
     end

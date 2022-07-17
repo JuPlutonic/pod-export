@@ -15,7 +15,7 @@ module ApplicationHelper
   private
 
   def pods_check(pods, tpi_numbers_on_page)
-    tpi_numbers_on_page.reduce([]) do |el, pod|
+    tpi_numbers_on_page.each_with_object([]) do |pod, el|
       el << (pods.where(tax_payer_id: pod).blank? ? EMPTYCELL : FULLCELL)
     end
   end
