@@ -10,23 +10,27 @@ class PageNav
       Chrome/58.0.3029.110 Safari/537.36]
   # %[Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) \
   #   Chrome/90.0.4430.212 Safari/537.36]
-  READ_TIMEOUT = 20
+  READ_TIMEOUT = 42
 
   attr_reader :last_page, :page
 
   def initialize(first_page)
     # Runs the scrapping with Nokogiri.
-    page = (@page = extract_page_from_raw_params(first_page)) # rubocop:disable Lint/UselessAssignment
+    @page = extract_page_from_raw_params(first_page)
+
+    same_page?(@page)
     @last_page = scrape_last_page
     scrape_when_initialized
   end
 
   def pod_organizations
-    @pod_organizations = instance_variable_get(:@pod_organizations) || []
+    # @pod_organizations = instance_variable_get(:@pod_organizations) || []
+    @pod_organizations || []
   end
 
   def pod_ids
-    @pod_ids = instance_variable_get(:@pod_ids) || []
+    # @pod_ids = instance_variable_get(:@pod_ids) || []
+    @pod_ids || []
   end
 
   def add_pod_organizations(organization)
@@ -40,8 +44,8 @@ class PageNav
   # Pod_organizations and pod_ids are accessed by method 'scape'
   # So if we don't changing page, but pushing 'Visit page' button
   #   we'll see no load. The button is on controllers/pods/index.html.slim page.
-  def page=(raw_page)
-    return if @page == raw_page
+  def same_page?(raw_page)
+    return if page == raw_page
 
     # Redo the scrapping, Rememoize with true.
     doc = call_nokogiri_default_page(raw_page, true)
@@ -76,7 +80,7 @@ class PageNav
 
   # Argument: parameter => String, a single unnested parameter
   def extract_page_from_raw_params(parameter)
-    nested_param = instance_values.fetch('page') { 0 } # = parameter[:page] - 1
+    nested_param = instance_values.fetch('page') { 0 } # = parameter[:page].pred
     nested_param.to_i || instance_values.fetch(parameter).to_i # parameter.to_i
   end
 

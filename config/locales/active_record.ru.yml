@@ -1,0 +1,13 @@
+ru:
+  attributes:
+    id: ID
+    created_at: Дата создания
+    updated_at: Дата обновления
+  activerecord:
+    errors:
+      messages:
+        invalid_date_time_format: Неверный формат даты
+        record_invalid: 'Возникли ошибки: %{errors}'
+        restrict_dependent_destroy:
+          has_one: 'Невозможно удалить запись, так как существует зависимость: %{record}'
+          has_many: 'Невозможно удалить запись, так как существуют зависимости: %{record}'

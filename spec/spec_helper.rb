@@ -18,14 +18,8 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-
-# require 'rspec'
-# require 'capybara'
-# require 'capybara/rspec'
-require 'capybara/dsl'
-
 RSpec.configure do |config|
-  config.include Capybara::DSL
+  # config.include Capybara::DSL
   config.before :all do
     ENV['PRECOMPILE_ASSETS'] ||= case self.class.metadata[:type]
                                  when :feature, :view
