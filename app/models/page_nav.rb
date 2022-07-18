@@ -23,14 +23,14 @@ class PageNav
     scrape_when_initialized
   end
 
+  # TODO: Change ubiq. ivars names. DANGER parsing/content can be hidden fr. app
+  # ---------------ivars with parsing content-----------------------------------
   def pod_organizations
-    # @pod_organizations = instance_variable_get(:@pod_organizations) || []
-    @pod_organizations || []
+    @pod_organizations = instance_variable_get(:@pod_organizations) || []
   end
 
   def pod_ids
-    # @pod_ids = instance_variable_get(:@pod_ids) || []
-    @pod_ids || []
+    @pod_ids = instance_variable_get(:@pod_ids) || []
   end
 
   def add_pod_organizations(organization)
@@ -40,6 +40,7 @@ class PageNav
   def add_pod_ids(id)
     pod_ids << id if id.present?
   end
+  # -----------------------------------------------------------------------------
 
   # Pod_organizations and pod_ids are accessed by method 'scape'
   # So if we don't changing page, but pushing 'Visit page' button
@@ -47,12 +48,12 @@ class PageNav
   def same_page?(raw_page)
     return if page == raw_page
 
-    # Redo the scrapping, Rememoize with true.
+    # Redo the scrapping, rememoize with true.
     doc = call_nokogiri_default_page(raw_page, true)
     scrape(doc, true)
   end
 
-  # ---------------SimpleForm methods.-----------------------------------------
+  # ---------------SimpleForm methods.------------------------------------------
   def to_model
     self
   end
