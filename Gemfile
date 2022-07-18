@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '~> 2.6.0'
+ruby '~> 2.7.0'
 # memoize methods invocation (https://github.com/matthewrudy/memoist
 gem 'memoist'
 # Pg is the Ruby interface to the {PostgreSQL RDBMS}[http://www.postgresql.org/] (https://bitbucket.org/ged/ruby-pg)
