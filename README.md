@@ -4,19 +4,19 @@
 
 Получаем данные о ПОД из <https://data.gov.ru>
 
-![Heroku](https://pyheroku-badge.herokuapp.com/?app=pod-export7657651&style=plastic)
-[::обитает здесь::![обитает здесь](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)](https://pod-export7657651.herokuapp.com/)
+![](https://pyheroku-badge.herokuapp.com/?app=pod-export7657651&style=plastic) \
+[::ОбитаетЗдесь::![обитает здесь](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)](https://pod-export7657651.herokuapp.com/)
 
 ## Config
 
 * Ruby версия (вставьте данную строку в Gemfile): `ruby '~> 2.7.0'`
 
-* Rails 5.2.8.1, PostgreSQL (рекомендую 14-й)
+* Rails 5.2.8.1, PostgreSQL (=< 14.4, рекомендую версию как в heroku: 11.16)
 
 * Front-end часть — простая, ассеты (если надо) компилятся вот так:
 
-  > Рекомендую ноду        ` $(which -a node | head -n 1) -v # => v12.22.4`\
-  > Ярн первой версии      ` npm install -g yarn@1.22.5`\
+  > Рекомендую ноду        `$(which -a node | head -n 1) -v # => v12.22.4`\
+  > Ярн первой версии      `npm install -g yarn@1.22.5`\
   > Установим его в рельсы `rails yarn:install`\
   > Скомпилим ассеты       `rails assets:precompile`
 
@@ -38,15 +38,14 @@
 
 ## Особенности
 
-* Без скаффолдинга, т.к. данные получаются (скрапятся) по ходу работы. Генерил
-    модели, а также контроллеры без маршрута.
+* Данные получаются (скрапятся) по ходу работы.
 
-* Поэтому в методе индекс и в application_helper происходит сравнения
-    персистанса из БД с соскраппленными таблицами и поэтому submit из
-    специальной формы gem `simple_form`.
+* В `pods/index.html.slim` — submit из специальной формы gem `simple_form`, в \
+    паршале `_pods_table.html.slim` происходит сравнения персистанса из БД с \
+    соскраппленными таблицами.
 
-* Pod — ПОД (поставщик открытых данных) связан с ИНН (tax_payer_id) из таблицы
-    budget_participants.
+* Наименования:  Pod — ПОД (поставщик открытых данных) связан с ИНН \
+    (tax_payer_id) из таблицы budget_participants.
 
 ## AGILE
 
