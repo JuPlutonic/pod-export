@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 ruby '~> 2.7.0'
 # memoize methods invocation (https://github.com/matthewrudy/memoist
-gem 'memoist'
+gem 'memoist', require: false
 # Pg is the Ruby interface to the {PostgreSQL RDBMS}[http://www.postgresql.org/] (https://bitbucket.org/ged/ruby-pg)
 gem 'pg'
 # Puma is a simple, fast, threaded, and highly concurrent HTTP 1.1 server for Ruby/Rack applications (http://puma.io)
