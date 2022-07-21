@@ -2,20 +2,21 @@
 
 # :reek:InstanceVariableAssumption
 class PageNav
-  include ActiveModel::Model
   RECORDS_PER_PAGE_ON_TARGETED_SITE = 20
-  # TODO: UA round-robin and resending of time-outed query
   USER_AGENT =
-    %[Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) \
-      Chrome/58.0.3029.110 Safari/537.36]
+    %[Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) \
+      Chrome/101.0.4951.64 Safari/537.36]
   # %[Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) \
   #   Chrome/90.0.4430.212 Safari/537.36]
-  READ_TIMEOUT = 42
+  READ_TIMEOUT = 30
+  RETRIES = 2
+
+  include ActiveModel::Model
 
   attr_reader :last_page, :page
 
   def initialize(first_page)
-    # Runs the scrapping with Nokogiri.
+    # Runs the scrapping with Nokogiri
     @page = extract_page_from_raw_params(first_page)
 
     same_page?(@page)
@@ -23,8 +24,7 @@ class PageNav
     scrape_when_initialized
   end
 
-  # TODO: Change ubiq. ivars names. DANGER parsing/content can be hidden fr. app
-  # ---------------ivars with parsing content-----------------------------------
+  # ---------------ivars with parsed content------------------------------------
   def pod_organizations
     @pod_organizations = instance_variable_get(:@pod_organizations) || []
   end
@@ -40,20 +40,20 @@ class PageNav
   def add_pod_ids(id)
     pod_ids << id if id.present?
   end
-  # -----------------------------------------------------------------------------
+  # ----------------------------------------------------------------------------
 
-  # Pod_organizations and pod_ids are accessed by method 'scape'
+  # Pod_organizations and pod_ids are accessed by method 'scape'.
   # So if we don't changing page, but pushing 'Visit page' button
-  #   we'll see no load. The button is on controllers/pods/index.html.slim page.
+  #   we'll see no load. The button is on controllers/pods/index.html.slim page
   def same_page?(raw_page)
     return if page == raw_page
 
-    # Redo the scrapping, rememoize with true.
+    # Redo the scrapping, rememoize with true
     doc = call_nokogiri_default_page(raw_page, true)
     scrape(doc, true)
   end
 
-  # ---------------SimpleForm methods.------------------------------------------
+  # ---------------SimpleForm methods-------------------------------------------
   def to_model
     self
   end
@@ -67,8 +67,8 @@ class PageNav
   end
   # ----------------------------------------------------------------------------
 
-  # ---------------Filter implementation template.------------------------------
-  #   It sends post-query to URI. Here scrape updates variables.
+  # ---------------Filter implementation template-------------------------------
+  #   It sends post-query to URI. Here scrape updates variables
   # def filter(keyword)
   #   get('/search', query: { q: keyword })['pods']
   #   doc = call_nokogiri_default_page_with_filter
@@ -88,8 +88,9 @@ class PageNav
   require 'memoist'
   extend Memoist
   require 'open-uri'
+  require 'timeout'
 
-  #  --------------Implementation template which is collecting json data-sets.--
+  #  --------------Implementation template which is collecting json data-sets---
   # def scrape_data(pod)
   #   call_nokogiri_selected_pod_page
   # end
@@ -97,30 +98,41 @@ class PageNav
   # def call_nokogiri_selected_pod_page; end
   # ----------------------------------------------------------------------------
 
-  # TODO: User may filter page results. Filter '' needs to be passed by default.
   def call_nokogiri_default_page(cur_page = 0)
     base_url = 'https://data.gov.ru/organizations?field_organization_inn_value=' \
                '&title=' \
                '&field_organization_short_name_value=' \
                '&term_node_tid_depth=All' \
                "&page=#{cur_page}"
-    Nokogiri::HTML(URI.parse(base_url).open(:ssl_verify_mode => OpenSSL::SSL::VERIFY_NONE,
-                                            :read_timeout => READ_TIMEOUT,
-                                            :encoding => Encoding::UTF_8,
-                                            'Accept-Language' => 'en-US,en;q=0.8,ru;q=0.6',
-                                            'User-Agent' => USER_AGENT,
-                                            'Referer' => 'https://data.gov.ru/organizations/'), nil, 'UTF-8')
+
+    begin
+      retries = ENV.fetch('RETRIES') { RETRIES }
+      Timeout.timeout(0) do
+        parsed = URI.parse(base_url).open(ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE,
+                                          read_timeout: ENV.fetch('READ_TIMEOUT') { READ_TIMEOUT },
+                                          encoding: Encoding::UTF_8,
+                                          'Accept-Language' => 'en-US,en;q=0.8,ru;q=0.6',
+                                          'User-Agent' => USER_AGENT,
+                                          'Referer' => 'https://data.gov.ru/organizations/')
+        Nokogiri::HTML(parsed, nil, 'UTF-8')
+      end
+    rescue Timeout::Error
+      retries -= 1
+      sleep(5)
+      retries.zero? and raise
+
+      retry
+    end
   end
   memoize :call_nokogiri_default_page
 
-  # TODO: TEST crawling when base_url have only one page (where is no pagination on the target site).
   def scrape_last_page
-    # When we start browsing from the first page, li[12] will be the last paginated table.
+    # When we start browsing from the first page, li[12] will be the last paginated table
     call_nokogiri_default_page
       .xpath('//div[3]/ul/li[12]/a')
       .to_s
-      .gsub(/^.*=/, '') # - removes useful parts of url query.
-      .gsub(/\D/, '').to_i # - removes non digit parts of html tags.
+      .gsub(/^.*=/, '') # Removes useful parts of url query
+      .gsub(/\D/, '').to_i # Removes non digit parts of html tags
   end
   memoize :scrape_last_page
 
@@ -134,10 +146,8 @@ class PageNav
     doc.xpath('//td[2]/a').each do |anchor|
       add_pod_organizations(anchor.text.strip)
 
-      # gsub is doing deletion of /organization/ - it remains only taxpayer's id:
+      # `gsub` is doing deletion of /organization/. It remains only tax_payer_id
       add_pod_ids(anchor.xpath('@href').to_s.gsub(%r{(/\w+/)(\d+)}, '\2').to_s)
-      # FIXME: Glitches: P8 /administraciya-kostromskoy-oblasti, P3 /administraciya-vladimirskoy-oblasti
-      # FIXME: __Appearing only if the type of the organizations is "regional".
     end
   end
   memoize :scrape
