@@ -85,7 +85,7 @@ class PageNav
     nested_param.to_i || instance_values.fetch(parameter).to_i # parameter.to_i
   end
 
-  # Memoization
+  require 'memoist'
   extend Memoist
   require 'open-uri'
 
