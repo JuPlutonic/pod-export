@@ -11,3 +11,42 @@ ru:
         restrict_dependent_destroy:
           has_one: 'Невозможно удалить запись, так как существует зависимость: %{record}'
           has_many: 'Невозможно удалить запись, так как существуют зависимости: %{record}'
+    models:
+      budget_participant:
+        one: Получатель бюджетных средств
+        many: Получатели бюджетных средств
+      datum:
+        one: Данные
+        many: Данные
+      json_dataset:
+        one: Датасет
+        many: Датасеты
+      pod:
+        one: Поставщик открытых данных
+        many: Поставщики открытых данных
+        attributes:
+          pod_code:
+            blank: Не заполнено поле кода поставщика открытых данных
+          tax_payer_id:
+            blank: Не заполнено поле ИНН
+  pods:
+    create:
+      success: Поставщик открытых данных сохранён
+      alert: Не удалось сохранить поставщика открытых данных
+    index:
+      no_one: Записей нет
+    # about:
+    #   foo: bar
+    # contact:
+    #   foo: bar
+    # edit:
+    #   foo: bar
+    # form:
+    #   foo: bar
+    # new:
+    #   foo: bar
+    # show:
+    #   foo: bar
+    # update:
+    #   success: baz
+    #   alert: baz

@@ -19,8 +19,8 @@ ru:
           municipal: Муниципальный
           regional: Региональный
       budget_participant:
-        name: "Название"
-        short_name: "Короткое название"
+        name: Название
+        short_name: Короткое название
         tax_payer_id: ИНН
         budg_code: Реальный ИНН
     # Examples
