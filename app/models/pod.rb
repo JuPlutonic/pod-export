@@ -15,12 +15,10 @@
 #
 class Pod < ApplicationRecord
   has_many :json_datasets, through: :datum
-  # rubocop:disable Rails/InverseOf
   with_options foreign_key: :gov_code, primary_key: :pod_code do
-    has_many :data, dependent: :restrict_with_exception
-    has_many :budget_participants, dependent: :delete_all
+    has_many :data, dependent: :restrict_with_exception, inverse_of: :pod
+    has_many :budget_participants, dependent: :delete_all, inverse_of: :pod
   end
-  # rubocop:enable Rails/InverseOf
 
   enum kind: { federal: 'federal',
                municipal: 'municipal',
@@ -32,6 +30,7 @@ class Pod < ApplicationRecord
   validates :pod_code, presence: true, uniqueness: true
   validates :tax_payer_id, presence: true, tax_payer_id: true
 
+  accepts_nested_attributes_for :budget_participants
   accepts_nested_attributes_for :data, reject_if: proc { |attributes|
                                                     attributes[:converted].blank?
                                                   }, allow_destroy: true
