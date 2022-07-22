@@ -18,6 +18,7 @@ RSpec.describe ApplicationHelper, type: :helper do
 
   describe 'helper shows what all tpis are already existed (fabricated)' do
     it 'when tpis coincide with el-s from scrapped tpis, and helper shows \'показать данные\'' do
+      20.times { create :pod_description, tax_payer_id: different_els.pop }
       expect(helper.elem_retrieval(dup_different_els).uniq!).to eq [fullcell]
     end
   end
