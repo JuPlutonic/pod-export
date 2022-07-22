@@ -22,7 +22,6 @@ class PodsController < ApplicationController
   # ----------------------------------------------------------------------------
 
   # -User, when visits Pod sees if bots, already scraped data-sets--pod_params--
-  # TODO: User sees Pod's open datasets, pod_params have data_attributes: [:id, :date:, source, :author, :converted]
   def create
     @pod = Pod.new(pod_params)
 
