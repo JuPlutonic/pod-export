@@ -14,8 +14,6 @@ class PodsController < ApplicationController
 
   # -PageNav initiation with first_page argument, elements retrieval, scrapping-
   def index
-    # Definition of instance variables, what will be accessed in the
-    #   views/pods/index.html.slim file.
     @index ||= 0
     @page_nav = PageNav.new(@index) unless Object.const_defined?(:PagNav) && @index == @page_nav.page
     # @last_page_num ||= @page_nav.last_page
