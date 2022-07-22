@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_15_143624) do
+ActiveRecord::Schema.define(version: 2022_07_22_174224) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "budget_participants", force: :cascade do |t|
@@ -56,7 +57,7 @@ ActiveRecord::Schema.define(version: 2022_07_15_143624) do
     t.datetime "updated_at", null: false
     t.string "kind"
     t.boolean "government_led", default: false
-    t.string "pod_code", null: false
+    t.uuid "pod_code", null: false
     t.index ["government_led"], name: "index_pods_on_government_led"
     t.index ["pod_code"], name: "index_pods_on_pod_code", unique: true
   end

@@ -8,7 +8,7 @@
 #  government_led :boolean          default(FALSE)
 #  kind           :string
 #  organization   :string
-#  pod_code       :string           not null
+#  pod_code       :uuid             not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  tax_payer_id   :string
@@ -24,8 +24,8 @@ RSpec.describe Pod, type: :model do
   describe 'validations' do
     subject { FactoryBot.create(:pod_description) }
 
-    it { is_expected.to validate_presence_of(:pod_code) }
-    it { is_expected.to validate_uniqueness_of(:pod_code) }
-    it { is_expected.to validate_presence_of(:tax_payer_id) }
+    it { should validate_presence_of(:pod_code) }
+    it { should validate_uniqueness_of(:pod_code).ignoring_case_sensitivity }
+    it { should validate_presence_of(:tax_payer_id) }
   end
 end

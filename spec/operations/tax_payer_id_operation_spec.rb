@@ -10,7 +10,7 @@ RSpec.describe TaxPayerIdOperation do
       end
 
       it 'is true for the proper tax_payer_id' do
-        expect(described_class.new('8080808099').call).to be true
+        expect(described_class.new(Faker::Russian.inn).call).to be true
       end
     end
   end
