@@ -16,8 +16,9 @@ class PodsController < ApplicationController
   def index
     # Definition of instance variables, what will be accessed in the
     #   views/pods/index.html.slim file.
-    @index_cur_page ||= 0
-    @page_nav = PageNav.new(@index_cur_page) unless Object.const_defined?(:PagNav) && @index_cur_page == @page_nav.page
+    @index ||= 0
+    @page_nav = PageNav.new(@index) unless Object.const_defined?(:PagNav) && @index == @page_nav.page
+    # @last_page_num ||= @page_nav.last_page
   end
   # ----------------------------------------------------------------------------
 
@@ -26,10 +27,12 @@ class PodsController < ApplicationController
     @pod = Pod.new(pod_params)
 
     if @pod.save
+      flash[:success] = t('.success')
       respond_to do |format|
         format.html { redirect_to pod_url(tax_payer_id: @pod.tax_payer_id) }
       end
     else
+      flash[:alert] = t('.alert')
       redirect_to '/'
     end
   end
