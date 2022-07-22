@@ -50,7 +50,8 @@ group :development, :test do
   gem 'rails-controller-testing'
   # RSpec for Rails (https://github.com/rspec/rspec-rails)
   gem 'rspec-rails', '~> 3.5'
-  # gem 'selenium-webdriver'
+  # Faker russian specific values. INN, OGRN, et.c. (http://github.com/asiniy/faker-russian)
+  gem 'faker-russian'
 end
 
 group :development do

@@ -4,14 +4,19 @@
 #
 # Table name: pods
 #
-#  id             :bigint           not null
+#  id             :bigint           not null, primary key
+#  government_led :boolean          default(FALSE)
+#  kind           :string
 #  organization   :string
-#  tax_payer_id   :string           primary key
+#  pod_code       :string           not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  kind           :string
-#  government_led :boolean          default(FALSE)
-#  pod_code       :string           not null
+#  tax_payer_id   :string
+#
+# Indexes
+#
+#  index_pods_on_government_led  (government_led)
+#  index_pods_on_pod_code        (pod_code) UNIQUE
 #
 require 'rails_helper'
 
@@ -19,6 +24,8 @@ RSpec.describe Pod, type: :model do
   describe 'validations' do
     subject { FactoryBot.create(:pod_description) }
 
+    it { is_expected.to validate_presence_of(:pod_code) }
+    it { is_expected.to validate_uniqueness_of(:pod_code) }
     it { is_expected.to validate_presence_of(:tax_payer_id) }
   end
 end
