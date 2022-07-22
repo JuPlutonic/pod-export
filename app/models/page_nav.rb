@@ -7,7 +7,7 @@ class PageNav
     %[Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) \
       Chrome/101.0.4951.64 Safari/537.36]
   # %[Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) \
-  #   Chrome/90.0.4430.212 Safari/537.36]
+  #   Chrome/101.0.4951.64 Safari/537.36]
   READ_TIMEOUT = 30
   RETRIES = 2
 
@@ -29,24 +29,24 @@ class PageNav
     @pod_organizations = instance_variable_get(:@pod_organizations) || []
   end
 
-  def pod_ids
-    @pod_ids = instance_variable_get(:@pod_ids) || []
+  def tpis
+    @tpis = instance_variable_get(:@tpis) || []
   end
 
   def add_pod_organizations(organization)
     pod_organizations << organization if organization.present?
   end
 
-  def add_pod_ids(id)
-    pod_ids << id if id.present?
+  def add_tpi(tpi)
+    tpis << tpi if tpi.present?
   end
   # ----------------------------------------------------------------------------
 
-  # Pod_organizations and pod_ids are accessed by method 'scape'.
+  # Pod_organizations and tpis are accessed by method 'scape'.
   # So if we don't changing page, but pushing 'Visit page' button
   #   we'll see no load. The button is on controllers/pods/index.html.slim page
   def same_page?(raw_page)
-    return if page == raw_page
+    return if @page == raw_page
 
     # Redo the scrapping, rememoize with true
     doc = call_nokogiri_default_page(raw_page, true)
@@ -67,7 +67,7 @@ class PageNav
   end
   # ----------------------------------------------------------------------------
 
-  # ---------------Filter implementation template-------------------------------
+  # ---------------Filter implementation template.------------------------------
   #   It sends post-query to URI. Here scrape updates variables
   # def filter(keyword)
   #   get('/search', query: { q: keyword })['pods']
@@ -147,7 +147,7 @@ class PageNav
       add_pod_organizations(anchor.text.strip)
 
       # `gsub` is doing deletion of /organization/. It remains only tax_payer_id
-      add_pod_ids(anchor.xpath('@href').to_s.gsub(%r{(/\w+/)(\d+)}, '\2').to_s)
+      add_tpi(anchor.xpath('@href').to_s.gsub(%r{(/\w+/)(\d+)}, '\2').to_s)
     end
   end
   memoize :scrape
