@@ -15,5 +15,5 @@ windows:
   - wrk:
       layout: main-vertical
       panes:
-        - edt_pod: nvim +NERDTreeToggle
+        - edt_pod: nvim +NERDTree
         - tdd_pod: rbenv exec bundle exec guard
