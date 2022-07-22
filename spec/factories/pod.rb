@@ -1,14 +1,9 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :pod_elem_retriever, class: 'Pod' do
-    sequence(:tax_payer_id) { |n| "11001001#{n.to_s.rjust(2, '0')}" }
-  end
-
   factory :pod_description, class: 'Pod' do
-    organization { 'Pod' }
-    pod_code { '123901' }
-    tax_payer_id { '11001001aA' }
+    pod_code { Digest::UUID.uuid_v4 }
+    tax_payer_id { Faker::Russian.inn }
   end
 
   factory :invalid_pod, class: 'Pod' do

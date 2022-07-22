@@ -2,8 +2,8 @@
 
 # :reek:InstanceVariableAssumption
 class PodsController < ApplicationController
-  before_action :set_pod, only: %i[show edit update]
-  # ---------------set_pod------------------------------------------------------
+  before_action :set_tpi, only: %i[show edit update]
+
   def show
     @tax_payers_id = params[:tax_payer_id]
   end
@@ -11,7 +11,6 @@ class PodsController < ApplicationController
   def edit; end
 
   def update; end
-  # ----------------------------------------------------------------------------
 
   # -PageNav initiation with first_page argument, elements retrieval, scrapping-
   def index
@@ -43,7 +42,7 @@ class PodsController < ApplicationController
 
   private
 
-  def set_pod
+  def set_tpi
     @pod = Pod.find(params[:tax_payer_id])
   end
 
