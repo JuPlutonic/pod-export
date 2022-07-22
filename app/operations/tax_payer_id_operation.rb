@@ -26,7 +26,7 @@ class TaxPayerIdOperation
     when 12
       if vls[0..1] == %w[0 0]
         checksum_n10 vls[2..]
-      elsif vls[-2..] == %w[- 1]
+      elsif vls[-2..] == %w[- 0]
         checksum_n10 vls[0..-3]
       else
         checksum_n11_and_n12 vls
