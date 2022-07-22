@@ -79,7 +79,7 @@ GEM
     sexp_processor (4.16.1)
     thread_safe (0.3.6)
     tomlrb (2.0.3)
-    tzinfo (1.2.9)
+    tzinfo (1.2.10)
       thread_safe (~> 0.1)
     unicode-display_width (2.2.0)
     webrick (1.7.0)
