@@ -1,7 +1,7 @@
 - provide(:home, 'active')
 - provide(:title, 'Организации')
 
-div.tbl== render 'shared/pods_table', pod_ids: @page_nav.pod_ids
+div.tbl== render 'shared/pods_table', tpis: @page_nav.tpis
 
 div
   .row.col-md-5
@@ -9,7 +9,7 @@ div
     fieldset
       = simple_form_for @page_nav, remote: true do |page_nav|
         = page_nav.number_field :page,
-          value: @index_cur_page ? "#{@index_cur_page + 1}" : "1",
+          value: @index_cur_page ? "#{@index_cur_page + 1}" : '1',
           within: 1..(@index_last_page || @page_nav.to_key.first.last),
-          class: "special_input"
+          class: 'special_input'
         = page_nav.submit
