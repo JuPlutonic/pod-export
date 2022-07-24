@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'memoist'
+
 # :reek:InstanceVariableAssumption
 class PageNav
   RECORDS_PER_PAGE_ON_TARGETED_SITE = 20
@@ -16,10 +18,9 @@ class PageNav
   attr_reader :last_page, :page
 
   def initialize(first_page)
-    # Runs the scrapping with Nokogiri
     @page = extract_page_from_raw_params(first_page)
 
-    same_page?(@page)
+    # Runs the scrapping with Nokogiri
     @last_page = scrape_last_page
     scrape_when_initialized
   end
@@ -37,21 +38,10 @@ class PageNav
     pod_organizations << organization if organization.present?
   end
 
-  def add_tpi(tpi)
+  def add_tpis(tpi)
     tpis << tpi if tpi.present?
   end
   # ----------------------------------------------------------------------------
-
-  # Pod_organizations and tpis are accessed by method 'scape'.
-  # So if we don't changing page, but pushing 'Visit page' button
-  #   we'll see no load. The button is on controllers/pods/index.html.slim page
-  def same_page?(raw_page)
-    return if @page == raw_page
-
-    # Redo the scrapping, rememoize with true
-    doc = call_nokogiri_default_page(raw_page, true)
-    scrape(doc, true)
-  end
 
   # ---------------SimpleForm methods-------------------------------------------
   def to_model
@@ -59,7 +49,7 @@ class PageNav
   end
 
   def to_key
-    [0..@last_page]
+    [0..last_page]
   end
 
   def persisted?
@@ -79,13 +69,12 @@ class PageNav
 
   private
 
-  # Argument: parameter => String, a single unnested parameter
   def extract_page_from_raw_params(parameter)
-    nested_param = instance_values.fetch('page') { 0 } # = parameter[:page].pred
-    nested_param.to_i || instance_values.fetch(parameter).to_i # parameter.to_i
+    parameter.is_a?(Integer) and return parameter
+
+    parameter.fetch('page').to_i.pred
   end
 
-  require 'memoist'
   extend Memoist
   require 'open-uri'
   require 'timeout'
@@ -104,7 +93,6 @@ class PageNav
                '&field_organization_short_name_value=' \
                '&term_node_tid_depth=All' \
                "&page=#{cur_page}"
-
     begin
       retries = ENV.fetch('RETRIES') { RETRIES }
       Timeout.timeout(0) do
@@ -147,7 +135,7 @@ class PageNav
       add_pod_organizations(anchor.text.strip)
 
       # `gsub` is doing deletion of /organization/. It remains only tax_payer_id
-      add_tpi(anchor.xpath('@href').to_s.gsub(%r{(/\w+/)(\d+)}, '\2').to_s)
+      add_tpis(anchor.xpath('@href').to_s.gsub(%r{(/\w+/)(\d+)}, '\2').to_s)
     end
   end
   memoize :scrape
