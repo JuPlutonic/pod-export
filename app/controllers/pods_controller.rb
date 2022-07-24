@@ -14,17 +14,17 @@ class PodsController < ApplicationController
 
   # -PageNav initiation with first_page argument, elements retrieval, scrapping-
   def index
-    @index ||= 0
+    @index = @page_nav&.page || 0
     @page_nav = PageNav.new(@index) unless Object.const_defined?(:PagNav) && @index == @page_nav.page
-    # @last_page_num ||= @page_nav.last_page
   end
   # ----------------------------------------------------------------------------
 
   # -User, when visits Pod sees if bots, already scraped data-sets--pod_params--
   def create
+    Rails.logger.warn("\n\n#{pod_params}\n\n")
     @pod = Pod.new(pod_params)
 
-    if @pod.save
+    if @pod.save!
       flash[:success] = t('.success')
       respond_to do |format|
         format.html { redirect_to pod_url(tax_payer_id: @pod.tax_payer_id) }
@@ -37,6 +37,7 @@ class PodsController < ApplicationController
   # ----------------------------------------------------------------------------
 
   def new
+    # @tax_payers_id = params[:tax_payer_id]
     @pod = Pod.new
   end
 
