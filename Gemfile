@@ -3,6 +3,8 @@
 source 'https://rubygems.org'
 
 ruby '~> 2.7.0'
+# Boot large ruby/rails apps faster (https://github.com/Shopify/bootsnap)
+gem 'bootsnap'
 # memoize methods invocation (https://github.com/matthewrudy/memoist
 gem 'memoist', require: false
 # Pg is the Ruby interface to the {PostgreSQL RDBMS}[http://www.postgresql.org/] (https://bitbucket.org/ged/ruby-pg)

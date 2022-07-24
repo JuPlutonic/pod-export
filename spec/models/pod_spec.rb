@@ -8,7 +8,7 @@
 #  government_led :boolean          default(FALSE)
 #  kind           :string
 #  organization   :string
-#  pod_code       :uuid             not null
+#  pod_code       :string           not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  tax_payer_id   :string

@@ -8,7 +8,7 @@
 #  government_led :boolean          default(FALSE)
 #  kind           :string
 #  organization   :string
-#  pod_code       :uuid             not null
+#  pod_code       :string           not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  tax_payer_id   :string
@@ -35,8 +35,15 @@ class Pod < ApplicationRecord
   validates :pod_code, presence: true, uniqueness: true, case_sensitive: false
   validates :tax_payer_id, presence: true, tax_payer_id: true
 
+  #after_commit :refresh_uuid, on: :create
+  after_create :reload
+
   accepts_nested_attributes_for :budget_participants
   accepts_nested_attributes_for :data, reject_if: proc { |attributes|
                                                     attributes[:converted].blank?
                                                   }, allow_destroy: true
+  def reload_uuid
+    self[:pod_code] = self.class.where(id: id).pluck(:pod_code).first if attributes.has_key? 'pod_code'
+  end
+  private :reload_uuid
 end

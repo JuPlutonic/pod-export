@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_22_174224) do
+ActiveRecord::Schema.define(version: 2022_07_22_175240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -35,10 +35,10 @@ ActiveRecord::Schema.define(version: 2022_07_22_174224) do
     t.boolean "converted"
     t.string "author"
     t.string "source"
+    t.string "gov_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "pod_id"
-    t.index ["pod_id"], name: "index_data_on_pod_id"
+    t.index ["gov_code"], name: "index_data_on_gov_code"
   end
 
   create_table "json_datasets", force: :cascade do |t|
@@ -57,11 +57,10 @@ ActiveRecord::Schema.define(version: 2022_07_22_174224) do
     t.datetime "updated_at", null: false
     t.string "kind"
     t.boolean "government_led", default: false
-    t.uuid "pod_code", null: false
+    t.string "pod_code", default: -> { "gen_random_uuid()" }, null: false
     t.index ["government_led"], name: "index_pods_on_government_led"
     t.index ["pod_code"], name: "index_pods_on_pod_code", unique: true
   end
 
-  add_foreign_key "data", "pods"
   add_foreign_key "json_datasets", "data"
 end

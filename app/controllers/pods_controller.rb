@@ -23,7 +23,7 @@ class PodsController < ApplicationController
   def create
     @pod = Pod.new(pod_params)
 
-    if @pod.save
+    if @pod.save!
       flash[:success] = t('.success')
       respond_to do |format|
         format.html { redirect_to pod_url(tax_payer_id: @pod.tax_payer_id) }
@@ -36,7 +36,6 @@ class PodsController < ApplicationController
   # ----------------------------------------------------------------------------
 
   def new
-    # @tax_payers_id = params[:tax_payer_id]
     @pod = Pod.new
   end
 
