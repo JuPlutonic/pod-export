@@ -21,7 +21,6 @@ class PodsController < ApplicationController
 
   # -User, when visits Pod sees if bots, already scraped data-sets--pod_params--
   def create
-    Rails.logger.warn("\n\n#{pod_params}\n\n")
     @pod = Pod.new(pod_params)
 
     if @pod.save
