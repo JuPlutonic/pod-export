@@ -24,7 +24,7 @@ class PodsController < ApplicationController
     Rails.logger.warn("\n\n#{pod_params}\n\n")
     @pod = Pod.new(pod_params)
 
-    if @pod.save!
+    if @pod.save
       flash[:success] = t('.success')
       respond_to do |format|
         format.html { redirect_to pod_url(tax_payer_id: @pod.tax_payer_id) }
