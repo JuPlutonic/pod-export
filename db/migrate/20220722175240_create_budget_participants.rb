@@ -1,4 +1,4 @@
-class CreateBudgetParticipants < ActiveRecord::Migration[5.2]
+class CreateBudgetParticipants < ActiveRecord::Migration[6.0]
   def change
     create_table :budget_participants do |t|
       t.string :name

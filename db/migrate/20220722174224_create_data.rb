@@ -1,4 +1,4 @@
-class CreateData < ActiveRecord::Migration[5.2]
+class CreateData < ActiveRecord::Migration[6.0]
   def change
     create_table :data do |t|
       t.string :mime
