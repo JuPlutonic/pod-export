@@ -16,7 +16,6 @@
 # Indexes
 #
 #  index_pods_on_government_led  (government_led)
-#  index_pods_on_pod_code        (pod_code) UNIQUE
 #
 require 'rails_helper'
 

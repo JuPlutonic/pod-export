@@ -20,7 +20,7 @@ div#pods_table
             - this_path = new_pod_path
           td
             - if tpi_placeholder && org_placeholder
-              = button_to entry, this_path, method: :get, params: get_params, remote: false
+              = button_to entry, this_path, method: :get, params: get_params, class: "btn btn-xs", remote: false
   p.row.col-md-5
     p
       breadcrumb Навигация #{page_num.succ} из

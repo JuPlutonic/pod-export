@@ -1,4 +1,4 @@
-class AddKindGovernmentLetToPod < ActiveRecord::Migration[5.2]
+class AddKindGovernmentLetToPod < ActiveRecord::Migration[7.0]
   def change
     add_column :pods, :kind, :string
     add_column :pods, :government_led, :boolean, default: false
