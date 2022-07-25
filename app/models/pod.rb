@@ -16,7 +16,6 @@
 # Indexes
 #
 #  index_pods_on_government_led  (government_led)
-#  index_pods_on_pod_code        (pod_code) UNIQUE
 #
 class Pod < ApplicationRecord
   has_many :json_datasets, through: :datum
@@ -32,8 +31,10 @@ class Pod < ApplicationRecord
   scope :government_led, -> { where(government_led: true) }
   scope :president_led, -> { where(government_led: false) }
 
-  validates :pod_code, presence: true, uniqueness: true, case_sensitive: false
-  validates :tax_payer_id, presence: true, tax_payer_id: true
+  # after_commit :reload
+  after_create :reload
+
+  validates :tax_payer_id, presence: true, tax_payer_id: true, allow_blank: false
 
   accepts_nested_attributes_for :budget_participants
   accepts_nested_attributes_for :data, reject_if: proc { |attributes|

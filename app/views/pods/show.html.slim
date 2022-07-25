@@ -1,5 +1,11 @@
 - provide(:home, "active")
 - provide(:title, "ПОД")
 
-= render "form", locals: { disable_toggler: true }
+div.container-fluid
+  = render "form", locals: { disable_toggler: true }
 
+div
+  -if Rails.application.routes.recognize_path(request.referrer)[:action] != 'index'
+    p<= button_to 'Назад', '#', :remote => true, onclick: "window.history.go(-2);"
+  - else
+    p<= button_to 'Назад', '#', :remote => true, onclick: "window.history.go(-1);"

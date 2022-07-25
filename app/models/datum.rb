@@ -8,19 +8,15 @@
 #  author     :string
 #  converted  :boolean
 #  date       :date
+#  gov_code   :string
 #  mime       :string
 #  source     :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  pod_id     :bigint
 #
 # Indexes
 #
-#  index_data_on_pod_id  (pod_id)
-#
-# Foreign Keys
-#
-#  fk_rails_...  (pod_id => pods.id)
+#  index_data_on_gov_code  (gov_code)
 #
 class Datum < ApplicationRecord
   with_options dependent: :destroy do

@@ -1,4 +1,4 @@
-class CreateBudgetParticipants < ActiveRecord::Migration[5.2]
+class CreateBudgetParticipants < ActiveRecord::Migration[7.0]
   def change
     create_table :budget_participants do |t|
       t.string :name
@@ -6,7 +6,7 @@ class CreateBudgetParticipants < ActiveRecord::Migration[5.2]
       t.string :tax_payer_id
       t.boolean :status
       t.string :budg_code
-      t.string :gov_code
+      t.string :gov_code, foreign_key: true, type: :uuid
 
       t.timestamps
     end
