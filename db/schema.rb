@@ -2,15 +2,15 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# This file is the source Rails uses to define your schema when running `rails
-# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
 # be faster and is potentially less error prone than running all of your
 # migrations from scratch. Old migrations may fail to apply correctly if those
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_24_222243) do
+ActiveRecord::Schema.define(version: 2022_07_22_175240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2022_07_24_222243) do
     t.datetime "updated_at", null: false
     t.string "kind"
     t.boolean "government_led", default: false
-    t.string "pod_code", default: "gen_random_uuid()", null: false
+    t.uuid "pod_code", default: -> { "gen_random_uuid()" }, null: false
     t.index ["government_led"], name: "index_pods_on_government_led"
     t.index ["pod_code"], name: "index_pods_on_pod_code", unique: true
   end

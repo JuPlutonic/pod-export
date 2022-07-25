@@ -1,4 +1,4 @@
-class CreateJsonDatasets < ActiveRecord::Migration[6.0]
+class CreateJsonDatasets < ActiveRecord::Migration[6.1]
   def change
     create_table :json_datasets do |t|
       t.binary 'file'

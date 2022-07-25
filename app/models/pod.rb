@@ -8,7 +8,7 @@
 #  government_led :boolean          default(FALSE)
 #  kind           :string
 #  organization   :string
-#  pod_code       :string           default("gen_random_uuid()"), not null
+#  pod_code       :uuid             not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  tax_payer_id   :string
@@ -32,7 +32,7 @@ class Pod < ApplicationRecord
   scope :government_led, -> { where(government_led: true) }
   scope :president_led, -> { where(government_led: false) }
 
-  validates :pod_code, presence: true, uniqueness: true, case_sensitive: false
+  validates :pod_code, presence: true, uniqueness: { case_sensitive: false }
   validates :tax_payer_id, presence: true, tax_payer_id: true
 
   # after_commit :refresh_uuid, on: :create
