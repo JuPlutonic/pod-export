@@ -5,11 +5,7 @@ require 'memoist'
 # :reek:InstanceVariableAssumption
 class PageNav
   RECORDS_PER_PAGE_ON_TARGETED_SITE = 20
-  USER_AGENT =
-    %[Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) \
-      Chrome/101.0.4951.64 Safari/537.36]
-  # %[Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) \
-  #   Chrome/101.0.4951.64 Safari/537.36]
+  USER_AGENT = "Ruby/#{RUBY_VERSION}"
   READ_TIMEOUT = 30
   RETRIES = 2
 
@@ -77,6 +73,7 @@ class PageNav
 
   extend Memoist
   require 'open-uri'
+  require 'openssl'
   require 'timeout'
 
   #  --------------Implementation template which is collecting json data-sets---
@@ -100,7 +97,7 @@ class PageNav
                                           read_timeout: ENV.fetch('READ_TIMEOUT') { READ_TIMEOUT },
                                           encoding: Encoding::UTF_8,
                                           'Accept-Language' => 'en-US,en;q=0.8,ru;q=0.6',
-                                          'User-Agent' => USER_AGENT,
+                                          'User-Agent' => ENV.fetch('USER_AGENT') { USER_AGENT },
                                           'Referer' => 'https://data.gov.ru/organizations/')
         Nokogiri::HTML(parsed, nil, 'UTF-8')
       end
