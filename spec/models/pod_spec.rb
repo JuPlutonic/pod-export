@@ -23,8 +23,6 @@ RSpec.describe Pod, type: :model do
   describe 'validations' do
     subject { FactoryBot.create(:pod_description) }
 
-    it { should validate_presence_of(:pod_code) }
-    it { should validate_uniqueness_of(:pod_code).ignoring_case_sensitivity }
     it { should validate_presence_of(:tax_payer_id) }
   end
 end
