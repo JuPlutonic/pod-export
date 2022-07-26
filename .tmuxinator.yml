@@ -3,7 +3,7 @@ name: pod-export
 root: /opt/git/pod-export7657651
 pre_window: >
   promote /opt/git/pod-export7657651/.env.development &&
-  rbenv global 2.7.6
+  rbenv global 3.0.4
 windows:
   - pod_wrk:
       layout: main-vertical

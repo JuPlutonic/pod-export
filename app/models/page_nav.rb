@@ -5,7 +5,7 @@ require 'memoist'
 # :reek:InstanceVariableAssumption
 class PageNav
   RECORDS_PER_PAGE_ON_TARGETED_SITE = 20
-  USER_AGENT = "Ruby/#{RUBY_VERSION}"
+  USER_AGENT = "Ruby/#{RUBY_VERSION}".freeze
   READ_TIMEOUT = 30
   RETRIES = 2
 

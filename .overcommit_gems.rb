@@ -13,7 +13,7 @@ gem 'rubocop-performance'
 # Automatic Rails code style checking tool. (https://github.com/rubocop-hq/rubocop-rails)
 gem 'rubocop-rails'
 # Code style checking for RSpec files (https://github.com/rubocop-hq/rubocop-rspec)
-gem 'rubocop-rspec', '~> 2.4.0'
+gem 'rubocop-rspec'
 # fast, accurate ctags generator for ruby source code using Ripper (https://github.com/tmm1/ripper-tags)
 gem 'ripper-tags'
 # YARD is a documentation generation tool for the Ruby programming... (https://github.com/lsegal/yard)
