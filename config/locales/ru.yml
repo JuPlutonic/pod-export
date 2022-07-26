@@ -38,8 +38,11 @@ ru:
       less_than: может иметь значение меньшее чем %{count}
       less_than_or_equal_to: может иметь значение меньшее или равное %{count}
       model_invalid: 'Возникли ошибки: %{errors}'
+      no_parameters: обязательные параметры отсутствуют
       not_a_number: не является числом
       not_an_integer: не является целым числом
+      not_found: запись не найдена
+      not_unique: запись не уникальна
       odd: может иметь лишь четное значение
       other_than: должно отличаться от %{count}
       present: нужно оставить пустым
