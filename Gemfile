@@ -60,12 +60,11 @@ group :development do
   # Annotates Rails Models, routes, fixtures, and others based on the database schema. (http://github.com/ctran/annotate_models)
   gem 'annotate', require: false
   # Better error page for Rails and other Rack apps (https://github.com/BetterErrors/better_errors)
-  gem 'better_errors', '~> 2.9.1'
+  gem 'better_errors'
   # Retrieve the binding of a method's caller. Can also retrieve bindings even further up the stack. (http://github.com/banister/binding_of_caller)
   gem 'binding_of_caller'
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  # Ruby fast debugger - base + CLI (http://github.com/deivid-rodriguez/byebug)
-  gem 'byebug', platform: :mri
+  # Lightweight Ruby debugger (https://github.com/gsamokovarov/break)
+  gem 'break'
   # Guard gem for RSpec (https://github.com/guard/guard-rspec)
   gem 'guard-rspec', require: false
   # Listen to file modifications (https://github.com/guard/listen)
