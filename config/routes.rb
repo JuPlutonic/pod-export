@@ -34,4 +34,5 @@ Rails.application.routes.draw do
   end
   get 'contact' => 'pods#contact', as: :contact
   get 'about' => 'pods#about', as: :about
+  get 'welcome' => 'greeter#welcome', as: :welcome
 end
