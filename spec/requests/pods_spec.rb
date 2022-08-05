@@ -61,23 +61,22 @@ RSpec.describe 'Pods', type: :request do
 
       it 'redirects to show' do
         post pods_path(pod: attributes_for(:pod_description))
-        expect(response).to render_template(:show)
-        # expect(response).to redirect_to pod_path(assigns(:pod))
+        expect(response).to redirect_to pod_path(assigns(:pod)[:tax_payer_id])
       end
     end
 
     context 'when invalid' do
       # post :create, params: { pod: attributes_for(:invalid_pod) }
 
-      xit 'does not save new pod in DB' do
+      it 'does not save new pod in DB' do
         expect do
           post pods_url, params: { pod: attributes_for(:invalid_pod) }
         end.not_to change(Pod, :count)
       end
 
-      xit 'renders show template' do
+      it 'renders index template' do
         post pods_url, params: { pod: attributes_for(:invalid_pod) }
-        expect(response).to render_template :new
+        expect(response).to redirect_to pods_path
       end
     end
   end
