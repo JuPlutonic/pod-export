@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# :reek:InstanceVariableAssumption
+# :reek:DuplicateMethodCall
 class PodsController < ApplicationController
   before_action :set_tpi, only: %i[new show]
 
@@ -14,7 +14,9 @@ class PodsController < ApplicationController
 
   # PageNav initiation with first_page argument, elements retrieval, scrapping
   def index
-    @index = @page || 0
+    cookies.permanent[:first_time] = 1 and redirect_to(welcome_path) unless cookies.permanent[:first_time]
+
+    @index ||= 0
     (Object.const_defined?(:PagNav) && @index == @page_nav.page) || @page_nav = PageNav.new(@index)
   end
 
