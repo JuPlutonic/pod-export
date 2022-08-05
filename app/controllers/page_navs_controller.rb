@@ -14,6 +14,6 @@ class PageNavsController < ApplicationController
   private
 
   def page_nav_params
-    params.require(:page_nav).permit(:page)
+    params.require(:page_nav).permit(:tpis, :page)
   end
 end

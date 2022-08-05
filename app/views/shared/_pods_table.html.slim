@@ -1,4 +1,4 @@
-- page_num = params[:page_nav] ? params[:page_nav][:page].to_i.pred : 0
+/- page_num = params[:page_nav] ? params[:page_nav][:page].to_i.pred : 0
 div#pods_table
   table border=".5"
     tr
@@ -9,7 +9,7 @@ div#pods_table
     - elements = elem_retrieval(@page_nav.tpis)
     - elements.each_with_index do |entry, num|
         tr class="#{cycle('odd', 'even')}"
-          td= PageNav::RECORDS_PER_PAGE_ON_TARGETED_SITE * page_num + num.succ
+          td= PageNav::RECORDS_PER_PAGE_ON_TARGETED_SITE * @page_nav.page + num.succ
           td= tpi_placeholder = @page_nav.tpis[num]
           td= org_placeholder = @page_nav.pod_organizations[num]
           - get_params = { tax_payer_id: @page_nav.tpis[num], organization: @page_nav.pod_organizations[num] }
@@ -23,5 +23,5 @@ div#pods_table
               = button_to entry, this_path, method: :get, params: get_params, class: "btn btn-xs", remote: false
   p.row.col-md-5
     p
-      breadcrumb Навигация #{page_num.succ} из
+      breadcrumb Навигация #{@page_nav.page.succ} из
       breadcrumb<= @page_nav.last_page.succ

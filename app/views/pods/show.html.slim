@@ -7,5 +7,7 @@ div.container-fluid
 div
   -if Rails.application.routes.recognize_path(request.referrer)[:action] != 'index'
     p<= button_to 'Назад', '#', :remote => true, onclick: "window.history.go(-2);"
+    /p<= link_to 'Назад', pods_path(renew: "true")
   - else
     p<= button_to 'Назад', '#', :remote => true, onclick: "window.history.go(-1);"
+    /p<= link_to 'Назад', pods_path(renew: "false")
