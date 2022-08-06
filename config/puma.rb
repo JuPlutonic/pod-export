@@ -4,8 +4,9 @@
 # the maximum value specified for Puma. Default is set to 5 threads for minimum
 # and maximum; this matches the default thread size of Active Record.
 #
-threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
-threads threads_count, threads_count
+min_threads_count = ENV.fetch("RAILS_MIN_THREADS") { 3 }
+max_threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
+threads min_threads_count, max_threads_count
 
 # Specifies the `worker_timeout` threshold that Puma will use to wait before
 # terminating a worker in development environments.
