@@ -14,8 +14,6 @@ class PodsController < ApplicationController
 
   # PageNav initiation with first_page argument, elements retrieval, scrapping
   def index
-    session[:first_time] = 1 and redirect_to(welcome_path) unless session[:first_time]
-
     @index ||= 0
     (Object.const_defined?(:PagNav) && @index == @page_nav.page) || @page_nav = PageNav.new(@index)
   end
