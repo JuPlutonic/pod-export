@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '~> 3.0.0'
+ruby '~> 3.1.0'
 # Boot large ruby/rails apps faster (https://github.com/Shopify/bootsnap)
 gem 'bootsnap'
 # memoize methods invocation (https://github.com/matthewrudy/memoist
