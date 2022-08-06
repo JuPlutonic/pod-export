@@ -27,7 +27,6 @@ Rails.application.routes.draw do
   get 'data/new'
 
   get 'pods/index'
-  root 'pods#index'
   resources :pods, param: :tax_payer_id
   resources :page_navs, only: :create do
     post 'create', on: :member
@@ -35,4 +34,5 @@ Rails.application.routes.draw do
   get 'contact' => 'pods#contact', as: :contact
   get 'about' => 'pods#about', as: :about
   get 'welcome' => 'greeter#welcome', as: :welcome
+  root 'greeter#welcome'
 end
