@@ -1,5 +1,5 @@
 # Using brew formula postgresql from Linuxbrew (`pg_ctl -D `$PGDATA`
-# start` can't handle termination signal well.
+# start` can't handle termination signal well).
 pgsql: postgres -D /home/linuxbrew/.linuxbrew/var/postgres
-pod_app: bundle exec rails server -p 3000 -b 0.0.0.0
+pod_app: bundle exec puma -t 5:5 -p 3000 -e development
 tmuxinator: /home/linuxbrew/.linuxbrew/bin/tmuxinator start pod-export
