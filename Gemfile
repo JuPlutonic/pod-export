@@ -9,6 +9,8 @@ gem 'bootsnap'
 gem 'memoist', require: false
 # Pg is the Ruby interface to the {PostgreSQL RDBMS}[http://www.postgresql.org/] (https://bitbucket.org/ged/ruby-pg)
 gem 'pg'
+# Ruby gem for dealing with proxy lists from different providers (http://github.com/nbulaj/proxy_fetcher)
+gem 'proxy_fetcher'
 # Puma is a simple, fast, threaded, and highly concurrent HTTP 1.1 server for Ruby/Rack applications (http://puma.io)
 gem 'puma', '~> 5'
 # Full-stack web application framework. (https://rubyonrails.org)

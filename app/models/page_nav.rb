@@ -5,9 +5,11 @@ require 'memoist'
 # :reek:InstanceVariableAssumption
 class PageNav
   RECORDS_PER_PAGE_ON_TARGETED_SITE = 20
-  USER_AGENT = "Ruby/#{RUBY_VERSION}".freeze
-  READ_TIMEOUT = 30
-  RETRIES = 2
+  USER_AGENT =
+    %{Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) \
+      Chrome/101.0.4951.64 Safari/537.36}
+  # READ_TIMEOUT = 60
+  # RETRIES = 3
 
   include ActiveModel::Model
 
@@ -71,10 +73,8 @@ class PageNav
     parameter.fetch('page').to_i.pred
   end
 
+  require 'proxy_fetcher'
   extend Memoist
-  require 'open-uri'
-  require 'openssl'
-  require 'timeout'
 
   #  --------------Implementation template which is collecting json data-sets---
   # def scrape_data(pod)
@@ -90,24 +90,21 @@ class PageNav
                '&field_organization_short_name_value=' \
                '&term_node_tid_depth=All' \
                "&page=#{cur_page}"
-    begin
-      retries = ENV.fetch('RETRIES') { RETRIES }
-      Timeout.timeout(0) do
-        parsed = URI.parse(base_url).open(ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE,
-                                          read_timeout: ENV.fetch('READ_TIMEOUT') { READ_TIMEOUT },
-                                          encoding: Encoding::UTF_8,
-                                          'Accept-Language' => 'en-US,en;q=0.8,ru;q=0.6',
-                                          'User-Agent' => ENV.fetch('USER_AGENT') { USER_AGENT },
-                                          'Referer' => 'https://data.gov.ru/organizations/')
-        Nokogiri::HTML(parsed, nil, 'UTF-8')
-      end
-    rescue Timeout::Error
-      retries -= 1
-      sleep(5)
-      retries.zero? and raise
-
-      retry
+    ProxyFetcher.configure do |config|
+      config.provider = %i[free_proxy_list_ssl xroxy proxy_list]
+      config.proxy_validation_timeout = 1
+      config.user_agent = USER_AGENT
     end
+    manager = ProxyFetcher::Manager.new
+    Rails.logger.warn("PROXIES: #{manager.proxies.size}\n^^^^^^^^^^^")
+    parsed =
+      ProxyFetcher::Client.get(
+        base_url,
+        options:
+          {}.tap { |hsh| hsh[:proxy] = manager.random and Rails.logger.warn(hsh[:proxy].instance_values) }
+      )
+    Rails.logger.warn(parsed.split[2]) if parsed.size < 650
+    Nokogiri::HTML(parsed, nil, 'UTF-8')
   end
   memoize :call_nokogiri_default_page
 
