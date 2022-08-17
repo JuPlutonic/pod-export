@@ -130,7 +130,7 @@ class PageNav
                '&field_organization_short_name_value=' \
                '&term_node_tid_depth=All' \
                "&page=#{cur_page}"
-    retries = ENV.fetch('RETRIES') { RETRIES }
+    retries = ENV.fetch('RETRIES') { RETRIES }.to_s
 
     begin
       verificate_proxies(true)
