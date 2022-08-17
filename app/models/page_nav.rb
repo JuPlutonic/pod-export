@@ -5,11 +5,9 @@ require 'memoist'
 # :reek:InstanceVariableAssumption
 class PageNav
   RECORDS_PER_PAGE_ON_TARGETED_SITE = 20
-  USER_AGENT =
-    %{Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) \
-      Chrome/101.0.4951.64 Safari/537.36}
-  # READ_TIMEOUT = 60
-  # RETRIES = 3
+  USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 ' \
+               '(KHTML, like Gecko) Chrome/103.0.5060.134 Safari/537.36'
+  RETRIES = 5
 
   include ActiveModel::Model
 
@@ -41,7 +39,7 @@ class PageNav
   end
   # ----------------------------------------------------------------------------
 
-  # ---------------SimpleForm methods-------------------------------------------
+  # ---------------SimpleForm methods-(include ActiveModel::Model)--------------
   def to_model
     self
   end
@@ -73,7 +71,10 @@ class PageNav
     parameter.fetch('page').to_i.pred
   end
 
+  require 'http'
+  require 'openssl'
   require 'proxy_fetcher'
+  require 'timeout'
   extend Memoist
 
   #  --------------Implementation template which is collecting json data-sets---
@@ -84,26 +85,66 @@ class PageNav
   # def call_nokogiri_selected_pod_page; end
   # ----------------------------------------------------------------------------
 
+  # -----To service_objects app/services, ivar to Redis-------------------------
+  def proxy_mgr
+    # ProxyFetcher.configure do |config|
+    #   config.provider = %i[free_proxy_list_ssl xroxy proxy_list]
+    #   config.proxy_validation_timeout = 1
+    #   config.user_agent = USER_AGENT
+    # end
+    manager = ProxyFetcher::Manager.new(refresh: false, file: Rails.root.join('proxies.txt').to_s)
+    Rails.logger.warn("PROXIES: #{manager.proxies.size}\n^^^^^^^^^^^^")
+
+    manager
+  end
+  memoize :proxy_mgr
+
+  def verificate_proxies
+    @proxies = proxy_mgr.get!
+    raise StandardError, 'Validation of proxies.txt – 0 working' if @proxies.blank?
+
+    if @proxies.http?
+      @prefix = 'http://'
+    elsif @proxies.https?
+      @prefix = 'https://'
+    else
+      verificate_proxies
+    end
+  end
+  memoize :verificate_proxies
+
+  def serialize_proxy
+    ["#{@prefix}#{@proxies.instance_values['addr']}", @proxies.instance_values['port']]
+  end
+  # ----------------------------------------------------------------------------
+
+  def prepare_ssl
+    ctx = OpenSSL::SSL::SSLContext.new
+    ctx.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    ctx
+  end
+
   def call_nokogiri_default_page(cur_page = 0)
     base_url = 'https://data.gov.ru/organizations?field_organization_inn_value=' \
                '&title=' \
                '&field_organization_short_name_value=' \
                '&term_node_tid_depth=All' \
                "&page=#{cur_page}"
-    ProxyFetcher.configure do |config|
-      config.provider = %i[free_proxy_list_ssl xroxy proxy_list]
-      config.proxy_validation_timeout = 1
-      config.user_agent = USER_AGENT
+    retries = ENV.fetch('RETRIES') { RETRIES }
+
+    begin
+      verificate_proxies(true)
+      parsed = HTTP.timeout(connect: 15, write: 2, read: 10)
+                   .via(*serialize_proxy)
+                   .get(base_url, ssl_context: prepare_ssl)
+                   .encoding(Encoding::UTF_8)
+    rescue Timeout::Error
+      retries -= 1
+      sleep(1)
+      retries.zero? and raise
+
+      retry
     end
-    manager = ProxyFetcher::Manager.new
-    Rails.logger.warn("PROXIES: #{manager.proxies.size}\n^^^^^^^^^^^")
-    parsed =
-      ProxyFetcher::Client.get(
-        base_url,
-        options:
-          {}.tap { |hsh| hsh[:proxy] = manager.random and Rails.logger.warn(hsh[:proxy].instance_values) }
-      )
-    Rails.logger.warn(parsed.split[2]) if parsed.size < 650
     Nokogiri::HTML(parsed, nil, 'UTF-8')
   end
   memoize :call_nokogiri_default_page
