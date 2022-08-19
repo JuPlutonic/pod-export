@@ -13,12 +13,6 @@
 
 * Rails 7.0.3.1, PostgreSQL (=< 14.4, рекомендую версию как в heroku: 11.16)
 
-* Front-end часть — простая:
-
-  > Рекомендую ноду        `$(which -a node | head -n 1) -v # => v16.13.1`\
-  > Ярн первой версии      `npm install -g yarn@1.22.17`\
-  > Установим его в рельсы `rails yarn:install`\
-
 * heroku — в .gitignore добавлен файл config`/initializers/oink.rb`
 
 * Анализ логов Oink:

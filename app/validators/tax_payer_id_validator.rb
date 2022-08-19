@@ -5,7 +5,7 @@ class TaxPayerIdValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     TaxPayerIdOperation.new(value).call and return
 
-    record.errors[attribute] << (options[:message]&.merge(tax_payer_id: value) ||
-                                  "Указан неверный ИНН #{value}")
+    record.errors.add(attribute, (options[:message]&.merge(tax_payer_id: value) ||
+                                  "Указан неверный ИНН #{value}"))
   end
 end

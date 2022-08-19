@@ -18,21 +18,17 @@ gem 'rails', '~> 7.0.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-# CoffeeScript adapter for the Rails asset pipeline. (https://github.com/rails/coffee-rails)
-gem 'coffee-rails', '~> 5.0.0'
+# Integrate Flash Messages with ease using Noty JS, Toastr JS or Bootstrap (https://github.com/fakhir-shad/flash_notifier)
+gem "flash_notifier", "~> 1.2"
 # an asset gemification of the font-awesome icon font library (https://github.com/bokmann/font-awesome-rails)
 gem 'font-awesome-rails'
+# Use ESM with importmap to manage modern JavaScript in Rails without transpiling or bundling. (https://github.com/rails/importmap-rails)
+gem "importmap-rails", "~> 1.1"
 # Create JSON structures via a Builder-style DSL (https://github.com/rails/jbuilder)
 gem 'jbuilder', '~> 2.5'
-# See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
-# Use jQuery with Rails 4+ (https://github.com/rails/jquery-rails)
-gem 'jquery-rails'
 # JSON implementation for JRuby (http://json-jruby.rubyforge.org/)
 gem 'json', '~> 2.3.0'
 # Use libsass with Ruby! (https://github.com/sass/sassc-ruby)
-gem 'sassc'
-# Integrate SassC-Ruby into Rails. (https://github.com/sass/sassc-rails)
 gem 'sassc-rails'
 # bundle exec rake doc:rails generates the API under doc/api.
 # gem 'sdoc', '>= 0.4.0', group: :doc
@@ -91,10 +87,6 @@ group :test do
   # gem 'cuprite'
   # Strategies for cleaning databases.  Can be used to ensure a clean state for testing. (http://github.com/DatabaseCleaner/database_cleaner)
   gem 'database_cleaner'
-  # # Auto-install phantomjs on demand for current platform. Comes with poltergeist integration. (https://github.com/colszowka/phantomjs-gem)
-  # gem 'phantomjs', '~> 2', require: 'phantomjs/poltergeist'
-  # # PhantomJS driver for Capybara (https://github.com/teampoltergeist/poltergeist)
-  # gem 'poltergeist', '~> 1.6.0'
   # Simple one-liner tests for common Rails functionality (https://matchers.shoulda.io/)
   gem 'shoulda-matchers'
   # Struggling to get 100% code coverage:
