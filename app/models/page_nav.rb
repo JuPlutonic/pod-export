@@ -111,7 +111,11 @@ class PageNav
     parsed = if ENV.any? { |mtch, _| mtch=~ /^HEROKU/ }
                ProxyFetcher::Client.get(base_url, options: { proxy: proxy_mgr.random })
              else
-               HTTP.get(base_url, ssl_context: prepare_ssl).encoding(Encoding::UTF_8)
+               HTTP
+                 .timeout(connect: 120, write: 2, read: 52)
+                 .encoding(Encoding::UTF_8)
+                 .get(base_url, ssl_context: prepare_ssl)
+                 .to_s
              end
     Nokogiri::HTML(parsed, nil, 'UTF-8')
   end

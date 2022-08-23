@@ -5,6 +5,8 @@ source 'https://rubygems.org'
 ruby '~> 3.1.0'
 # Boot large ruby/rails apps faster (https://github.com/Shopify/bootsnap)
 gem 'bootsnap'
+# Use Capistrano for deployment
+# gem 'capistrano-rails', group: :development
 # memoize methods invocation (https://github.com/matthewrudy/memoist
 gem 'memoist', require: false
 # Pg is the Ruby interface to the {PostgreSQL RDBMS}[http://www.postgresql.org/] (https://bitbucket.org/ged/ruby-pg)
@@ -15,31 +17,31 @@ gem 'proxy_fetcher'
 gem 'puma', '~> 5'
 # Full-stack web application framework. (https://rubyonrails.org)
 gem 'rails', '~> 7.0.0'
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+# Use Redis for Action Cable
+gem "redis", "~> 4.0"
 
-# Integrate Flash Messages with ease using Noty JS, Toastr JS or Bootstrap (https://github.com/fakhir-shad/flash_notifier)
-gem "flash_notifier", "~> 1.2"
-# an asset gemification of the font-awesome icon font library (https://github.com/bokmann/font-awesome-rails)
-gem 'font-awesome-rails'
+# Integrate Dart Sass with the asset pipeline in Rails. (https://github.com/rails/dartsass-rails)
+gem "dartsass-rails", "~> 0.4.0"
 # Use ESM with importmap to manage modern JavaScript in Rails without transpiling or bundling. (https://github.com/rails/importmap-rails)
 gem "importmap-rails", "~> 1.1"
 # Create JSON structures via a Builder-style DSL (https://github.com/rails/jbuilder)
 gem 'jbuilder', '~> 2.5'
 # JSON implementation for JRuby (http://json-jruby.rubyforge.org/)
 gem 'json', '~> 2.3.0'
-# Use libsass with Ruby! (https://github.com/sass/sassc-ruby)
-gem 'sassc-rails'
 # bundle exec rake doc:rails generates the API under doc/api.
 # gem 'sdoc', '>= 0.4.0', group: :doc
 # Forms made easy! (https://github.com/plataformatec/simple_form)
 gem 'simple_form', '~> 5.1.0'
 # # Slim templates generator for Rails 3+ (https://github.com/slim-template/slim-rails)
 gem 'slim-rails'
+# Sprockets Rails integration (https://github.com/rails/sprockets-rails)
+gem "sprockets-rails", "~> 3.4"
+# A modest JavaScript framework for the HTML you already have. (https://stimulus.hotwired.dev)
+gem "stimulus-rails", "~> 1.1"
 # Generic interface to multiple Ruby template engines (http://github.com/rtomayko/tilt/)
 gem 'tilt', '~> 2.0.9'
-# Turbolinks makes navigating your web application faster (https://github.com/turbolinks/turbolinks)
-gem 'turbolinks', '~> 5'
+# The speed of a single-page web application without having to write any JavaScript. (https://github.com/hotwired/turbo-rails)
+gem "turbo-rails", "~> 1.1"
 # Ruby wrapper for UglifyJS JavaScript compressor (http://github.com/lautis/uglifier)
 gem 'uglifier', '~> 2.7'
 
@@ -58,7 +60,7 @@ group :development do
   # Annotates Rails Models, routes, fixtures, and others based on the database schema. (http://github.com/ctran/annotate_models)
   gem 'annotate', require: false
   # Better error page for Rails and other Rack apps (https://github.com/BetterErrors/better_errors)
-  gem 'better_errors'
+  # gem 'better_errors'
   # Retrieve the binding of a method's caller. Can also retrieve bindings even further up the stack. (http://github.com/banister/binding_of_caller)
   gem 'binding_of_caller'
   # Lightweight Ruby debugger (https://github.com/gsamokovarov/break)

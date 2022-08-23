@@ -6,39 +6,42 @@ html
     meta content="width=device-width, initial-scale=1" name="viewport" /
     /! The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
     title == yield(:title)
-    /! HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
-    /! WARNING: Respond.js doesn't work if you view the page via file://
-    /![if lt IE 9]
-      | <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script
-      | <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script
     = csrf_meta_tags
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    /! SimpleCSS
-    link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css"
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload'
+    link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"
+    link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+    /link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css"
     = javascript_importmap_tags
-    = build_flash theme: 'mint'
-  body{style="grid-template-columns: 1fr min(135rem,90%) 1fr;"}
+  body
     = render 'shared/navbar'
     br/
+    - if flash.any?
+      - flash.each do |name, msg|
+        div style='padding-right: 35px; padding-left: 35px' role='alert'
+          br/
+          = content_tag :div, msg, id: "flash_#{name}", class: "alert alert-#{name}"
     br/
     br/
+    /nav.side-nav = render 'shared/side-nav
+    /  ul ...
 
     / Filter's block
 
     /.container style=("margin-top: 60px")
       .row
-        .col-md-3.well
+        .col.well
           = form_tag('/', class: 'form-inline', method: 'get') do
             .row
-              .form-group.col-md-8.col-md-offset-2
-                = text_field_tag :looking_for, @search_term, placeholder: "Enter pod's name", id: 'input_sm_field', class: 'input input-sm', style: 'width: 100%'
+              .form-group.col.col-offset
+                = text_field_tag :looking_for, @search_term, placeholder: "Enter pod's name", id: 'input_sm_field', class: 'input', style: 'width: 100%'
             br/
             .row
-              .form-group.col-md-8.col-md-offset-2
-                = button_tag 'Search', type: 'submit', id: 'btn_sm_button', class: 'btn btn-danger btn-sm', data: {disable_with: "<i class='fa fa-circle-o-notch fa-spin'></i> Searching…"}
-    .container
-      == yield
-  hr/
-  footer
-    p.text-center
-      | Данные получены с data.gov.ru
+              .form-group.col.col-offset
+                = button_tag 'Search', type: 'submit', id: 'btn_sm_button', class: 'btn', data: {disable_with: "<i class='fa fa-circle-o-notch fa-spin'></i> Searching…"}
+    container == yield
+    /aside.sidebar = render "shared/sidebar"
+    footer#centered-by-justif-content
+      hr/
+      p.text-center
+        | Данные получены с data.gov.ru

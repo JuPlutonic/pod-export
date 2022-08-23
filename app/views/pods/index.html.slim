@@ -1,17 +1,15 @@
 - provide(:home, 'active')
 - provide(:title, 'Организации')
 
-div.tbl== render 'shared/pods_table'
+.tbl == render 'shared/pods_table'
 /, tpis: @page_nav.tpis
 
-div
-  .row.col-md-5
-  p
-    fieldset
-      = simple_form_for @page_nav, remote: true do |page_nav|
-        = page_nav.number_field :page,
-          value: "#{@index.succ}",
-          within: 1..@page_nav.to_key.first.last.succ,
-          class: 'special_input'
-        = page_nav.submit
+.row
+  fieldset#centered-by-justif-content = \
+    simple_form_for @page_nav, remote: true do |page_nav|
+      = page_nav.number_field :page,
+        value: @index.succ.to_s,
+        within: 1..@page_nav.to_key.first.last.succ,
+        class: 'special_input'
+      = page_nav.submit
 /@index ? "#{@index.succ}" : '1',

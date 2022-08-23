@@ -1,12 +1,13 @@
 - provide(:home, 'active')
 - provide(:title, 'Организации')
 
-article#profile.row.background
+.background
   h3 Для начала работы с программой нажмите кнопку.
   p#lead &nbsp;
   p#lead &nbsp;
   p#lead &nbsp;
-  br
-  hr
-  p>= button_to "Приступить к работе", pods_path, class: "btn btn-sm", method: :get
-  hr
+  br/
+  hr/
+= button_to "Приступить к работе", pods_path, class: "btn", method: :get
+| &nbsp;
+hr/

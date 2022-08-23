@@ -30,7 +30,7 @@ class PodsController < ApplicationController
         if @pod.save
           redirect_to pod_url(tax_payer_id: @pod.tax_payer_id), notice: t('.success')
         else
-          redirect_to pods_path, notice: t('.alert')
+          redirect_to pods_path, notice: t('.alert'), status: :unprocessable_entity
         end
       end
     end
