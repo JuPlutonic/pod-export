@@ -11,16 +11,13 @@ html
     link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
     link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"
     link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
-    /link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css"
     = javascript_importmap_tags
   body
     = render 'shared/navbar'
     br/
     - if flash.any?
-      - flash.each do |name, msg|
-        div style='padding-right: 35px; padding-left: 35px' role='alert'
-          br/
-          = content_tag :div, msg, id: "flash_#{name}", class: "alert alert-#{name}"
+      .flash
+        = render 'layouts/flash'
     br/
     br/
     /nav.side-nav = render 'shared/side-nav
