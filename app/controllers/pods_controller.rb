@@ -6,6 +6,7 @@ class PodsController < ApplicationController
 
   def show
     @pod = Pod.find_by(tax_payer_id: @tax_payers_id)
+    @pod.data.build(@tax_payer_id)
   end
 
   def edit; end
@@ -20,6 +21,7 @@ class PodsController < ApplicationController
 
   def new
     @pod = Pod.find_by(tax_payer_id: params[:tax_payer_id]) || Pod.new
+    @pod.data.build(@tax_payer_id)
   end
 
   def create
@@ -37,7 +39,6 @@ class PodsController < ApplicationController
   end
   # ----------------------------------------------------------------------------
 
-  private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_tpi
