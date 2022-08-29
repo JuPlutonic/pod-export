@@ -1,4 +1,4 @@
-.well.col
+.col
   = form_for @pod, multipart: true do |f|
     fieldset
       = f.label :organization
@@ -12,4 +12,4 @@
       = f.hidden_field :tax_payer_id, value: params[:tax_payer_id]
       = f.hidden_field :organization, value: params[:organization]
       #top-margin-like-caption
-        = f.submit class: "btn" unless locals[:disable_toggler]
+        = f.submit class: "button-primary" unless locals[:disable_toggler]

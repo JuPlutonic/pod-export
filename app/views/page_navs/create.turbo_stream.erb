@@ -1,0 +1,3 @@
+<%= turbo_stream.replace dom_id(page_nav = PageNav.new(params["page_nav"]["page"])) do %>
+  <%= render partial: "shared/pods_table", page_nav: page_nav %>
+<% end %>

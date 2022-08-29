@@ -65,9 +65,9 @@ class PageNav
   private
 
   def extract_page_from_raw_params(parameter)
-    parameter.is_a?(Integer) and return parameter
+    parameter.respond_to?(:fetch) and return parameter.fetch('page').to_i.pred
 
-    parameter.fetch('page').to_i.pred
+    parameter.to_i
   end
 
   require 'proxy_fetcher'

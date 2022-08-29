@@ -16,10 +16,51 @@
   --transition: 250ms ease-in-out;
 }
 
-.row-maeg-top {
+@mixin common-centered {
+  display: flex;
+  justify-content: center;
+}
+
+body article form {
+  align-items: center;
+  @include common-centered;
+}
+
+#top-margin-like-caption {
+  transform: translate(0, 30%);
+}
+
+.text-center{
+  text-align: center;
+}
+
+.centered-by-justif-content {
+  @include common-centered;
+  &.relat {
+    position: relative;
+  }
+}
+
+.blocktext {
+  display: block;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  &.sm {
+    width: 9em;
+  }
+  &.md {
+    width: 25em;
+  }
+  &.lg {
+    width: 135em;
+  }
+}
+
+.row-marg-top {
    margin-top: 60px;
 }
 
+// Flash-----------------------------------------
 .flash {
   position:fixed;
   top: 5rem;
@@ -54,47 +95,13 @@
   }
 }
 
-#centered-by-justif-content {
-  display: flex;
-  justify-content: center;
-}
-
-#top-margin-like-caption {
-  transform: translate(0, 30%);
-}
-
-body container h3 {
-  text-align: center;
-}
-
-body container form {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.blocktext {
-  display: block;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  &.sm {
-    width: 9em;
-  }
-  &.md {
-    width: 25em;
-  }
-  &.lg {
-    width: 135em;
-  }
-}
-
-* {
-  padding: 0 !important;
-  margin: 0 !important;
-  box-sizing: border-box !important;
-}
-
+// NavBar-----------------------------------------
 header {
+  * {
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+  }
   --color: #008aff;
   display: grid;
   gap: 0.5rem;
@@ -115,7 +122,7 @@ header {
   }
 
   padding: 0.5rem;
-  width: 100%;
+  width: 98%;
   min-width: 750px;
   border-radius: 0.5rem;
 

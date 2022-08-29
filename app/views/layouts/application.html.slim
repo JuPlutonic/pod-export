@@ -25,20 +25,19 @@ html
 
     / Filter's block
 
-    /.container style=("margin-top: 60px")
+    /section.container.row-marg-top
       .row
-        .col.well
-          = form_tag('/', class: 'form-inline', method: 'get') do
-            .row
-              .form-group.col.col-offset
-                = text_field_tag :looking_for, @search_term, placeholder: "Enter pod's name", id: 'input_sm_field', class: 'input', style: 'width: 100%'
-            br/
-            .row
-              .form-group.col.col-offset
-                = button_tag 'Search', type: 'submit', id: 'btn_sm_button', class: 'btn', data: {disable_with: "<i class='fa fa-circle-o-notch fa-spin'></i> Searching…"}
-    container == yield
+        = form_tag('/', method: 'get') do
+          .row
+            <div class="six columns">
+              = text_field_tag :looking_for, @search_term, placeholder: "Enter pod's name", class: 'input font-fld__sm u-full-width'
+          br/
+          .row
+            <div class="six columns">
+              = button_tag 'Search', type: 'submit', id: '', class: 'button-primary font-fld__sm', data: { disable_with: "<i class='fa fa-circle-o-notch fa-spin'></i> Searching…" }
+    article.container == yield
     /aside.sidebar = render "shared/sidebar"
-    footer#centered-by-justif-content
+    footer
       hr/
       p.text-center
         | Данные получены с data.gov.ru

@@ -1,24 +1,24 @@
-/- page_num = params[:page_nav] ? params[:page_nav][:page].to_i.pred : 0
-table id="centered-by-justif-content" border=".5" style="position: relative"
-  tr
-    th №
-    th ИНН
-    th Наименование организации
-    th _
-  - elements = elem_retrieval(@page_nav.tpis)
-  - elements.each_with_index do |entry, num|
-      tr class="#{cycle('odd', 'even')}"
-        td = (PageNav::RECORDS_PER_PAGE_ON_TARGETED_SITE * @page_nav.page) + num.succ
-        td = tpi_placeholder = @page_nav.tpis[num]
-        td = org_placeholder = @page_nav.pod_organizations[num]
-        ruby:
-          get_params = { tax_payer_id: @page_nav.tpis[num], organization: @page_nav.pod_organizations[num] }
-          this_path = {}
-          this_path = entry == 'показать данные' ? pod_path(@page_nav.tpis[num]) : new_pod_path
-        td
-          = tpi_placeholder and org_placeholder \
-            and button_to(entry, this_path, method: :get, params: get_params, class: "btn", remote: false)
-p.row.col
-  p
-    breadcrumb.blocktext.sm Навигация #{@page_nav.page.succ} из
-      #{@page_nav.last_page.succ}
+= tag.div id: dom_id(@page_nav) do
+  table.centered-by-justif-content.relat border=".5"
+    tr
+      th №
+      th ИНН
+      th Наименование организации
+      th _
+    - elements = elem_retrieval(@page_nav.tpis)
+    - elements.each_with_index do |entry, num|
+        tr.cap-height
+          td = (PageNav::RECORDS_PER_PAGE_ON_TARGETED_SITE * @page_nav.page) + num.succ
+          td = tpi_placeholder = @page_nav.tpis[num]
+          td
+            p = org_placeholder = @page_nav.pod_organizations[num]
+          ruby:
+            get_params = { tax_payer_id: tpi_placeholder, organization: org_placeholder }
+            this_path = entry == 'показать данные' ? pod_path(tpi_placeholder) : new_pod_path
+          td
+            = tpi_placeholder and org_placeholder \
+              and button_to(entry, this_path, method: :get, params: get_params, class: "button", remote: false)
+  p.row.col
+    p
+      .blocktext.sm Навигация #{@page_nav.page.succ} из
+        #{@page_nav.last_page.succ}

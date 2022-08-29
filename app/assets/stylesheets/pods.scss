@@ -1,15 +1,28 @@
-// Place all the styles related to the pods controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
+// Table----------------------------------------
 table {
   border-collapse: collapse;
+  width: 100%;
 }
 
 td {
-  padding: 12px;
+  border: 1px solid #999;
+  // padding: 12px;
 }
 
-.even {
+table p {
+  margin: 0;
+}
+
+.cap-height p {
+  max-height: 3em;
+  overflow: hidden;
+}
+
+td, th {
+    padding: 2px 2px !important;
+    text-align: center !important;
+}
+
+tbody tr:nth-child(even) th {
   background-color: #e2e7ff;
 }

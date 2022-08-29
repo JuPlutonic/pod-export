@@ -1,15 +1,14 @@
 - provide(:home, 'active')
 - provide(:title, 'Организации')
-
-.tbl == render 'shared/pods_table'
-/, tpis: @page_nav.tpis
+= turbo_frame_tag dom_id(@page_nav) do
+  .u-full-width == render 'shared/pods_table'
 
 .row
-  fieldset#centered-by-justif-content = \
-    simple_form_for @page_nav, remote: true do |page_nav|
+  fieldset.centered-by-justif-content = \
+    simple_form_for @page_nav, remote: true, data: { controller: "refresh-turbo-stream" } do |page_nav|
+      = hidden_field_tag :authenticity_token, form_authenticity_token
       = page_nav.number_field :page,
         value: @index.succ.to_s,
         within: 1..@page_nav.to_key.first.last.succ,
         class: 'special_input'
       = page_nav.submit
-/@index ? "#{@index.succ}" : '1',

@@ -8,7 +8,9 @@ class PageNavsController < ApplicationController
   def create
     @page_nav = PageNav.new(page_nav_params)
 
-    respond_to(&:js)
+    respond_to do |format|
+      format.turbo_stream
+    end
   end
 
   private
