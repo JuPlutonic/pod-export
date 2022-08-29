@@ -74,9 +74,10 @@ RSpec.describe 'Pods', type: :request do
         end.not_to change(Pod, :count)
       end
 
-      it 'renders index template' do
+      it 'returns http unprocessable_entity' do
         post pods_url, params: { pod: attributes_for(:invalid_pod) }
-        expect(response).to redirect_to pods_path
+        expect(response).to have_http_status(:unprocessable_entity) # 422
+        # It's  redirect, I can't expect(response.body).to include(I18n.t('.pods.create.alert'))
       end
     end
   end

@@ -65,9 +65,9 @@ class PageNav
   private
 
   def extract_page_from_raw_params(parameter)
-    parameter.respond_to?(:fetch) and return parameter.fetch('page').to_i.pred
+    return parameter.fetch('page').to_i.pred if parameter.is_a?(ActionController::Parameters)
 
-    parameter.to_i
+    parameter.to_i.succ
   end
 
   require 'proxy_fetcher'
@@ -88,10 +88,7 @@ class PageNav
       config.proxy_validation_timeout = 15
       config.user_agent = USER_AGENT
     end
-    manager = ProxyFetcher::Manager.new
-    Rails.logger.warn("PROXIES: #{manager.proxies.size}\n^^^^^^^^^^^^")
-
-    manager
+    ProxyFetcher::Manager.new
   end
   memoize :proxy_mgr
 
