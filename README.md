@@ -26,83 +26,27 @@
   > `overmind s 2>&1 >/dev/null &` \
   > `mux start pod-export` \
   > Tmuxinator (mux — это «алиас»), подключивщись по сокету, откроет окно
-  > Overmind-а с «рельсой», если не открываются окна-табы тмукса, сделать так: \
+  > Overmind-а с Puma/RoR, если не открываются окна-табы тмукса, сделать так: \
   > `tmux kill-session -t pod-export; mux start -p=./.tmuxinator.yml`
 
 ## Особенности
 
 * Данные скрапятся по ходу работы. На сайте появился API, сделаю без скрапинга \
-    в другом репозхитории.
+    _**в другом репозитории**_.
 
 * `layouts/_flash.html.slim` убираются автоматически: \
     задействован Stimulus (removals_controller.js).
 
-* Паршиал `shared/_pods_table.html.slim` обновляется с помощью TurboFrame, \
-    на индексе стоит TurboFrame (связаны они с пом. dom_id).
+* Паршиал `shared/_pods_table.html.slim` обновляется с помощью TurboStream, \
+    на индексе стоит TurboFrame, и связаны они с помощью dom_id.
 
-* В `pods/index.html.slim` — submit из специальной формы gem `simple_form`, в \
-    паршале `_pods_table.html.slim` происходит сравнения персистанса из БД с \
-    соскраппленными таблицами (т.е самописный пейджер / пагинация).
+* В `pods/index.html.slim` — submit из специальной формы gem `simple_form` \
+    (самописный пейджер / пагинация), в паршале `_pods_table.html.slim` \
+    происходят сравнения персистанса из БД с соскраппленными таблицами \
+    (метод `elem_retrieval`).
 
 * Наименования:  Pod — ПОД (поставщик открытых данных) связан с ИНН \
-    (tax_payer_id) из таблицы budget_participants.
-
-## AGILE
-
-app/views/pods/index.html.slim (убрал из кода):
-
-* `[ 15] [TODO]` Пользователь не только выбирает страницу, но и фильтрует по
-    названию организации. Дополнительное поле в simple form.
-
-app/views/shared/_navbar.html.slim (убрал из кода):
-
-* `[14-] [OPTIMIZE]` Пользователь не видит текущее своё положение в приложении.
-    Не скрывается ссылка на индекс в индексе.
-
-* `[-15-] [OPTIMIZE]` Речь о NAVBAR-е… Н/р link_to_unless_current почему-то, да
-    и у тега link класс - active.
-
-* `[-16]` / = link_to_unless_current "🏡", {action: "index" }
-
-app/views/shared/_pods_table.html.slim (убрал из кода):
-
-* `[17] [TODO]` ТEST на-первую 'true' часть IF условия.
-
-app/controllers/page_navs_controller.rb:
-
-* `[19-] [OPTIMIZE]` Something wrong with with 'ActionController::Parameters',
-    what is 'permitted: false'
-
-* `[-20] [OPTIMIZE]` and can be accessed only by `params[:page_nav][:page]`
-    hash key.
-
-app/controllers/pods_controller.rb:
-
-**BRANCH:** pods_new_organization-description
-
-* `[27] [TODO]` User sees Pod's open datasets, pod_params have data_attributes:
-    `[:id, :date, :source, :author, :converted]`
-
-app/models/datum.rb:
-
-* `[18] [TODO]` User must see data, sorted (ASC) by date. Now, by default
-    it's sorted (DESC) by updated_at.
-
-app/models/page_nav.rb:
-
-* `[7] [TODO]` UA round-robin and resending of time-outed query
-
-* `[79] [TODO]` User may filter page results. Filter '' needs to be passed by
-    default.
-
-* `[86] [TODO]` TEST crawling when base_url have only one page (where is no
-    pagination on the target site).
-
-* `[104-] [FIXME]` Glitches: P8 /administraciya-kostromskoy-oblasti, P3
-    /administraciya-vladimirskoy-oblasti
-
-* `[-105] [FIXME]` Appearing only if the type of the organizations is "
-    regional".
+    (`tax_payer_id`, реализована валидация) из таблицы `budget_participants`.
 
 ---
 
