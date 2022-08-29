@@ -5,9 +5,8 @@ require 'memoist'
 # :reek:InstanceVariableAssumption
 class PageNav
   RECORDS_PER_PAGE_ON_TARGETED_SITE = 20
-  USER_AGENT = "Ruby/#{RUBY_VERSION}".freeze
-  READ_TIMEOUT = 30
-  RETRIES = 2
+  USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 ' \
+               '(KHTML, like Gecko) Chrome/103.0.5060.134 Safari/537.36'
 
   include ActiveModel::Model
 
@@ -39,7 +38,7 @@ class PageNav
   end
   # ----------------------------------------------------------------------------
 
-  # ---------------SimpleForm methods-------------------------------------------
+  # ---------------SimpleForm methods-(include ActiveModel::Model)--------------
   def to_model
     self
   end
@@ -66,15 +65,13 @@ class PageNav
   private
 
   def extract_page_from_raw_params(parameter)
-    parameter.is_a?(Integer) and return parameter
+    parameter.respond_to?(:fetch) and return parameter.fetch('page').to_i.pred
 
-    parameter.fetch('page').to_i.pred
+    parameter.to_i
   end
 
+  require 'proxy_fetcher'
   extend Memoist
-  require 'open-uri'
-  require 'openssl'
-  require 'timeout'
 
   #  --------------Implementation template which is collecting json data-sets---
   # def scrape_data(pod)
@@ -84,30 +81,43 @@ class PageNav
   # def call_nokogiri_selected_pod_page; end
   # ----------------------------------------------------------------------------
 
+  # -----To service_objects app/services, ivar to Redis-------------------------
+  def proxy_mgr
+    ProxyFetcher.configure do |config|
+      config.provider = %i[free_proxy_list_ssl xroxy proxy_list]
+      config.proxy_validation_timeout = 15
+      config.user_agent = USER_AGENT
+    end
+    manager = ProxyFetcher::Manager.new
+    Rails.logger.warn("PROXIES: #{manager.proxies.size}\n^^^^^^^^^^^^")
+
+    manager
+  end
+  memoize :proxy_mgr
+
+  def prepare_ssl
+    ctx = OpenSSL::SSL::SSLContext.new
+    ctx.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    ctx
+  end
+  memoize :prepare_ssl
+
   def call_nokogiri_default_page(cur_page = 0)
     base_url = 'https://data.gov.ru/organizations?field_organization_inn_value=' \
                '&title=' \
                '&field_organization_short_name_value=' \
                '&term_node_tid_depth=All' \
                "&page=#{cur_page}"
-    begin
-      retries = ENV.fetch('RETRIES') { RETRIES }
-      Timeout.timeout(0) do
-        parsed = URI.parse(base_url).open(ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE,
-                                          read_timeout: ENV.fetch('READ_TIMEOUT') { READ_TIMEOUT },
-                                          encoding: Encoding::UTF_8,
-                                          'Accept-Language' => 'en-US,en;q=0.8,ru;q=0.6',
-                                          'User-Agent' => ENV.fetch('USER_AGENT') { USER_AGENT },
-                                          'Referer' => 'https://data.gov.ru/organizations/')
-        Nokogiri::HTML(parsed, nil, 'UTF-8')
-      end
-    rescue Timeout::Error
-      retries -= 1
-      sleep(5)
-      retries.zero? and raise
-
-      retry
-    end
+    parsed = if ENV.any? { |mtch, _| mtch=~ /^HEROKU/ }
+               ProxyFetcher::Client.get(base_url, options: { proxy: proxy_mgr.random })
+             else
+               HTTP
+                 .timeout(connect: 120, write: 2, read: 52)
+                 .encoding(Encoding::UTF_8)
+                 .get(base_url, ssl_context: prepare_ssl)
+                 .to_s
+             end
+    Nokogiri::HTML(parsed, nil, 'UTF-8')
   end
   memoize :call_nokogiri_default_page
 

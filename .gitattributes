@@ -1,1 +1,9 @@
-*.css linguist-detectable=false
+# Mark the database schema as having been generated.
+db/schema.rb linguist-generated
+
+# Mark any vendored files as having been vendored.
+vendor/* linguist-vendored
+
+# Exclude cascading styling from my project's language stats
+*.scss linguist-detectable=false
+# *.css linguist-detectable=false

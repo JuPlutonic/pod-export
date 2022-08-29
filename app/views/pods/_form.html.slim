@@ -1,14 +1,15 @@
-div.well.col-md-4
+.col
   = form_for @pod, multipart: true do |f|
     fieldset
       = f.label :organization
       = f.text_field :organization,
         value: @pod.organization || params[:organization],
-        disabled: :true
+        disabled: true
     fieldset
       = f.label :tax_payer_id
-      = f.text_field :tax_payer_id, value: params[:tax_payer_id], disabled: :true
-    fieldset
+      = f.text_field :tax_payer_id, value: params[:tax_payer_id], disabled: true
+    fieldset#inline-block
       = f.hidden_field :tax_payer_id, value: params[:tax_payer_id]
       = f.hidden_field :organization, value: params[:organization]
-    = f.submit class: "btn btn-xs" unless locals[:disable_toggler]
+      #top-margin-like-caption
+        = f.submit class: "button-primary" unless locals[:disable_toggler]

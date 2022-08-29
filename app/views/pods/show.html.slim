@@ -1,13 +1,16 @@
 - provide(:home, "active")
 - provide(:title, "ПОД")
 
-div.container-fluid
+.container-fluid
   = render "form", locals: { disable_toggler: true }
 
 div
-  -if Rails.application.routes.recognize_path(request.referrer)[:action] != 'index'
-    p<= button_to 'Назад', '#', :remote => true, onclick: "window.history.go(-2);"
-    /p<= link_to 'Назад', pods_path(renew: "true")
+  - if Rails.application.routes.recognize_path(request.referer)[:action] == 'index'
+    | &nbsp;
+    p = button_to 'Назад', '#', remote: true, onclick: "window.history.go(-1);"
+    /p <= link_to 'Назад', pods_path(renew: "false")
   - else
-    p<= button_to 'Назад', '#', :remote => true, onclick: "window.history.go(-1);"
-    /p<= link_to 'Назад', pods_path(renew: "false")
+    | &nbsp;
+    p = button_to 'Назад', '#', remote: true, onclick: "window.history.go(-2);"
+    /p<= link_to 'Назад', pods_path(renew: "true")
+br/

@@ -1,13 +1,15 @@
 - provide(:home, "active")
 - provide(:title, "ПОД")
 
-div.container-fluid
+.container-fluid
   = render "form", locals: { disable_toggler: false }
 
 div
-  p<= button_to 'Назад', '#', :remote => true, onclick: "window.history.go(-1);"
-  /p<= link_to 'Назад', pods_path(renew: "false")
+  | &nbsp;
+  p = button_to 'Назад', '#', remote: true, onclick: "window.history.go(-1);"
+  /p <= link_to 'Назад', pods_path(renew: "false")
   /p Files:
   /ul
     - pod.json_dataset.files.each do |a|
       li= link_to a.file_name, a.file.url
+br/
