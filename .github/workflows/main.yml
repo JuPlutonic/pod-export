@@ -1,46 +1,19 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-# This workflow will download a prebuilt Ruby version, install dependencies and run tests with Rake
-# For more information see: https://github.com/marketplace/actions/setup-ruby-jruby-and-truffleruby
+#    - name: Deploy to Heroku
 
-name: Ruby
-
+name: Ruby💎️️
 on:
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-
 jobs:
-  test:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Setup Ruby, JRuby and TruffleRuby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: '3.1'
-    - name: Install dependencies
-      run: bundle install
-    - name: Running migrations
-    # - name: Install Front end packages
-    #   run: npm install
-      run: rails db:migrate RAILS_ENV=test
-    - name: Run tests
-      run: bundle exec rake
-  deploy:
-    needs: test
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to Heroku
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "pod-export7657651"
+          heroku_app_name: 'pod-export7657651'
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           stack: heroku-22
