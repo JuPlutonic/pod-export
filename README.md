@@ -3,9 +3,8 @@
 ## Перечень организаций — поставщиков датасетов
 
 Получаем данные о ПОД из <https://data.gov.ru>
-
-![](https://pyheroku-badge.herokuapp.com/?app=pod-export7657651&style=plastic) \
-[::ОбитаетЗдесь::![обитает здесь](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)](https://pod-export7657651.herokuapp.com/)
+[::ОбитаетЗдесь::![обитает здесь](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)](https://pod-export7657651.herokuapp.com/)&nbsp;
+[::ДеплоитсяЗдесь::![Ruby💎️️](https://github.com/JuPlutonic/pod-export7657651/actions/workflows/main.yml/badge.svg?branch=master&event=push)](https://github.com/JuPlutonic/pod-export7657651/actions/workflows/main.yml)
 
 ## Config
 
@@ -31,7 +30,7 @@
 
 ## Особенности
 
-* Данные скрапятся по ходу работы. На сайте появился API, сделаю без скрапинга \
+* Данные скрапятся по ходу работы. ==Сайте теперь с API==, сделаю без скрапинга \
     _**в другом репозитории**_.
 
 * `layouts/_flash.html.slim` убираются автоматически: \
@@ -49,4 +48,3 @@
     (`tax_payer_id`, реализована валидация) из таблицы `budget_participants`.
 
 ---
-
