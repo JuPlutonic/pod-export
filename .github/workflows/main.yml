@@ -22,9 +22,9 @@ jobs:
       with:
         ruby-version: '3.1' # Not needed with a .ruby-version file
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - name: Running migrations
-      run: rails db:migrate RAILS_ENV=test
-    - name: Run tests
+    - name: Running migrations 🔧
+      run: bundle exec rails db:migrate RAILS_ENV=test
+    - name: Run tests 🛎️
       run: bundle exec rake
   build:
     needs: test
