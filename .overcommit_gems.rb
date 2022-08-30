@@ -16,5 +16,7 @@ gem 'rubocop-rails'
 gem 'rubocop-rspec'
 # fast, accurate ctags generator for ruby source code using Ripper (https://github.com/tmm1/ripper-tags)
 gem 'ripper-tags'
+# Slim template linting tool (https://github.com/sds/slim-lint)
+gem 'slim_lint'
 # YARD is a documentation generation tool for the Ruby programming... (https://github.com/lsegal/yard)
 gem 'yard'

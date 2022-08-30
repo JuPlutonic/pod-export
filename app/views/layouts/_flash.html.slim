@@ -1,3 +1,4 @@
-- flash.each do |name, msg|
-  div.flash__message data-controller="removals" data-action="animationend->removals#remove"
+- flash.each do |_name, msg|
+  .flash__message{data-controller="removals"
+                  data-action="animationend->removals#remove"}
     = msg

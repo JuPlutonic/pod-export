@@ -4,8 +4,8 @@
   .u-full-width == render 'shared/pods_table'
 
 .row
-  fieldset.centered-by-justif-content = \
-    simple_form_for @page_nav, remote: true, data: { controller: "refresh-turbo-stream" } do |page_nav|
+  fieldset.centered-by-justif-content
+    = simple_form_for @page_nav, remote: true do |page_nav|
       = hidden_field_tag :authenticity_token, form_authenticity_token
       = page_nav.number_field :page,
         value: @index.succ.to_s,
