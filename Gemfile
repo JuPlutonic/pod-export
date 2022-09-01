@@ -38,8 +38,6 @@ gem 'slim-rails'
 gem "sprockets-rails", "~> 3.4"
 # A modest JavaScript framework for the HTML you already have. (https://stimulus.hotwired.dev)
 gem "stimulus-rails", "~> 1.1"
-# Ruby wrapper for Terser JavaScript compressor (http://github.com/ahorek/terser-ruby)
-gem "terser", "~> 1.1"
 # Generic interface to multiple Ruby template engines (http://github.com/rtomayko/tilt/)
 gem 'tilt', '~> 2.0.9'
 # The speed of a single-page web application without having to write any JavaScript. (https://github.com/hotwired/turbo-rails)
