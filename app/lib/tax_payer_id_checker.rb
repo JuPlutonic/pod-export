@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# :reek:UncommunicativeMethodName number - position of the control number
-class TaxPayerIdOperation
+# :reek:UncommunicativeMethodName N#{number} — position of the control number
+class TaxPayerIdChecker
   COEFFICIENTS_FOR_N10 = [2, 4, 10, 3, 5, 9, 4, 6, 8, 0].freeze
   COEFFICIENTS_FOR_N11 = [7, 2, 4, 10, 3, 5, 9, 4, 6, 8, 0].freeze
   COEFFICIENTS_FOR_N12 = [3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8, 0].freeze

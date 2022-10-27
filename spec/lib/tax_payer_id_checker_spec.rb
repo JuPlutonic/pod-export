@@ -2,7 +2,12 @@
 
 require 'rails_helper'
 
-RSpec.describe TaxPayerIdOperation do
+# Personal TaxPayerId is 10 numbered code
+# Organizational TaxPayerId is 12 numbered code
+# TaxPayerId can be recovered in singular condition:
+# it formally was personal TaxPayerId and in the Persistence this number have
+# 12 numbers (with prefixed two zeros or with '-0' at the end)
+RSpec.describe TaxPayerIdChecker do
   describe '#call' do
     context 'when tpi is filled' do
       it 'returns false for tpi filled with zeros' do
