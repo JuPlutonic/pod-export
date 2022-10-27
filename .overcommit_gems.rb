@@ -1,3 +1,5 @@
+# Helper gem to require bundler-audit (http://github.com/stewartmckee/bundle-audit)
+gem 'bundle-audit'
 # Run Ruby more than fast. Fasterer (https://github.com/DamirSvrtan/fasterer)
 gem 'fasterer', '~> 0.10.0'
 # Markdown lint tool (http://github.com/markdownlint/markdownlint)
