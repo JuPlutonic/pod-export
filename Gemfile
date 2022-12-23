@@ -2,7 +2,8 @@
 
 source 'https://rubygems.org'
 
-ruby '~> 3.1.0'
+# ruby '~> 3.1.0'
+ruby '3.0.5'
 # Boot large ruby/rails apps faster (https://github.com/Shopify/bootsnap)
 gem 'bootsnap'
 # Use Capistrano for deployment
@@ -93,3 +94,5 @@ group :test do
   # gem 'simplecov', require: false
   # gem 'simplecov-json', require: false
 end
+
+gem "dry-initializer", "~> 3.1"
