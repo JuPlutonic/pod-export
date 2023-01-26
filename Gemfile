@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 
 # ruby '~> 3.1.0'
-ruby '3.0.5'
+ruby '3.2.0'
 # Boot large ruby/rails apps faster (https://github.com/Shopify/bootsnap)
 gem 'bootsnap'
 # Use Capistrano for deployment
